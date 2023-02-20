@@ -1,0 +1,21 @@
+<div class="carousel-container" *ngIf="images && images.length > 0" >
+    <a [routerLink]="['/lkh']"><img class="img_animation"
+     *ngFor="let image of images let i = index"
+    [src]="image.src" [alt]=""
+    [ngClass]="{'image-active':selectedIndex === i}">
+    </a>
+   
+    <div  class="carousel-dot-container" *ngIf="indicators">
+        <span *ngFor="let dot of images; let i=index" class="dot" 
+                [ngClass]="{'active':selectedIndex ===i}"
+                (click)="selectImg(i)">
+
+        </span>
+    </div>
+    <button class="btn-carousel btn-prev" *ngIf="controls" >
+        <i class="bi bi-caret-left icon-carousel icon-prev" (click)="onPrev()"></i>
+    </button>
+    <button class="btn-carousel btn-next" *ngIf="controls" >
+        <i class="bi bi-caret-right icon-carousel icon-next" (click)="onNext()"></i>
+    </button>
+</div>

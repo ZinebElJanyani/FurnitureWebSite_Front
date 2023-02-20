@@ -1,0 +1,99 @@
+.carousel-container{
+    position:relative;
+    margin : auto;
+    text-align:center;
+    width: 90%;
+    border-radius:15px;
+    box-shadow: 0 6px 16px #7e7e7e; 
+    height:5%;
+}
+
+.carousel-container img{
+ display:none;
+ border-radius:15px;
+}
+.carousel-container img.image-active{
+    display :block;
+    width:100%;
+     height:450px;
+}
+/*dots indicators*/
+
+.carousel-dot-container{
+    position:absolute;
+    right:0;
+    left:0;
+    bottom:0;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.dot{
+    cursor:pointer;
+    height: 15px;
+    width:15px;
+    margin:0 5px;
+    background-color: #888585;
+    border-radius:50%;
+    display:inline-block;
+    transition: opacity 0.6s ease;
+    opacity: 0.5;
+}
+
+.active,
+.dot:hover{
+    opacity: 1;
+}
+
+.img_animation{
+    animation:  12s img_anmation infinite linear;
+     opacity: 0.0; 
+}
+
+@keyframes img_anmation {
+    0% {opacity: 0.0}
+    4% {opacity: 1.0}
+    33.33% {opacity: 1.0}
+    37.33% {opacity: 0.0}
+    100% {opacity: 0.0}
+}
+
+.btn-carousel{
+    position:absolute;
+    top:0;
+    bottom:0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 9%;
+    padding: 0;
+    color:#888585;
+    text-align: center;
+    background:0 0;
+    cursor:pointer;
+    border: none;
+}
+.btn-prev{
+    left: 0;
+
+}
+.btn-next{
+    right: 0;
+}
+
+.icon-carousel:hover{
+    opacity: 0.9;
+}
+
+.icon-carousel:active{
+    opacity: 0.5;
+}
+.icon-prev,.icon-next{
+    font-size: 35px;
+ }
+
+ #img_anmation > *:nth-child(1) {animation-delay: 0s}
+#img_anmation > *:nth-child(2) {animation-delay: 4s}
+#img_anmation > *:nth-child(3) {animation-delay: 8s}

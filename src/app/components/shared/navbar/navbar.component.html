@@ -1,0 +1,38 @@
+<nav class="navbar" (scroll)="onScroll($event)" [class.active-nav]="isActive">
+    <div class="nav-center">
+        <!--logo-->
+        <div id="logo">Decor<i class="bi bi-flower3"></i></div>
+        <!--liens-->
+        <div>
+            <button class="toggle-nav"  (click)="onToggle()">
+                <i class="bi bi-justify"></i>
+            </button>
+            <ul class="nav-links" [class.mobile-menu]="mobileSize" >
+                <li><a routerLink="/" class="nav-link">Home</a></li>
+                <li><a routerLink="/products" class="nav-link">Products</a></li>
+                <li><a href="#" class="nav-link">About</a></li>
+                <!--<li><a routerLink="/login" class="nav-link">login</a></li>-->
+               
+                <li ngbDropdown class="nav-item dropdown">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      username
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" routerLink="shared/profile">My Profile</a>
+                      <a class="dropdown-item" routerLink="orders">My Orders</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Log Out</a>
+                    </div>
+                  </li>
+            </ul>
+        </div>
+        
+        <!--card icon-->
+        <div class="toggle-container">
+            <button class="toggle-cart">
+                <i class="bi bi-cart-fill"></i>
+            </button>
+            <span class="cart-item-count">1</span>
+        </div>
+    </div>
+</nav>
