@@ -7,7 +7,7 @@
 				<div class="col-md-12">
 					<div class="heading-banner">
 						<div class="heading-banner-title">
-							<h2>Product Grid View</h2>
+							<h2>Affordable quality, guaranteed</h2>
 						</div>
 						<div class="breadcumbs pb-15">
 							<ul>
@@ -42,7 +42,60 @@
 							<h4>Categories</h4>
 						</div>
 						<div id="cat-treeview"  class="widget-info product-cat boxscrol2">
-							<ul>
+							<zippy title ="Living Room">
+								<ul>
+									<li><a href="#">Sofas</a></li>
+									<li><a href="#">Rugs</a></li>
+									<li><a href="#">Daybeds</a></li>
+									<li><a href="#">Bookcases</a></li>
+									<li><a href="#">Chests</a></li>
+									<li><a href="#">Tables</a></li>
+									<li><a href="#">TV Stands</a></li>
+								</ul>
+							 </zippy>
+							 <zippy title ="Bedroom">
+								<ul>
+									<li><a href="#">Beds</a></li>
+									<li><a href="#">Mattresses</a></li>
+									<li><a href="#">Dressers</a></li>
+									<li><a href="#">Vanities</a></li>
+									<li><a href="#">Bedding</a></li>
+									<li><a href="#">Armoires+Wadrobes</a></li>
+								</ul>
+							 </zippy>
+							 <zippy title ="Office">
+								<ul>
+									<li><a href="#">Office Chairs</a></li>
+									<li><a href="#">Office Desks</a></li>
+									<li><a href="#">Office Sets</a></li>
+									<li><a href="#">Desk lamps</a></li>
+									<li><a href="#">Gaming Chairs</a></li>
+								</ul>
+							 </zippy>
+							 <zippy title ="Dining Room">
+								<ul>
+									<li><a href="#">Dining Tables</a></li>
+									<li><a href="#">Dining Chairs</a></li>
+									<li><a href="#">Sideboards+buffets</a></li>
+								</ul>
+							 </zippy>
+							 <zippy title ="Kids Room">
+								<ul>
+									<li><a href="#">Chests</a></li>
+									<li><a href="#">Kids bed</a></li>
+									<li><a href="#">Kids Dressers+chests</a></li>
+									<li><a href="#">Kids Dicor</a></li>
+								</ul>
+							 </zippy>
+							 <zippy title ="Patio & Backyard">
+								<ul>
+									<li><a href="#">Sets</a></li>
+									<li><a href="#">Sofas</a></li>
+									<li><a href="#">outdoor tables</a></li>
+									<li><a href="#">Outdoor Decor</a></li>
+								</ul>
+							 </zippy>
+							<!--<ul>
 								<li><span>Chair</span>
 									<ul>
 										<li><a href="#">T-Shirts</a></li>
@@ -88,7 +141,7 @@
 										<li><a href="#">Bilazers</a></li>
 									</ul>
 								</li>
-							</ul>
+							</ul>-->
 						</div>
 					</aside>
 					<!-- Widget-categories end -->
@@ -101,7 +154,7 @@
 							<div class="price_filter">
 								<div class="price_slider_amount">
 									<input type="submit"  value="You range :"/> 
-									<input type="text" id="amount" name="price"  placeholder="Add Your Price" /> 
+									<input type="range" id="amount" name="price"  placeholder="Add Your Price" /> 
 								</div>
 								<div id="slider-range"></div>
 							</div>
@@ -145,7 +198,7 @@
 					<!-- Widget-banner start -->
 					<aside class="widget widget-banner hidden-sm">
 						<div class="widget-info widget-banner-img">
-							<a href="#"><img src="img/banner/5.jpg" alt="" /></a>
+							<a href="#"><img src="assets/images/home_img/products_pub.jpg" alt="" /></a>
 						</div>
 					</aside>
 					<!-- Widget-banner end -->
@@ -189,7 +242,7 @@
 													</span>
 												</div>
 												<div class="product-action clearfix">
-													<a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi zmdi-favorite-outline"></i></a>
+													<a (click)="favorite()" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi" [class.zmdi-favorite]="isFavorite" [class.zmdi-favorite-outline]="!isFavorite"></i></a>
 													<a href="#" data-toggle="modal"  data-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>

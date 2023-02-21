@@ -1,0 +1,24 @@
+/*.zippy{
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}*/
+
+.zippy-heading{
+    font-weight: 600;
+   /* padding: 20px;*/
+    cursor: pointer;
+    color: #c8a165;
+}
+.zippy-body{
+    padding: 20px;
+}
+
+.zippy-active{
+    background-color: #f0f0f0;
+}
+i{
+    float: right;
+}
+.zippy-heading-active{
+    color: black;
+}

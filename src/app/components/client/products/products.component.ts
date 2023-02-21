@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-
+  isFavorite=false;
+  favorite(){
+    this.isFavorite = !this.isFavorite;
+  }
 }

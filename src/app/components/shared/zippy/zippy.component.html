@@ -1,1 +1,18 @@
-<p>zippy works!</p>
+<div class="zippy">
+    <div class="zippy-heading" (click)="toggle()" [class.zippy-active]="!isnotdesplay" 
+    [ngClass] = "{
+        'zippy-heading-active' : isnotdesplay
+        }">
+        {{title}}
+       <!--<i class="bi" [ngClass] = "{
+        'bi-caret-down-fill' : isnotdesplay,
+        'bi-caret-up-fill'  : !isnotdesplay
+        }" >
+        </i>--> 
+    </div>
+    
+    <!--<div class="zippy-body" [hidden]="isnotdesplay" >-->
+    <div class="zippy-body" *ngIf="!isnotdesplay">
+        <ng-content  ></ng-content>
+    </div>
+</div>
