@@ -2077,7 +2077,7 @@ body {
 .widget-info.product-cat {
   background: #fff none repeat scroll 0 0;
   /*height: 290px;*/
-  padding: 15px 20px 20px 10px;
+  padding: 5px 10px 5px 10px;
 }
 .product-cat .treeview { padding-left: 20px;}
 .product-cat .treeview li span {

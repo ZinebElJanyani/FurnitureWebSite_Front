@@ -1,3 +1,4 @@
+import { CategoryService } from './services/category.service';
 import { AuthService } from './services/auth.service';
 import { MaterialModule } from './added-modules/material.module';
 import { ComponentModule} from './added-modules/component.module';
@@ -33,7 +34,7 @@ import { OrdersComponent } from './components/client/orders/orders.component';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
