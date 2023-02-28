@@ -9,7 +9,7 @@
             </button>
             <ul class="nav-links" [class.mobile-menu]="mobileSize" >
                 <li><a routerLink="/" class="nav-link">Home</a></li>
-                <li><a routerLink="/products" class="nav-link">Products</a></li>
+                <li><a [routerLink]="['/products', 1, 0]" class="nav-link">Products</a></li>
                 <li><a href="#" class="nav-link">About</a></li>
                 <!--<li><a routerLink="/login" class="nav-link">login</a></li>-->
                

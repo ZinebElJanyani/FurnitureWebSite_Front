@@ -17,7 +17,8 @@ const routes: Routes = [
     /*{path : 'courses/:id' , component: CourseComponent},
     {path : 'courses' , component: CoursesComponent},*/
     
-    {path : 'products' , component: ProductsComponent},
+    {path : 'products/:p1/:p2' , component: ProductsComponent},
+    {path : '' , redirectTo:'products/1/0',pathMatch:'full'},
     {path : 'product-detail' , component: ProductDetailComponent},
     {path : 'login' , component: LoginComponent},
     {path : 'mshopping-cart' , component: ShoppingCartComponent},

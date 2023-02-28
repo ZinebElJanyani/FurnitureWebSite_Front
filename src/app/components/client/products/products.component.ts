@@ -1,6 +1,7 @@
 import { map } from 'rxjs';
 import { CategoryService } from './../../../services/category.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -9,21 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit{
   collections:any;
+  produits:any;
  products: Products[]=[]
+ numProducts:number;
+ isFavorite:boolean[]=[];
  
   
-  constructor(private categoryService:CategoryService){
+  constructor(public categoryService:CategoryService,private route:ActivatedRoute,private router:Router){
+    this.numProducts=0;
+    //The fill() method is a built-in method in JavaScript that fills all the elements of an array with a specified value
+    this.isFavorite = new Array(this.products.length).fill(false);
     
   }
   ngOnInit(): void {
     this.getCategories()
-    this.getProducts()
+    this.router.events.subscribe((val)=>{
+      if(val instanceof NavigationEnd){
+        let p1 = this.route.snapshot.params['p1']
+    if(p1==1){
+      this.getProducts("/selected_P")
+    }else if (p1==2){
+      let p2 = this.route.snapshot.params['p2']
+      this.getProducts("/products_catg/"+p2)
+      
+    }
+      }
+    })
+    
   }
-  
  
-  isFavorite=false;
-  favorite(){
-    this.isFavorite = !this.isFavorite;
+ 
+  favorite(i:number){
+    this.isFavorite[i] = !this.isFavorite[i];
+    console.log(this.isFavorite[i])
   }
 
   getCategories() {
@@ -35,10 +54,20 @@ export class ProductsComponent implements OnInit{
         console.log(err);
       })
   }
-  getProducts() {
+  getProducts(url:String){
+    this.categoryService.getRessource(url)
+    .subscribe(data => 
+      {this.produits = data;
+      
+      },err=>{
+        console.log(err);
+      })
+  }
+ /* getProducts() {
     this.categoryService.getRessource("/selected_P")
     .subscribe((data:any) => 
       {
+        
         this.products = data.map((product: any) => {
           return {
             id: product.id,
@@ -64,7 +93,7 @@ export class ProductsComponent implements OnInit{
             })
           };
         });
-        console.log(this.products)
+        this.numProducts = this.products.length
       },err=>{
         console.log(err);
       })
@@ -72,7 +101,7 @@ export class ProductsComponent implements OnInit{
         
       
      
-  }
+  }*/
 }
 
 interface Products{
