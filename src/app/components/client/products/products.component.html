@@ -45,7 +45,7 @@
 							
 							<zippy title ="{{c.title}}" >
 								<ul>
-									<li *ngFor="let catg of c.categories"><a [routerLink]="['/products', 2, catg.id]">{{catg.title}}</a></li>
+									<li *ngFor="let catg of c.categories"><a class="categ_link"[routerLink]="['/products', 2, catg.id]" (click)="curentCatg(catg)"  [class.active]="CurentCtg == catg">{{catg.title}}</a></li>
 								<!--	<li><a href="#">Rugs</a></li>
 									<li><a href="#">Daybeds</a></li>
 									<li><a href="#">Bookcases</a></li>

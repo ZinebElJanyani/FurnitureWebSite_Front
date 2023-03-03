@@ -2804,7 +2804,9 @@ input.cart-plus-minus-box {
   color: #999;
   margin-right: 15px;
 }
+
 .post-share a:hover { color: #C8A165;}
+
 .post-share a:last-child { margin-right: 0;}
 .author-comments {
   background: #f6f6f6 none repeat scroll 0 0;
@@ -2948,8 +2950,8 @@ input.cart-plus-minus-box {
   text-transform: uppercase;
   
 }
-
-
+/*por colorer la category en question*/
+.categ_link.active { color: #C8A165;}
 
 
 

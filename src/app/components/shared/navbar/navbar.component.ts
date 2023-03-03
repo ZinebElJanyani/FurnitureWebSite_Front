@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, HostListener } from '@angular/core';
 
 @Component({
@@ -10,7 +11,7 @@ export class NavbarComponent {
   mobileSize;
   dropDclick=false;
 
-  constructor() { 
+  constructor(router:Router) { 
     this.isActive = false;
     this.mobileSize = false;
   }
@@ -31,4 +32,6 @@ export class NavbarComponent {
   onToggle(){
     this.mobileSize=!this.mobileSize;
   }
+
+ 
 }

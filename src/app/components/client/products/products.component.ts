@@ -14,10 +14,12 @@ export class ProductsComponent implements OnInit{
  products: Products[]=[]
  numProducts:number;
  isFavorite:boolean[]=[];
+ CurentCtg:any
  
   
   constructor(public categoryService:CategoryService,private route:ActivatedRoute,private router:Router){
     this.numProducts=0;
+   
     //The fill() method is a built-in method in JavaScript that fills all the elements of an array with a specified value
     this.isFavorite = new Array(this.products.length).fill(false);
     
@@ -28,11 +30,13 @@ export class ProductsComponent implements OnInit{
       if(val instanceof NavigationEnd){
         let p1 = this.route.snapshot.params['p1']
     if(p1==1){
+      this.CurentCtg = undefined
       this.getProducts("/selected_P")
+     
     }else if (p1==2){
       let p2 = this.route.snapshot.params['p2']
       this.getProducts("/products_catg/"+p2)
-      
+     
     }
       }
     })
@@ -46,6 +50,7 @@ export class ProductsComponent implements OnInit{
   }
 
   getCategories() {
+    
     this.categoryService.getRessource("/collections")
     .subscribe(data => 
       {this.collections = data;
@@ -58,10 +63,15 @@ export class ProductsComponent implements OnInit{
     this.categoryService.getRessource(url)
     .subscribe(data => 
       {this.produits = data;
+        
       
       },err=>{
         console.log(err);
       })
+  }
+  curentCatg(c:any){
+    this. CurentCtg = c
+    
   }
  /* getProducts() {
     this.categoryService.getRessource("/selected_P")
