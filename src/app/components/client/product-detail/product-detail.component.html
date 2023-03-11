@@ -38,12 +38,8 @@
                         <!-- Single-pro-slider Big-photo start -->
                         <div class="single-pro-slider single-big-photo view-lightbox slider-for">
                             
-                           
-                                    
-                                            <app-carousel [images]="images_product" [indicators]="false" [autoSlide]="false" [animation]="false" [selectedIndex]="selectedIndx"></app-carousel>
-                                           <!-- <img src="{{imagePath}}" alt="" class="img-responsive">-->
-                                
-                            
+                            <app-carousel [images]="images_product" [indicators]="false" [autoSlide]="false" [animation]="false" [selectedIndex]="selectedIndx"></app-carousel>
+
                         </div>	
                         <!-- Single-pro-slider Big-photo end -->								
                         <div class="product-info">
@@ -59,8 +55,9 @@
                                 </span>
                             </div>
                             <div class="fix mb-20">
-                                <span *ngIf="product.promotion>0" class="pro-label new-label">-{{product.promotion}} %</span>
-								<span class="pro-price">{{product.price|number:'0.00'}} DH</span>
+                                <span class="pro-price">{{product.price - product.promotion|number:'0.00'}} DH</span>
+                                <span *ngIf="product.promotion" class="old-price">{{product.price}} DH</span>
+								
                             </div>
                             <div class="product-description">
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humou or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum. </p>
@@ -91,9 +88,9 @@
                             <!-- Size end -->
                             <div class="clearfix">
                                 <div class="cart-plus-minus">
-                                    <div class="dec qtybutton">-</div>
-                                    <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                <div class="inc qtybutton">+</div>
+                                    <div class="dec qtybutton" (click)="quantity=quantity-1">-</div>
+                                    <input type="text" value="{{'0'+quantity}}" name="qtybutton" class="cart-plus-minus-box">
+                                    <div class="inc qtybutton" (click)="quantity=quantity+1">+</div>
                             </div>
                                 <div class="product-action clearfix">
                                     <a  (click)="favoriteProduct()" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi" [class.zmdi-favorite]="isFavorite" [class.zmdi-favorite-outline]="!isFavorite"></i></a>
@@ -122,17 +119,17 @@
                         <div class="single-pro-tab-menu">
                             <!-- Nav tabs -->
                             <ul class="">
-                                <li><a href="#description" data-toggle="tab">Description</a></li>
-                                <li class="active"><a href="#reviews"  data-toggle="tab">Reviews</a></li>
-                                <li><a href="#information" data-toggle="tab">Information</a></li>
-                                <li><a href="#tags" data-toggle="tab">Tags</a></li>
+                                <li (click)="isDescActive=true;isRevActive=false;isInfActive=false;isTagActive=false" [class.active]="isDescActive"><a  data-toggle="tab">Description</a></li>
+                               <li (click)="isDescActive=false;isRevActive=true;isInfActive=false;isTagActive=false" [class.active]="isRevActive"><a  data-toggle="tab">Reviews</a></li>
+                                <li (click)="isDescActive=false;isRevActive=false;isInfActive=true;isTagActive=false" [class.active]="isInfActive"><a  data-toggle="tab">Information</a></li>
+                                <li (click)="isDescActive=false;isRevActive=false;isInfActive=false;isTagActive=true" [class.active]="isTagActive"><a  data-toggle="tab">Tags</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane" id="description">
+                            <div class="tab-pane" id="description" [class.active]="isDescActive">
                                 <div class="pro-tab-info pro-description">
                                     <h3 class="tab-title title-border mb-30">dummy Product name</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
@@ -140,14 +137,14 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
                                 </div>
                             </div>
-                            <div class="tab-pane active" id="reviews">
+                            <div class="tab-pane " id="reviews" [class.active]="isRevActive" >
                                 <div class="pro-tab-info pro-reviews">
                                     <div class="customer-review mb-60">
                                         <h3 class="tab-title title-border mb-30">Customer review</h3>
                                         <ul class="product-comments clearfix">
                                             <li class="mb-30">
                                                 <div class="pro-reviewer">
-                                                    <img src="img/reviewer/1.jpg" alt="" />
+                                                    <img src="assets/images/home_img/review1.jpg" alt="" />
                                                 </div>
                                                 <div class="pro-reviewer-comment">
                                                     <div class="fix">
@@ -165,7 +162,9 @@
                                             </li>
                                             <li class="threaded-comments">
                                                 <div class="pro-reviewer">
-                                                    <img src="img/reviewer/1.jpg" alt="" />
+                                                   
+                                                    <img src="assets/images/home_img/reviews2.jpg" alt="" />
+                                                   
                                                 </div>
                                                 <div class="pro-reviewer-comment">
                                                     <div class="fix">
@@ -238,7 +237,7 @@
                                     </div>
                                 </div>		
                             </div>
-                            <div class="tab-pane" id="information">
+                            <div class="tab-pane" id="information" [class.active]="isInfActive">
                                 <div class="pro-tab-info pro-information">
                                     <h3 class="tab-title title-border mb-30">Product information</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
@@ -246,7 +245,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
                                 </div>											
                             </div>
-                            <div class="tab-pane" id="tags">
+                            <div class="tab-pane" id="tags" [class.active]="isTagActive">
                                 <div class="pro-tab-info pro-information">
                                     <h3 class="tab-title title-border mb-30">tags</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>

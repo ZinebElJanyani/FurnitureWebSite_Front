@@ -707,9 +707,11 @@ button {
     font-family: "Roboto",sans-serif;
     font-size: 20px;
 }
-.s-price-box .old-price {
+.old-price {
   margin-left: 15px;
   text-decoration: line-through;
+  font-weight: 600;
+  color: gray;
 }
 .modal-product .product-info .price-box {
     float: left;
@@ -985,7 +987,7 @@ body {
 /*11. Shop-page
 ----------------------------------- */
 .heading-banner-area {
-  background: rgba(0, 0, 0, 0) url("~src/assets/images/home_img/hero3-image.jpg") no-repeat scroll center center / cover ;
+  background: rgba(0, 0, 0, 0) url("~src/assets/images/home_img/product-detail.jpg") no-repeat scroll center center / cover ;
 }
 .heading-banner-title h2 {
   color: #fff;
@@ -1276,10 +1278,10 @@ body {
   }
   /* single-product no-sidebar */
   .single-pro-info.no-sidebar .single-big-photo {
-    width: 38%;
+    width: 50%;
   }
   .single-pro-info.no-sidebar .product-info {
-    width: 62%;
+    width: 50%;
   }
   /* single-product-tab review */
   .pro-tab-info {
@@ -1565,6 +1567,7 @@ span.color.color-7 { background: #C38B4B; }
   margin: 0 0 0 20px;
   /* width: 230px; */
   width: 45%;
+  text-align: center;
 }
 .shop-list .product-description  p {
   font-weight: 400;
@@ -1618,7 +1621,9 @@ input.cart-plus-minus-box {
 .fix {
   overflow: hidden;
 }
-
+a{
+  cursor: pointer;
+}
 
 
 

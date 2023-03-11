@@ -22,7 +22,7 @@ const routes: Routes = [
     {path : '' , redirectTo:'products/1/0',pathMatch:'full'},
     {path : 'product-detail/:p' , component: ProductDetailComponent},
     {path : 'login' , component: LoginComponent},
-    {path : 'mshopping-cart' , component: ShoppingCartComponent},
+    {path : 'shopping-cart' , component: ShoppingCartComponent},
     {path : 'check-out' , component: CheckOutComponent},
     {path : 'order-success' , component: OrderSuccessComponent},
     {path : 'orders' , component: OrderSuccessComponent},

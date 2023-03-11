@@ -197,7 +197,7 @@
 											<div class="product-img">
 												<span *ngIf="p.promotion>0" class="pro-label new-label">-{{p.promotion}} %</span>
 												<span class="pro-price-2">{{p.price|number:'0.00'}} DH</span>
-												<a href="single-product.html"><img src="{{this.categoryService.host+'/productFirst_P/'+p.id}}" alt="" /></a>
+												<a [routerLink]="['/product-detail', p.id]"><img src="{{this.categoryService.host+'/productFirst_P/'+p.id}}" alt="" /></a>
 											</div>
 											<div class="product-info clearfix text-center">
 												<div class="fix">

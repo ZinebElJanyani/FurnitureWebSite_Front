@@ -16,8 +16,11 @@ export class ProductDetailComponent implements OnInit{
   product:any
   selectedIndx=0
   isFavorite=false
-  
-
+  isDescActive=false
+  isInfActive=false
+  isRevActive=true
+  isTagActive=false
+  quantity=1
   constructor( public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
 
   }
@@ -40,7 +43,7 @@ export class ProductDetailComponent implements OnInit{
   
           this.images_product.push(this.sanitizer.bypassSecurityTrustUrl(base64Image));
         });
-          console.log(this.images_product)
+         
         
         },err=>{
           console.log(err);
@@ -51,6 +54,7 @@ export class ProductDetailComponent implements OnInit{
       this.categoryService.getRessource("/product/"+id)
       .subscribe(data => 
         {this.product = data;
+          console.log(this.product)
           this.getProductImages( id)
         
         },err=>{
