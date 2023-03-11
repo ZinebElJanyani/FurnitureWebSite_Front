@@ -1,41 +1,79 @@
 import { map } from 'rxjs';
 import { CategoryService } from './../../../services/category.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, NgModule } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
+declare var $:any
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit{
+  @ViewChild('progress') progresstElement?: ElementRef;
+  @ViewChild('min') minRange?: ElementRef;
+  @ViewChild('max') maxRange?: ElementRef;
   collections:any;
   produits:any;
  products: Products[]=[]
  numProducts:number;
  isFavorite:boolean[]=[];
  CurentCtg:any
- 
-  
-  constructor(public categoryService:CategoryService,private route:ActivatedRoute,private router:Router){
+ currentCollect:any
+ minPrice:number
+ maxPrice:number
+ priceGrap:number=500
+
+  product:Products
+  constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router){
     this.numProducts=0;
-   
+  this.minPrice=0;
+  this.maxPrice = 10000;
+    this.product = {
+      id:0,
+      nom: 'Default product name',
+    description: 'Default product description',
+    price: 0,
+    qteStock: 0,
+    promotion: 0,
+    created_at: null,
+    style: null,
+    color: '',
+    material: '',
+    selected: false
+
+    }
     //The fill() method is a built-in method in JavaScript that fills all the elements of an array with a specified value
     this.isFavorite = new Array(this.products.length).fill(false);
     
   }
+  loadProducts(min:number,max:number){
+        let p1 = this.route.snapshot.params['p1']
+    if(p1==1){
+      this.CurentCtg = undefined
+      this.getProducts("/selected_P/"+min+"/"+max)
+     
+    }else if (p1==2){
+      let p2 = this.route.snapshot.params['p2']
+      this.getProducts("/products_catg/"+p2+"/"+min+"/"+max)
+     
+    }
+      
+  }
   ngOnInit(): void {
     this.getCategories()
+    this.loadProducts(0,10000)
     this.router.events.subscribe((val)=>{
+     
       if(val instanceof NavigationEnd){
         let p1 = this.route.snapshot.params['p1']
     if(p1==1){
       this.CurentCtg = undefined
-      this.getProducts("/selected_P")
+      this.getProducts("/selected_P/0/10000")
      
     }else if (p1==2){
       let p2 = this.route.snapshot.params['p2']
-      this.getProducts("/products_catg/"+p2)
+      this.getProducts("/products_catg/"+p2+"/0/10000")
      
     }
       }
@@ -73,6 +111,71 @@ export class ProductsComponent implements OnInit{
     this. CurentCtg = c
     
   }
+  OnheaderClick(collection:any){
+      this.currentCollect  = collection
+  }
+  onRangeMinChange(event:Event){
+    let rangeElement = event.target as HTMLInputElement
+    this.minPrice = Number( rangeElement.value)
+    let leftrate = (this.minPrice/Number(rangeElement.max))*100;
+    
+     if(this.maxPrice-this.minPrice<this.priceGrap){
+      rangeElement.value = String(this.maxPrice-this.priceGrap)
+      this.minPrice=Number( rangeElement.value)
+     }else{
+      this.loadProducts(this.minPrice,this.maxPrice)
+    this.renderer.setStyle(this.progresstElement?.nativeElement,'left',leftrate+"%")
+     }
+  }
+  onRangeMaxChange(event2:Event){
+   
+    let rangeElement2 = event2.target as HTMLInputElement
+    this.maxPrice = Number( rangeElement2.value)
+   
+    let rightrate =((this.maxPrice/Number(rangeElement2.max))*100);
+    if(this.maxPrice-this.minPrice<this.priceGrap){
+      rangeElement2.value = String(this.minPrice+this.priceGrap)
+      this.maxPrice = Number( rangeElement2.value)
+     }else{
+      this.loadProducts(this.minPrice,this.maxPrice)
+    this.renderer.setStyle(this.progresstElement?.nativeElement,'right',100-rightrate+"%")
+  }
+}
+onInputMinChange(event :Event){
+ 
+  let inputElement = event.target as HTMLInputElement
+  this.minPrice = Number( inputElement.value)
+  
+  if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 10000){
+    this.renderer.setProperty(this.minRange?.nativeElement,'value',String(this.minPrice))
+    this.loadProducts(this.minPrice,this.maxPrice)
+    let leftrate = (this.minPrice/10000)*100;
+    this.renderer.setStyle(this.progresstElement?.nativeElement,'left',leftrate+"%")
+  }
+  
+}
+onInputMaxChange(event :Event){
+  
+  let inputElement = event.target as HTMLInputElement
+  this.maxPrice = Number( inputElement.value)
+  if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 10000){
+    this.loadProducts(this.minPrice,this.maxPrice)
+    this.renderer.setProperty(this.maxRange?.nativeElement,'value',String(this.maxPrice))
+    let rightrate = (this.maxPrice/10000)*100;
+    this.renderer.setStyle(this.progresstElement?.nativeElement,'right',100-rightrate+"%")
+  }
+}
+
+openModelopen(prd :any){
+  console.log("koko")
+  $('#productModal').modal('show')
+  this.product = prd
+}
+openModelclose(){
+  console.log("lolo")
+  $('#poupupImg').modal('hide')
+}
+
  /* getProducts() {
     this.categoryService.getRessource("/selected_P")
     .subscribe((data:any) => 
@@ -126,12 +229,5 @@ interface Products{
   color: string;
   material: string;
   selected: boolean;
-  category: {
-    id: number;
-    title: string;
-  };
-  images: {
-    id: number;
-    imagePath: string;
-  }[];
+  
 }

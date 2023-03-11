@@ -1,7 +1,7 @@
 <div class="zippy">
-    <div class="zippy-heading" (click)="toggle()" [class.zippy-active]="!isnotdesplay" 
+    <div class="zippy-heading" (click)="toggle()" [class.zippy-active]="!isnotdesplay && isOpen" 
     [ngClass] = "{
-        'zippy-heading-active' : isnotdesplay
+        'zippy-heading-active' : isnotdesplay 
         }">
         {{title}}
        <!--<i class="bi" [ngClass] = "{
@@ -12,7 +12,7 @@
     </div>
     
     <!--<div class="zippy-body" [hidden]="isnotdesplay" >-->
-    <div class="zippy-body" *ngIf="!isnotdesplay">
+    <div class="zippy-body" *ngIf="!isnotdesplay && isOpen ">
         <ng-content  ></ng-content>
     </div>
 </div>

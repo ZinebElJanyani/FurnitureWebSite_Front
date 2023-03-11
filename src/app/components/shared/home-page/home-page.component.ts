@@ -104,7 +104,7 @@ export class HomePageComponent implements OnInit {
   }
 
   //*********************** */
-  Images =[
+  /*Images =[
   {
     src:"https://www.livingspaces.com/globalassets/images/lp/2023/01/0123_winder_d.jpg"
   },
@@ -120,7 +120,17 @@ export class HomePageComponent implements OnInit {
   {
     src:"assets/images/home_img/promo4.jpg"
   }
-  ]
+  ]*/
+  Images =[
+    
+    "https://www.livingspaces.com/globalassets/images/lp/2023/01/0123_winder_d.jpg",
+   
+    "assets/images/home_img/promo1.jpg",
+    "assets/images/home_img/promo2.jpg",
+    "assets/images/home_img/promo3.jpg",
+    "assets/images/home_img/promo4.jpg"
+    
+    ]
 
   //Buy by collection
 

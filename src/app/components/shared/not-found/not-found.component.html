@@ -1,1 +1,22 @@
-<p>not-found works!</p>
+<section class="gallery">
+
+	<div class="container">
+		<div class="img-container">
+			<img src="{{imagePath}}" alt="">
+			<div class="img-prev text-center">
+
+				
+				<div class="img-slide">
+					<img src="http://demo.redbit.com.tw/img/single-product/medium/2.jpg" alt="" (click)="getProductImages( 1)">
+				</div>
+				
+				<div *ngFor="let image of images" class="img-slide">
+					<img [src]="image" alt="" (click)="OnImgClick($event)">
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</section>

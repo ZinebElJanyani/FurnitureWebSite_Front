@@ -2521,7 +2521,7 @@ input.cart-plus-minus-box {
 }
 .separator {
   color: #ccc;
-  margin: 0 15px;
+  margin: 0 12px;
 }
 /* ---------------------------------
 	14. Shopping-cart
@@ -2953,7 +2953,90 @@ input.cart-plus-minus-box {
 /*por colorer la category en question*/
 .categ_link.active { color: #C8A165;}
 
+.price-input{
+  width:100%;
+  display:flex;
+  margin:30px 0 35px;
+  flex-direction:column;
+}
+.price-values{
+  width:100%;
+  display:flex;
+  margin: 20px 5px;
+}
+.price-input .field{
+  height: 45px;
+  width:100%;
+  display:flex;
+  align-items: center;
+  
+}
 
+.field input{
+  width: 100%;
+  height: 100%;
+  outline:none;
+  font-size: 19px;
+  text-align: center;
+  margin-left: 12px;
+  border-radius: 5px;
+  border: 1px solid #999;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
+
+.price-input .separator{
+  width:130px;
+  display: flex;
+  font-size: 19px;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider{
+  height: 5px;
+  border-radius: 5px;
+  background: #ddd;
+  position: relative;
+}
+.slider .progress{
+  height: 5px;
+  left:0%;
+  right: 0%;
+  position:absolute;
+  border-radius: 5px;
+  background: #C8A165;
+
+}
+
+.range-input{
+  position: relative;
+}
+.range-input input{
+  position: absolute;
+  top:-5px;
+  height: 5px;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  height: 17px;
+  width:17px;
+  border-radius: 50%;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  background: #C8A165;
+}
+
+.progress-field{
+  margin: 30px 0;
+}
 
 
 

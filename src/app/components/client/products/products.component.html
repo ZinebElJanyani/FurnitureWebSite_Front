@@ -38,12 +38,12 @@
 					<!-- Widget-search end -->
 					<!-- Widget-Categories start -->
 					<aside class="widget widget-categories  mb-30">
-						<div class="widget-title">
+					<div class="widget-title">
 							<h4>Categories</h4>
 						</div>
 						<div id="cat-treeview"  class="widget-info product-cat boxscrol2" *ngFor="let c of collections">
 							
-							<zippy title ="{{c.title}}" >
+							<zippy title ="{{c.title}}" (headerClick)="OnheaderClick(c)" [isOpen]="(c == currentCollect)? true:false" let a="">
 								<ul>
 									<li *ngFor="let catg of c.categories"><a class="categ_link"[routerLink]="['/products', 2, catg.id]" (click)="curentCatg(catg)"  [class.active]="CurentCtg == catg">{{catg.title}}</a></li>
 								<!--	<li><a href="#">Rugs</a></li>
@@ -106,14 +106,29 @@
 						<div class="widget-title">
 							<h4>Price</h4>
 						</div>
-						<div class="widget-info">
-							<div class="price_filter">
-								<div class="price_slider_amount">
-									<input type="submit"  value="You range :"/> 
-									<input type="range" id="amount" name="price"  placeholder="Add Your Price" /> 
+						<div class="price-input container">
+							<div class="price-values">
+								<div class="field">
+									<span>Min</span>
+									<input  type="number" class="input-min" value="{{minPrice}}" (change)="onInputMinChange($event)">
 								</div>
-								<div id="slider-range"></div>
+								<div class="separator">-</div>
+								<div class="field">
+									<span>Max</span>
+									<input type="number" class="input-max" value="{{maxPrice}}" (change)="onInputMaxChange($event)">
+								</div>
 							</div>
+							<div class="progress-field">
+								<div class="slider">
+									<div class="progress" #progress></div>
+								</div>
+								<div class="range-input">
+									<input #min type="range" class="range-min" min="0" max="10000" value="0" (input)="onRangeMinChange($event)">
+									<input #max type="range" class="range-max" min="0" max="10000" value="10000" (input)="onRangeMaxChange($event)">
+
+								</div>
+							</div>
+							
 						</div>
 					</aside>
 					<!-- Shop-Filter end -->
@@ -199,7 +214,7 @@
 												</div>
 												<div class="product-action clearfix">
 													<a  (click)="favorite(i)" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi" [class.zmdi-favorite]="this.isFavorite[i]" [class.zmdi-favorite-outline]="!this.isFavorite[i]  "></i></a>
-													<a href="#" data-toggle="modal"  data-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+													<a (click)="openModelopen(p)" data-toggle="modal"  title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
 												</div>
@@ -457,17 +472,20 @@
 						<div class="modal-product">
 							<div class="product-images">
 								<div class="main-image images">
-									<img alt="#" src="img/product/quickview-photo.jpg"/>
+									<img alt="#" src="{{this.categoryService.host+'/productFirst_P/'+product.id}}" style="
+									height: 20rem;
+									margin: 50px 0px;"/>
 								</div>
 							</div><!-- .product-images -->
 
 							<div class="product-info">
-								<h1>Aenean eu tristique</h1>
+								<h1>{{product.nom}}</h1>
 								<div class="price-box-3">
 									<hr />
 									<div class="s-price-box">
-										<span class="new-price">$160.00</span>
-										<span class="old-price">$190.00</span>
+										<span class="new-price">{{product.price - product.promotion}} DH</span>
+										
+										<span *ngIf="product.promotion" class="old-price">{{product.price}} DH</span>
 									</div>
 									<hr />
 								</div>
@@ -503,5 +521,7 @@
 	   <!-- END Modal -->
 	</div>
 	<!-- END QUICKVIEW PRODUCT -->	
+	<!-- Button trigger modal -->
+	
 	
 </div>

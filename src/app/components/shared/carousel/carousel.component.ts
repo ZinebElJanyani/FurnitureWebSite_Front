@@ -21,14 +21,24 @@ ngOnInit(): void {
     },this.slideInterval);
   }
 
-@Input() images:carouselImage[] = []
-@Input()indicators=true;
-@Input()controls=true;
-@Input()autoSlide =true;
-@Input()slideInterval=3000;
-selectedIndex = 0;
+  @Input() images:String[] = []
+  @Input()indicators=true;
+  @Input()controls=true;
+  @Input()autoSlide =true;
+  @Input()slideInterval=3000;
+  @Input()animation=true;
+  @Input()selectedIndex = 0;
 
+isEnter=false
 
+onEnter(){
+  this.isEnter=true;
+
+}
+onLeave(){
+  this.isEnter=false;
+
+}
 
 selectImg(index:number):void{
   this.selectedIndex = index;

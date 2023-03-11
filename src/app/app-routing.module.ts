@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './components/client/products/products.component';
 import { LoginComponent } from './components/shared/login/login.component';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
 const routes: Routes = [
   
@@ -19,7 +20,7 @@ const routes: Routes = [
     
     {path : 'products/:p1/:p2' , component: ProductsComponent},
     {path : '' , redirectTo:'products/1/0',pathMatch:'full'},
-    {path : 'product-detail' , component: ProductDetailComponent},
+    {path : 'product-detail/:p' , component: ProductDetailComponent},
     {path : 'login' , component: LoginComponent},
     {path : 'mshopping-cart' , component: ShoppingCartComponent},
     {path : 'check-out' , component: CheckOutComponent},
@@ -27,7 +28,7 @@ const routes: Routes = [
     {path : 'orders' , component: OrderSuccessComponent},
     {path : 'admin/products' , component: AdminProductsComponent},
     /*{path : 'shared/profile' , component: ProfileComponent},*/
-   /* {path : '**' , component: NotFoundComponent}*/
+    {path : '**' , component: NotFoundComponent}
 ];
 
 @NgModule({
