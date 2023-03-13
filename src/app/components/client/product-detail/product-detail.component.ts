@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CategoryService } from './../../../services/category.service';
@@ -21,8 +22,8 @@ export class ProductDetailComponent implements OnInit{
   isRevActive=true
   isTagActive=false
   quantity=1
-  constructor( public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
-
+  constructor(public authService: AuthService,public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
+    console.log(this.authService.userAutenticated);
   }
   ngOnInit(): void {
     let param = this.route.snapshot.params['p']

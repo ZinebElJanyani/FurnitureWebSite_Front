@@ -17,7 +17,7 @@ import { OrderSuccessComponent } from '../components/client/order-success/order-
 import { LoginComponent } from '../components/shared/login/login.component';
 import { ProductsComponent } from '../components/client/products/products.component';
 import { ProductDetailComponent } from '../components/client/product-detail/product-detail.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 const components=[
@@ -44,7 +44,8 @@ const components=[
     MaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
 
   exports:[

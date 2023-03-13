@@ -1,4 +1,4 @@
-import { map } from 'rxjs';
+import { debounceTime, fromEvent, map } from 'rxjs';
 import { CategoryService } from './../../../services/category.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, NgModule } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit{
   @ViewChild('progress') progresstElement?: ElementRef;
   @ViewChild('min') minRange?: ElementRef;
   @ViewChild('max') maxRange?: ElementRef;
+  @ViewChild('searchValue') searchInputRef?: ElementRef;
   collections:any;
   produits:any;
  products: Products[]=[]
@@ -23,8 +24,9 @@ export class ProductsComponent implements OnInit{
  minPrice:number
  maxPrice:number
  priceGrap:number=500
-
   product:Products
+  
+
   constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router){
     this.numProducts=0;
   this.minPrice=0;
@@ -45,7 +47,8 @@ export class ProductsComponent implements OnInit{
     }
     //The fill() method is a built-in method in JavaScript that fills all the elements of an array with a specified value
     this.isFavorite = new Array(this.products.length).fill(false);
-    
+    /**** */
+   
   }
   loadProducts(min:number,max:number){
         let p1 = this.route.snapshot.params['p1']
@@ -78,17 +81,35 @@ export class ProductsComponent implements OnInit{
     }
       }
     })
+    /***** */
     
   }
  
- 
+  ngAfterViewInit() {
+    if(this.searchInputRef){
+      console.log("lolo")
+    fromEvent(this.searchInputRef.nativeElement, 'input')
+    
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        this.categoryService.getRessource("/Find-product/"+this.searchInputRef?.nativeElement.value)
+        .subscribe(data => 
+          {this.produits = data;
+            console.log("koko")
+          
+          },err=>{
+            console.log(err);
+          })
+      });
+    }
+  }
   favorite(i:number){
     this.isFavorite[i] = !this.isFavorite[i];
     console.log(this.isFavorite[i])
   }
 
   getCategories() {
-    
+    console.log("sbr")
     this.categoryService.getRessource("/collections")
     .subscribe(data => 
       {this.collections = data;
@@ -175,7 +196,16 @@ openModelclose(){
   console.log("lolo")
   $('#poupupImg').modal('hide')
 }
-
+/*OnSearchValueChange(vl:String){
+    this.categoryService.getRessource("/Find-product/"+vl)
+    .subscribe(data => 
+      {this.produits = data;
+        
+      
+      },err=>{
+        console.log(err);
+      })
+}*/
  /* getProducts() {
     this.categoryService.getRessource("/selected_P")
     .subscribe((data:any) => 

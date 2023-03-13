@@ -14,6 +14,8 @@ export class AuthService {
   private _isRegisterd = new BehaviorSubject<boolean>(true);
   isRegisterd$ = this._isRegisterd.asObservable();
    userAutenticated={
+   
+    email:"",
     username:"",
     role:"",
     token :{
@@ -49,12 +51,13 @@ export class AuthService {
 
     .subscribe((response:any) => {
       this._isAuthenticated.next(true);
-      
+      this.userAutenticated.email=name;
       this.userAutenticated.token = response
       localStorage.setItem('access_token',this.userAutenticated.token.acces_token);
       
       alert("login Success");
       this.getUserInfo_JWT();
+      this.createCaddyForCostomer();
       //this.router.navigate(['/courses']);
     },
     (err:HttpErrorResponse)=>
@@ -102,10 +105,29 @@ singUp( name?:string,email?:string,password?:string,phone?:string,birthDay?:stri
    .subscribe((resultData: any)=>
     {
       this._isRegisterd.next(true);
+      if(email)
+      this.userAutenticated.username=email
         alert("Registration successful! Thank you for registering with us ,Your account has been created and you can now log in and start using our services.");
         
     },(err:HttpErrorResponse)=>
     { this._isRegisterd.next(false);
     });
 }
+
+createCaddyForCostomer(){
+  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  this.http.post("http://localhost:8084/api/caddy/create/"+this.userAutenticated.email,null,{headers,responseType: 'text'})
+  .subscribe(data => 
+    {
+      console.log("ça marche")
+    
+    },err=>{
+      console.log(err);
+    })
+}
+
+ 
 }
