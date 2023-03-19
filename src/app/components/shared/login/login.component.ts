@@ -102,7 +102,7 @@ export class LoginComponent {
     }else{
       this.registerForm.reset
       this.leftClick()
-      this.authService.createCaddyForCostomer()
+      //this.authService.createCaddyForCostomer()
     }
     }, 1000);
   }

@@ -1,3 +1,4 @@
+import { CaddyService } from './services/caddy.service';
 import { CategoryService } from './services/category.service';
 import { AuthService } from './services/auth.service';
 import { MaterialModule } from './added-modules/material.module';
@@ -34,7 +35,7 @@ import { OrdersComponent } from './components/client/orders/orders.component';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService,CategoryService],
+  providers: [AuthService,CategoryService,CaddyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -47,35 +47,35 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td class="product-thumbnail  text-left">
+                                                    <tr *ngFor="let item of items">
+                                                        <td  class="product-thumbnail  text-left">
                                                             <!-- Single-product start -->
                                                             <div class="single-product">
                                                                 <div class="product-img">
-                                                                    <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
+                                                                    <a [routerLink]="['/product-detail',item.product.id]"><img src="{{this.categoryService.host+'/productFirst_P/'+item.product.id}}" alt="" /></a>
                                                                 </div>
                                                                 <div class="product-info">
-                                                                    <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                    <p class="mb-0">Color :  Black</p>
+                                                                    <h4 class="post-title"><a class="text-light-black" href="#">{{item.product.nom}}</a></h4>
+                                                                    <p class="mb-0">Color :  {{item.product.color}}</p>
                                                                     <p class="mb-0">Size :     SL</p>
                                                                 </div>
                                                             </div>
                                                             <!-- Single-product end -->												
                                                         </td>
-                                                        <td class="product-price">$56.00</td>
+                                                        <td class="product-price">{{item.product.price-item.product.promotion}} DH</td>
                                                         <td class="product-quantity">
                                     
                                                             <div class="clearfix">
                                                                 <div class="cart-plus-minus">
-                                                                    <div class="dec qtybutton" (click)="quantity=quantity-1">-</div>
-                                                                    <input type="text" value="{{'0'+quantity}}" name="qtybutton" class="cart-plus-minus-box">
-                                                                    <div class="inc qtybutton" (click)="quantity=quantity+1">+</div>
+                                                                    <div class="dec qtybutton" (click)="onAddToCart(item.product.id,-1)">-</div>
+                                                                    <input type="text" value="{{item.quantity}}" name="qtybutton" class="cart-plus-minus-box">
+                                                                    <div class="inc qtybutton" (click)="onAddToCart(item.product.id,1)">+</div>
                                                             </div>
                                                             </div>
                                                         </td>
-                                                        <td class="product-subtotal">$112.00</td>
+                                                        <td class="product-subtotal">{{item.quantity*(item.product.price-item.product.promotion)}} DH</td>
                                                         <td class="product-remove">
-                                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                            <a (click)="onDeleteItem(item.product.id)"><i class="zmdi zmdi-close"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -87,8 +87,8 @@
                                             <div class="customer-login mt-30">
                                                 <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
                                                 <p class="text-gray">Enter your coupon code if you have one!</p>
-                                                <input type="text" placeholder="Enter your code here.">
-                                                <button type="submit" data-text="apply coupon" class="button-one submit-button mt-15">apply coupon</button>
+                                                <input type="text" placeholder="Enter your code here." #inputCoupon>
+                                                <button type="submit" data-text="apply coupon" class="button-one submit-button mt-15" (click)="onCouponCode()">apply coupon</button>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -98,22 +98,30 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="text-left">Cart Subtotal</td>
-                                                            <td class="text-right">$155.00</td>
+                                                            <td class="text-right">{{cartSubTotal}} DH ({{items.length}} items)</td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="text-left">Cart Subtotal</td>
-                                                            <td class="text-right">$15.00</td>
+                                                            <td class="text-left">Delivery Subtotal</td>
+                                                            <td class="text-right" *ngIf="deliverySubtotal>0">+ {{deliverySubtotal}} DH</td>
+                                                            <td class="text-right" *ngIf="deliverySubtotal==0" style="color: rgb(22, 142, 40);"><i class="bi bi-truck"></i> Free Delivery</td>
+
                                                         </tr>
                                                         <tr>
-                                                            <td class="text-left">Vat</td>
-                                                            <td class="text-right">$00.00</td>
+                                                            <td class="text-left">Coupon Discount</td>
+                                                            <td class="text-right" *ngIf="couponDicount>0" style="color: rgb(22, 142, 40);">- {{couponDicount}} DH</td>
+                                                            <td class="text-right" *ngIf="couponDicount==0">00.00 DH</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-left">Order Total</td>
-                                                            <td class="text-right">$170.00</td>
+                                                            <td class="text-right">{{orderTotal}} DH</td>
                                                         </tr>
+                            
                                                     </tbody>
                                                 </table>
+                                                
+                                                    <button type="submit" data-text="get a quote" class="button-one submit-button mt-15" >place order</button>
+
+                                                
                                             </div>
                                         </div>
                                     </div>

@@ -1,3 +1,4 @@
+import { CaddyService } from './../../../services/caddy.service';
 import { AuthService } from './../../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -22,7 +23,7 @@ export class ProductDetailComponent implements OnInit{
   isRevActive=true
   isTagActive=false
   quantity=1
-  constructor(public authService: AuthService,public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
+  constructor( public caddyService:CaddyService, public authService: AuthService,public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
     console.log(this.authService.userAutenticated);
   }
   ngOnInit(): void {
@@ -66,6 +67,10 @@ export class ProductDetailComponent implements OnInit{
     favoriteProduct(){
       this.isFavorite=!this.isFavorite
     }
+
+    onAddToCart(idProduct:number,quantity:number){
+      this.caddyService.addItemToCart(idProduct,quantity);
+      }
   }
 
 

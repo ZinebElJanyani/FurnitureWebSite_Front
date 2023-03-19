@@ -1,3 +1,4 @@
+import { CaddyService } from './../../../services/caddy.service';
 import { debounceTime, fromEvent, map } from 'rxjs';
 import { CategoryService } from './../../../services/category.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, NgModule } from '@angular/core';
@@ -25,9 +26,10 @@ export class ProductsComponent implements OnInit{
  maxPrice:number
  priceGrap:number=500
   product:Products
+  modalCartQuantity=0;
   
 
-  constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router){
+  constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router,private CaddyService:CaddyService){
     this.numProducts=0;
   this.minPrice=0;
   this.maxPrice = 10000;
@@ -48,8 +50,9 @@ export class ProductsComponent implements OnInit{
     //The fill() method is a built-in method in JavaScript that fills all the elements of an array with a specified value
     this.isFavorite = new Array(this.products.length).fill(false);
     /**** */
-   
+    
   }
+
   loadProducts(min:number,max:number){
         let p1 = this.route.snapshot.params['p1']
     if(p1==1){
@@ -87,7 +90,7 @@ export class ProductsComponent implements OnInit{
  
   ngAfterViewInit() {
     if(this.searchInputRef){
-      console.log("lolo")
+      
     fromEvent(this.searchInputRef.nativeElement, 'input')
     
       .pipe(debounceTime(300))
@@ -95,7 +98,7 @@ export class ProductsComponent implements OnInit{
         this.categoryService.getRessource("/Find-product/"+this.searchInputRef?.nativeElement.value)
         .subscribe(data => 
           {this.produits = data;
-            console.log("koko")
+            
           
           },err=>{
             console.log(err);
@@ -105,11 +108,11 @@ export class ProductsComponent implements OnInit{
   }
   favorite(i:number){
     this.isFavorite[i] = !this.isFavorite[i];
-    console.log(this.isFavorite[i])
+    
   }
 
   getCategories() {
-    console.log("sbr")
+   
     this.categoryService.getRessource("/collections")
     .subscribe(data => 
       {this.collections = data;
@@ -195,6 +198,15 @@ openModelopen(prd :any){
 openModelclose(){
   console.log("lolo")
   $('#poupupImg').modal('hide')
+}
+
+onAddToCart(idProduct:number,quantity:number){
+this.CaddyService.addItemToCart(idProduct,quantity);
+}
+
+onInputChange(event:Event){
+this.modalCartQuantity=Number( (event.target as HTMLInputElement).value)
+console.log(this.modalCartQuantity);
 }
 /*OnSearchValueChange(vl:String){
     this.categoryService.getRessource("/Find-product/"+vl)

@@ -1,0 +1,280 @@
+.heading-banner-area {
+    background: rgba(0, 0, 0, 0) url("img/bg/1.jpg") no-repeat scroll center center / cover ;
+  }
+  .heading-banner-title h2 {
+    color: #fff;
+    font-size: 45px;
+    font-weight: 900;
+    line-height: 33px;
+    margin-bottom: 0;
+    padding: 134px 0 101px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .breadcumbs ul { overflow: hidden;}
+  .breadcumbs li {
+    color: #eee;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 38px;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .breadcumbs li:first-child { margin-left: 0px;}
+  .breadcumbs ul li a {
+    color: #fff;
+    display: block;
+  }
+  .breadcumbs ul li:hover a { color: #C87065;}
+  .breadcumbs li::after {
+    color: #fff;
+    content: "/";
+    left: -22px;
+    position: absolute;
+    top: 0;
+  }
+  .breadcumbs li:first-child::after { content: "";}
+  .overlay-bg { position: relative;}
+  .overlay-bg::before {
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  /* Product-option */
+  .option-btn {
+    margin-right: 20px;
+    padding: 0;
+    color: #999;
+  }
+  .option-btn.active, .option-btn:hover { color: #c8a165;}
+  .dropdown-menu { border-radius: 0;}
+  .dropdown-width { width: 290px;}
+
+/* ---------------------------------
+	14. Shopping-cart
+----------------------------------- */
+.shop-cart-table {
+    background: #fff none repeat scroll 0 0;
+    padding: 40px;
+  }
+  .table-content table {
+    background: #fff none repeat scroll 0 0;
+    border: medium none;
+    text-align: center;
+    width: 100%;
+  }
+  .table-content table th {
+    background: #f6f6f6 none repeat scroll 0 0;
+    font-weight: 700;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .table-content table td {
+    border-top: medium none;
+    padding: 20px 10px 0;
+    vertical-align: middle;
+  }
+  /* product-thumbnail */
+  .table-content table td.product-thumbnail {
+    padding-left: 0;
+    width: 330px;
+  }
+  .product-thumbnail .product-img {
+    float: left;
+    position: inherit;
+    width: 110px;
+  }
+  .product-thumbnail .product-info {
+    float: left;
+    padding: 24px 0 0 20px;
+  }
+  .product-thumbnail .post-title {
+    font-size: 14px;
+  }
+  .product-thumbnail .product-info p {
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+  .product-thumbnail .single-product {
+    padding-top: 0;
+  }
+  .table-content table td.product-price {
+    color: #999;
+    font-size: 16px;
+    font-weight: 900;
+  }
+  /* product-quantity */
+  .product-quantity .cart-plus-minus {
+    float: none;
+    height: 30px;
+    line-height: 30px;
+    margin: auto;
+    width: 120px;
+  }
+  .product-quantity .dec.qtybutton {
+    border-right: 5px solid #fff;
+  }
+  .product-quantity .inc.qtybutton {
+    border-left: 5px solid #fff;
+  }
+  .product-quantity .cart-plus-minus-box {
+    color: #666;
+    font-size: 13px;
+    font-weight: 700;
+    height: 30px;
+    line-height: 30px;
+  }
+  .product-quantity .dec.qtybutton::before, .product-quantity .inc.qtybutton::before {
+    display: none;
+  }
+  /* product-subtotal */
+  .table-content table td.product-subtotal {
+    font-size: 16px;
+    font-weight: 900;
+  }
+  /* product-remove */
+  .product-remove i {
+    background: #f6f6f6 none repeat scroll 0 0;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 30px;
+    transition: all 0.3s ease 0s;
+  }
+  .product-remove i:hover {
+    background: #C8A165 none repeat scroll 0 0;
+    color: #fff;
+  }
+  /* product-stock */
+  .table-content table td.product-stock {
+    color: #999;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  /* product-add-cart */
+  .table-content table td.product-add-cart a {
+    font-size: 25px;
+  }
+  /* payment-details */
+  .payment-details table { width: 100%;}
+  .payment-details table th {
+    background: #f5f5f5 none repeat scroll 0 0;
+    color: #666;
+    font-weight: 900;
+    padding: 10px 30px;
+    text-transform: uppercase;
+  }
+  .payment-details table td{
+    color: #999;
+    font-weight: 700;
+    padding: 7px 30px;
+  }
+  .payment-details table tr {
+    border-bottom: 1px solid #E5E5E5;
+  }
+  .payment-details table tr:last-child {
+    border-bottom: 0;
+  }
+  .payment-details table tr:last-child td {
+    color: #c87065;
+    padding: 15px 30px 0;
+  }
+  /* cart-page-menu */
+  .cart-page-menu li {
+    float: left;
+    padding: 0 15px;
+    width: 25%;
+  }
+  .cart-page-menu li a {
+    background: #fff none repeat scroll 0 0;
+    color: #999;
+    display: block;
+    font-weight: 700;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .cart-page-menu li.active a {
+    background: #C8A165 none repeat scroll 0 0;
+    color: #fff;
+  }
+  /* custom-select */
+  .custom-select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(246, 246, 246, 1) url("img/bg/angel-down.png") no-repeat scroll 97% center;
+    border: medium none;
+    color: #999;
+    height: 40px;
+    padding: 0 20px;
+    text-transform: capitalize;
+    width: 100%;
+    outline: none;
+  }
+  .custom-select option { padding: 5px 20px;}
+  /* payment-method */
+  .payment-accordion h3 {
+    background: #f6f6f6 none repeat scroll 0 0;
+    color: #666;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 900;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .payment-accordion-toggle::before {
+    color: #ccc;
+    content: "\f2f2";
+    font-family: material-design-iconic-font;
+    font-size: 25px;
+    position: absolute;
+    right: 30px;
+    text-align: center;
+  }
+  .payment-accordion-toggle.active::before{
+    content: "\f2f8";
+  }
+  .payment-content {
+    display: none;
+    padding: 0 30px;
+  }
+  .payment-content.default { display: block;}
+  .payment-content p { color: #999;}
+  .payment-content a img {
+    border: 1px solid #e5e5e5;
+    margin: 0 10px 10px 0;
+    padding: 5px;
+  }
+  /* order-compleate */
+  .thank-recieve p {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .order-info { padding: 20px 0;}
+  .single-order-info {
+    float: left;
+    width: 25%;
+  }
+
+a, *::before {
+    transition: all 0.3s ease 0s;
+}

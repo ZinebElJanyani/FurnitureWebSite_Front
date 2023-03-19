@@ -13,8 +13,13 @@ export class AuthService {
   isAuthenticated$ = this._isAuthenticated.asObservable();
   private _isRegisterd = new BehaviorSubject<boolean>(true);
   isRegisterd$ = this._isRegisterd.asObservable();
+
    userAutenticated={
-   
+    id:0,
+    name:"",
+    phone:"",
+    birthday:"",
+    created_at:"",
     email:"",
     username:"",
     role:"",
@@ -23,8 +28,15 @@ export class AuthService {
       refresh_token:""
     }
   };
+  token ={
+    acces_token:"",
+    refresh_token:""
+  };
   
-  constructor(private http:HttpClient,private router : Router) { }
+  constructor(private http:HttpClient,private router : Router) { 
+    this._isAuthenticated.next(false);
+  
+  }
 
   login(name? : string,password?:string){
     if(name && password){
@@ -35,36 +47,46 @@ export class AuthService {
       .set('password',password);
 
     this.http.post('http://localhost:8084/login', body.toString(), { headers })
-   /* .pipe(
-      catchError(error => {
-        // Handle error response
-        
-        if (error.status === 401) {
-          this.isAuthenticated=false;
-        } else {
-          this.isAuthenticated=false;
-          
-        }
-        return of(null);
-      })
-    )*/
 
     .subscribe((response:any) => {
       this._isAuthenticated.next(true);
-      this.userAutenticated.email=name;
-      this.userAutenticated.token = response
-      localStorage.setItem('access_token',this.userAutenticated.token.acces_token);
+
+  
+      this.token = response
+     
+      localStorage.setItem('access_token',this.token.acces_token);
+      localStorage.setItem('isAuthenticated',"true");
+      this.getuserProfile(this.token)
       
       alert("login Success");
       this.getUserInfo_JWT();
-      this.createCaddyForCostomer();
+      this.createCaddyForCostomer(this.token.acces_token);
+    
+      console.log("fin")
       //this.router.navigate(['/courses']);
     },
     (err:HttpErrorResponse)=>
     { this._isAuthenticated.next(false);
+      localStorage.setItem('isAuthenticated',"false");
     }
     );
   }
+  }
+  setUser(){
+    localStorage.setItem('user',JSON.stringify(this.userAutenticated));
+  }
+
+  loadUser(){
+    let value = localStorage.getItem('user')
+    if(value!=null){
+    let userData = JSON.parse(value)
+      if(userData!=null){
+        this.userAutenticated=userData
+        
+    }
+  }
+  return
+    
   }
 
   getUserInfo_JWT(){
@@ -76,8 +98,8 @@ export class AuthService {
     let decodedJwtData = JSON.parse(decodedJwtJsonData)
     this.userAutenticated.username=decodedJwtData.sub;
     this.userAutenticated.role=decodedJwtData.roles;
-    console.log('name: ' + decodedJwtData.sub)
-    console.log('role: ' + decodedJwtData.roles)
+   // console.log('name: ' + decodedJwtData.sub)
+   // console.log('role: ' + decodedJwtData.roles)
 
 
   }
@@ -107,27 +129,64 @@ singUp( name?:string,email?:string,password?:string,phone?:string,birthDay?:stri
       this._isRegisterd.next(true);
       if(email)
       this.userAutenticated.username=email
-        alert("Registration successful! Thank you for registering with us ,Your account has been created and you can now log in and start using our services.");
+        alert("Registration successful! Thank you for registering with us"+ name+", Your account has been created and you can now log in and start using our services.");
         
     },(err:HttpErrorResponse)=>
     { this._isRegisterd.next(false);
     });
 }
 
-createCaddyForCostomer(){
-  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+createCaddyForCostomer(accesstoken:string){
+  const authToken = 'Bearer ' + accesstoken; 
   const headers = new HttpHeaders({
     'Authorization': authToken
   });
   this.http.post("http://localhost:8084/api/caddy/create/"+this.userAutenticated.email,null,{headers,responseType: 'text'})
   .subscribe(data => 
     {
-      console.log("ça marche")
+      console.log("caddy is created")
     
     },err=>{
       console.log(err);
     })
 }
 
- 
+ getuserProfile(rtoken:any){
+  const authToken = 'Bearer ' + rtoken.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  console.log(this.userAutenticated.token.acces_token)
+  this.http.get("http://localhost:8084/api/UserAccount/profile",{headers,responseType: 'text'})
+  .subscribe((data:any) => 
+    {
+      this.userAutenticated= JSON.parse(data);
+      this.userAutenticated.token=rtoken;
+      this.setUser();
+    
+    },err=>{
+      console.log(err);
+    })
+ }
+
+ logout(){
+  this._isAuthenticated.next(false);
+  this.userAutenticated = {
+    id: 0,
+    name: "",
+    phone: "",
+    birthday: "",
+    created_at: "",
+    email: "",
+    username: "",
+    role: "",
+    token: {
+      acces_token: "",
+      refresh_token: ""
+    }
+     }
+     localStorage.setItem('access_token',"");
+     localStorage.setItem('isAuthenticated',"false");
+     localStorage.setItem('user',JSON.stringify(null));
+ }
 }
