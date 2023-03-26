@@ -82,4 +82,17 @@ updateCaddy(totalPrice?:number,deliveryPrice?:number,coupon?:number){
     return this.http.put("http://localhost:8084/api/caddy/updateCaddy/"+this.authService.userAutenticated.id,bodyData,{responseType: 'text',headers})
      
 }
+
+ showCardInfo(){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  const options = {
+    params: {
+      costomerId: this.authService.userAutenticated.id
+    }
+  };
+  return this.http.get("http://localhost:8084/api/caddy/showCartInfo",{headers, params: options.params})
+ }
 }

@@ -156,7 +156,7 @@ createCaddyForCostomer(accesstoken:string){
   const headers = new HttpHeaders({
     'Authorization': authToken
   });
-  console.log(this.userAutenticated.token.acces_token)
+
   this.http.get("http://localhost:8084/api/UserAccount/profile",{headers,responseType: 'text'})
   .subscribe((data:any) => 
     {

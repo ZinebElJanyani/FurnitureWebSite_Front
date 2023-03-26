@@ -77,7 +77,6 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value.email?.toString(),this.loginForm.value.password?.toString());
     this.authService.isRegisterd$.subscribe(v=>{this.isAUth=v;})
     setTimeout(() => {
-      console.log(this.authService.userAutenticated);
    if(this.isAUth==false){
       
      this.loginForm.reset
