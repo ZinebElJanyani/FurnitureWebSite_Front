@@ -1,9 +1,11 @@
+
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, of, reduce, throwError } from 'rxjs';
 import {} from 'jwt-decode';
 import { NonNullAssert } from '@angular/compiler';
 import { Router } from '@angular/router';
+import { CategoryService } from './category.service';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +64,7 @@ export class AuthService {
       this.getUserInfo_JWT();
       this.createCaddyForCostomer(this.token.acces_token);
     
-      console.log("fin")
+      
       //this.router.navigate(['/courses']);
     },
     (err:HttpErrorResponse)=>
@@ -189,4 +191,34 @@ createCaddyForCostomer(accesstoken:string){
      localStorage.setItem('isAuthenticated',"false");
      localStorage.setItem('user',JSON.stringify(null));
  }
+
+ updateUser(name?:string,phone?:string,email?:string,date?:Date){
+
+  let bodyData = {
+    "id":this.userAutenticated.id,
+    "name":name,
+    "phone":phone,
+    "email":email,
+    "birthday":date,
+    
+  };
+  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  return this.http.put("http://localhost:8084/api/UserAccount/edit",bodyData,{responseType: 'text',headers})
+   
+}
+uploadImageUser(file:File){
+  let formData:FormData = new FormData();
+  formData.append('file',file);
+  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+
+  const req=new HttpRequest('POST',"http://localhost:8084/api/UserAccount/uploadImageUser/"+this.userAutenticated.id,formData,{
+    reportProgress:true,
+    responseType:'text',
+    headers:new HttpHeaders({'Authorization': authToken})
+  })
+  return this.http.request(req)
+}
 }

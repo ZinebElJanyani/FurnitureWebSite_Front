@@ -1,0 +1,95 @@
+<div class="wrapper bg-dark-white">
+    <!-- HEADING-BANNER START -->
+    <div class="heading-banner-area overlay-bg">
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-banner">
+                        <div class="heading-banner-title">
+                            <h2>Wishlist</h2>
+                        </div>
+                        <div class="breadcumbs pb-15">
+                            <ul>
+                                
+                                <li><a href="index.html">Home</a></li>
+                                <li>Wishlist</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HEADING-BANNER END -->
+    <!-- SHOPPING-CART-AREA START -->
+    <div class="shopping-cart-area  pt-80 pb-80" style="background-color: #f6f6f6;">
+        <div class="container" >	
+            <div class="row" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="shopping-cart">
+                        <!-- Nav tabs -->
+                        
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="wishlist">
+                                <form action="#">
+                                    <div class="shop-cart-table">
+                                        <div class="table-content table-responsive">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="product-thumbnail">Product</th>
+                                                        <th class="product-price">Price</th>
+                                                        <th class="product-stock">stock status</th>
+                                                        <th class="product-add-cart">Add to cart</th>
+                                                        <th class="product-remove">Remove</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let product of products">
+                                                       
+                                                        <td class="product-thumbnail  text-left">
+                                                            <!-- Single-product start -->
+                                                            <div class="single-product">
+                                                                <div class="product-img">
+                                                                    <a href="single-product.html"><img style="height: 100px;" src="{{this.categoryService.host+'/productFirst_P/'+product.id}}" alt="" /></a>
+                                                                </div>
+                                                                <div class="product-info">
+                                                                    <h4 class="post-title"><a class="text-light-black" href="#">{{product.nom}}</a></h4>
+                                                                    <p class="mb-0">Color :  {{product.color}}</p>
+                                                                 
+                                                                    <p class="mb-0">Size :     SL</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Single-product end -->				
+                                                        </td>
+                                                        <td class="product-price">{{product.price}} DH</td>
+                                                        <td class="product-stock" *ngIf="product.qteStock>0" style="color: rgb(30, 134, 30);">In Stock</td>
+                                                        <td class="product-stock" *ngIf="product.qteStock==0" style="color: #e34115;">Out Of Stock</td>
+
+                                                        <td class="product-add-cart">
+                                                            <a class="text-light-black" (click)="onAddToCart(product.id)" ><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                        </td>
+                                                        <td class="product-remove">
+                                                            <a (click)="onRemoveProduct(product.id)"><i class="zmdi zmdi-close"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>									
+                            </div>
+                            <!-- wishlist end -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+		

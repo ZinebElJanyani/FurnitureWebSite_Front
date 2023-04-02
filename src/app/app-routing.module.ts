@@ -13,6 +13,7 @@ import { LoginComponent } from './components/shared/login/login.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { OrdersComponent } from './components/client/orders/orders.component';
 import { ProfileComponent } from './components/shared/profile/profile.component';
+import { WishlistComponent } from './components/client/wishlist/wishlist.component';
 
 const routes: Routes = [
   
@@ -27,6 +28,7 @@ const routes: Routes = [
     {path : 'shopping-cart' , component: ShoppingCartComponent},
     {path : 'check-out' , component: CheckOutComponent},
     {path : 'order-success' , component: OrderSuccessComponent},
+    {path : 'wishlist' , component: WishlistComponent},
     {path : 'orders' , component: OrdersComponent},
     {path : 'profile' , component: ProfileComponent},
     {path : 'admin/products' , component: AdminProductsComponent},

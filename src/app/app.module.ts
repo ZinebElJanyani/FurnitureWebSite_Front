@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 /*import { ProfileComponent } from './components/shared/profile/profile.component';*/
 import { OrdersComponent } from './components/client/orders/orders.component';
+import { WishlistComponent } from './components/client/wishlist/wishlist.component';
 /*import { ZippyComponent } from './shared/zippy/zippy.component';*/
 
 
@@ -22,6 +23,7 @@ import { OrdersComponent } from './components/client/orders/orders.component';
 @NgModule({
   declarations: [
     AppComponent,
+  
    
     
     

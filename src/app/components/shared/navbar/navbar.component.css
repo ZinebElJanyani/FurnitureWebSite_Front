@@ -43,7 +43,7 @@ a:not([href]):not([tabindex]){
 }
 .toggle-container {
   position: relative;
-  margin-top: 0.75rem;
+  /*margin-top: 0.75rem;*/
 }
 .toggle-cart {
   background: transparent;
@@ -51,6 +51,7 @@ a:not([href]):not([tabindex]){
   font-size: 1.6rem;
   color: var(--clr-white);
   cursor: pointer;
+  margin: 10px 20px;
 }
 .cart-item-count {
   position: absolute;
@@ -70,12 +71,14 @@ a:not([href]):not([tabindex]){
 .active-nav{
   background-color :var(--clr-white);
   box-shadow: 0 0 .5rem rgba(0, 0, 0, .6);
+
 }
 .active-nav .nav-link{
   color: var(--clr-grey-1);
 }
 .active-nav .toggle-cart{
   color: var(--clr-grey-1);
+  margin: 10px 20px;
 }
 
 .active-nav #logo{

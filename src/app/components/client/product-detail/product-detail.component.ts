@@ -38,6 +38,8 @@ export class ProductDetailComponent implements OnInit{
   progress=0;
   currentFileUpload: any;
   reviews:any
+  wishlist_product:number[]=[]
+  
 
 
   constructor( public caddyService:CaddyService, public authService: AuthService,public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
@@ -51,7 +53,11 @@ export class ProductDetailComponent implements OnInit{
       this.getReviews()
      
     }, 1000);
+    setTimeout(() => {
+      this.IsFavorite(this.product.id)     
+    }, 1000);
     
+   
   }
   initilizeForm(){
     this.reviewForm=new FormGroup({
@@ -80,7 +86,7 @@ export class ProductDetailComponent implements OnInit{
   }
   Freview(){
    
-      title:new FormControl("",Validators.required),
+      
    this.categoryService.addReview(this.product.id,this.nbrStars,this.reviewForm.value.title,this.reviewForm.value.text,"",this.reviewForm.value.recommandProduct,this.reviewForm.value.name)
    .subscribe((data:any) => 
       {
@@ -239,8 +245,25 @@ export class ProductDetailComponent implements OnInit{
         console.log(err);
       })
     }
-    favoriteProduct(){
+    favoriteProduct(id_product:number){
       this.isFavorite=!this.isFavorite
+
+      this.categoryService.favoriteProduct(id_product,this.isFavorite)
+        
+      
+    }
+
+    IsFavorite(product_Id :number){
+      let data =  localStorage.getItem('wishlist')
+      if(data){
+        this.wishlist_product=JSON.parse(data)
+        const index = this.wishlist_product.indexOf(product_Id);
+        if(index !==-1){
+          this.isFavorite = true
+        }
+
+      }
+
     }
 
     onAddToCart(idProduct:number,quantity:number){

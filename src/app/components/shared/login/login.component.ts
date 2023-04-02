@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 /*import { LoginValidators } from '/login.validators';*/
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/services/category.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,7 +27,7 @@ export class LoginComponent {
   get password(){
     return this.loginForm.get('password');
   }
-  constructor(fb:FormBuilder,private authService: AuthService,private router : Router){
+  constructor(fb:FormBuilder,private authService: AuthService,private router : Router,private categoryService:CategoryService){
     /*this.registerForm=fb.group({
       Remail:['',Validators.email,Validators.required],
     Rpassword:['',Validators.required],
@@ -74,7 +75,17 @@ export class LoginComponent {
   }
 
   Flogin(){
-    this.authService.login(this.loginForm.value.email?.toString(),this.loginForm.value.password?.toString());
+    
+      this.authService.login(this.loginForm.value.email?.toString(),this.loginForm.value.password?.toString());
+   
+    setTimeout(() => {
+    this.categoryService.storeFavoriteInDB().subscribe(data => {
+      console.log(data)
+    },err =>{
+      console.log(err)
+    }) 
+  }, 1000);
+   
     this.authService.isRegisterd$.subscribe(v=>{this.isAUth=v;})
     setTimeout(() => {
    if(this.isAUth==false){

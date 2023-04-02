@@ -20,6 +20,8 @@ import { ProductDetailComponent } from '../components/client/product-detail/prod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersComponent } from '../components/client/orders/orders.component';
+import { ProfileComponent } from '../components/shared/profile/profile.component';
+import { WishlistComponent } from '../components/client/wishlist/wishlist.component';
 
 const components=[
   NavbarComponent,
@@ -35,7 +37,9 @@ const components=[
   ProductsComponent,
   ProductDetailComponent,
   ZippyComponent,
-  OrdersComponent
+  OrdersComponent,
+  ProfileComponent,
+  WishlistComponent
 ]
 
 @NgModule({

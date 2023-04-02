@@ -85,7 +85,9 @@ export class ProductsComponent implements OnInit{
       }
     })
     /***** */
-    
+     setTimeout(() => {
+      this.IsFavorite()     
+    }, 500);
   }
  
   ngAfterViewInit() {
@@ -106,11 +108,29 @@ export class ProductsComponent implements OnInit{
       });
     }
   }
-  favorite(i:number){
+  favorite(i:number,id_product:number){
     this.isFavorite[i] = !this.isFavorite[i];
-    
+    this.categoryService.favoriteProduct(id_product,this.isFavorite[i])
   }
+  IsFavorite(){
+    let data =  localStorage.getItem('wishlist')
+    let wishlist:number[]=[]
+    console.log(this.produits)
+    if(data){
+      wishlist=JSON.parse(data)
+      let i =0;
+      this.produits.forEach((product:any )=> {
+       
+        const index = wishlist.indexOf(product.id);
+        if(index !==-1){
+          this.isFavorite[i] = true
+        }
+        i++;
+      })
+      
 
+    }
+  }
   getCategories() {
    
     this.categoryService.getRessource("/collections")
@@ -208,6 +228,7 @@ onInputChange(event:Event){
 this.modalCartQuantity=Number( (event.target as HTMLInputElement).value)
 console.log(this.modalCartQuantity);
 }
+
 /*OnSearchValueChange(vl:String){
     this.categoryService.getRessource("/Find-product/"+vl)
     .subscribe(data => 
@@ -257,6 +278,7 @@ console.log(this.modalCartQuantity);
       
      
   }*/
+  
 }
 
 interface Products{

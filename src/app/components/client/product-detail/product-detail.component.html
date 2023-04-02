@@ -90,7 +90,7 @@
                                     <div class="inc qtybutton" (click)="quantity=quantity+1">+</div>
                             </div>
                                 <div class="product-action clearfix">
-                                    <a  (click)="favoriteProduct()" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi" [class.zmdi-favorite]="isFavorite" [class.zmdi-favorite-outline]="!isFavorite"></i></a>
+                                    <a  (click)="favoriteProduct(product.id)" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi" [class.zmdi-favorite]="isFavorite" [class.zmdi-favorite-outline]="!isFavorite"></i></a>
        
                                     <a (click)="onAddToCart(product.id,quantity)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
                                 </div>
@@ -144,7 +144,7 @@
                                         <ul class="product-comments clearfix">
                                             <li class="mb-30" *ngFor="let review of reviews">
                                                 <div class="pro-reviewer">
-                                                    <img src="assets/images/home_img/review1.jpg" alt="" />
+                                                    <img src="{{'http://localhost:8084/api/UserAccount/userImage/'+review.id_customer}}" alt="" />
                                                 </div>
                                                 <div class="pro-reviewer-comment" >
                                                     <div class="fix">

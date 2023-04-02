@@ -153,17 +153,21 @@ header {
   justify-content: center;
   align-items: center;
   margin: 20px 0;
+ 
+  font-family: 'Dancing Script';
 }
 
 .userDetails .userName .map .ri {
   margin-right: var(--m-0-3);
   font-size: var(--m-fs);
+
 }
 
 .userDetails .userName .map span {
   font-size: var(--s-fs);
   color: var(--f3-color);
   font-weight: 700;
+  font-size: 50px;
 }
 
 .userDetails .userName p {

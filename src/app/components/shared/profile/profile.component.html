@@ -29,12 +29,14 @@
             <section class="userProfile card" >
                 <div class="profile">
                     <div class="container">
-                    <figure><img src="assets/images/home_img/review1.jpg" alt="profile" width="250px" height="250px"></figure>
-                    <div class="form-group">
-                        <label for="photo">Change Photo:</label>
-                        <input type="file" class="form-control" id="photo" name="photo">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <figure><img src="{{imagePath}}" alt="profile" width="250px" height="250px"></figure>
+                        <form [formGroup]="UserImgForm" (ngSubmit)="imgProfile()">
+                            <div class="form-group">
+                                <label for="photo">Change Photo:</label>
+                                <input type="file" class="form-control" id="photo" name="photo" formControlName="photo" (change)="onSelectedFile($event)">
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="UserImgForm.invalid">Upload</button>
+                        </form>
                     </div>
                 </div>
                 
@@ -66,10 +68,10 @@
                     <div class="container">
                         <div class="map">
                      
-                            <span>{{this.authService.userAutenticated.name}}</span>
+                            <span>Hello Dear {{this.authService.userAutenticated.name}}</span>
                         </div>
-                        <span>{{this.authService.userAutenticated.name}}</span>
-                        <form >
+                        <span>{{this.authService.userAutenticated.created_at}}</span>
+                        <form [formGroup]="profileForm" (ngSubmit)="Fprofile()">
                             <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" formControlName="name">
@@ -87,7 +89,7 @@
                             <input type="date" class="form-control" id="birthday" name="birthday" formControlName="birthday">
                             </div>
                             
-                            <button type="submit" class="btn btn-primary" >Submit</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid" >Edit profile</button>
                         </form>
                     </div>
                     

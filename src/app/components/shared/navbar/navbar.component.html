@@ -16,10 +16,10 @@
                 <li *ngIf="!isAuthenticated"><a routerLink="/login" class="nav-link">Login</a></li>
                 <li  ngbDropdown class="nav-item dropdown" *ngIf="isAuthenticated">
                     <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      username
+                        {{this.authservice.userAutenticated.name}}
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" routerLink="shared/profile">My Profile</a>
+                      <a class="dropdown-item" routerLink="profile">My Profile</a>
                       <a class="dropdown-item" routerLink="orders">My Orders</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" (click)="onLogout()" routerLink="/">Log Out</a>
@@ -35,6 +35,13 @@
                 <i class="bi bi-cart-fill"></i>
             </a>
             <span *ngIf="navCaddyCount>0" class="cart-item-count" >{{navCaddyCount}}</span>
+            
+            <a routerLink="/wishlist" class="toggle-cart" (click)="onShowCart()">
+                 
+                <i class="bi bi-heart-fill"></i>
+            </a>
+            <span *ngIf="navCaddyCount>0" class="cart-item-count" >{{navCaddyCount}}</span>
         </div>
+       
     </div>
 </nav>
