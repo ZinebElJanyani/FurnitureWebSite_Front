@@ -85,6 +85,9 @@
 .pro-label.new-label {
   background: #c8a165 none repeat scroll 0 0;
 }
+.pro-label.stock-label {
+  background: #e34115 none repeat scroll 0 0;
+}
 .pro-label.sale-label {
   background: #c87065 none repeat scroll 0 0;
 }

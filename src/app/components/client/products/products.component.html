@@ -201,6 +201,7 @@
 										<div class="single-product">
 											<div class="product-img">
 												<span *ngIf="p.promotion>0" class="pro-label new-label">-{{p.promotion}} %</span>
+												<span *ngIf="p.qteStock==0" class="pro-label stock-label">Out Of Stock</span>
 												<span class="pro-price-2">{{p.price|number:'0.00'}} DH</span>
 												<a [routerLink]="['/product-detail', p.id]"><img src="{{this.categoryService.host+'/productFirst_P/'+p.id}}" alt="" /></a>
 											</div>

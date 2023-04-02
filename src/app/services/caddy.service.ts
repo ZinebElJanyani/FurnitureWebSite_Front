@@ -56,7 +56,7 @@ export class CaddyService {
       costomerId: this.authService.userAutenticated.id
     }
   };
-  return this.http.get("http://localhost:8084/api/caddy/showCart",{headers, params: options.params})
+  return this.http.get("http://localhost:8084/api/caddy/getItems",{headers, params: options.params})
 }
 
 deleteItem(productId:number){

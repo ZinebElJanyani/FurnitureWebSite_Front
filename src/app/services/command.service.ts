@@ -43,7 +43,8 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
   createCommand(idAdress:number,phone:string,email:string,paymentMethod:string,name:string,deliveryDate:Date,withAssembly:boolean,assemblyPrice:number,totalPrice:number,deliveryPrice:number,couponDiscount:number){
     const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
     const headers = new HttpHeaders({
-      'Authorization': authToken
+      'Authorization': authToken,
+      'Content-Type': 'application/json'
     });
     let commandState=0
     if(paymentMethod=="CreditCards"){
@@ -64,7 +65,8 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
       'assemblyPrice':assemblyPrice,
       'deliveryPrice':deliveryPrice,
       'totalPrice':totalPrice,
-      'couponDiscount':couponDiscount,
+      'couponDiscount':couponDiscount
+    
     }
     
     return this.http.post("http://localhost:8084/api/command/create/"+idAdress,body,{headers})
@@ -84,5 +86,14 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
       
       return this.http.post("http://localhost:8084/api/command/createCreditCard/"+idCommande,body,{headers})
       
+      }
+
+      getCommand(){
+        const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+        const headers = new HttpHeaders({
+          'Authorization': authToken
+        });
+       
+        return this.http.get("http://localhost:8084/api/command/getCommand/"+this.authService.userAutenticated.id,{headers})
       }
 }

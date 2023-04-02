@@ -1,14 +1,18 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../../../services/auth.service';
 import { CategoryService } from './../../../services/category.service';
 import { CaddyService } from './../../../services/caddy.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Console } from 'console';
-
+declare var $:any
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
+
 export class ShoppingCartComponent implements OnInit {
+
   @ViewChild('inputCoupon') inputCoupon?: ElementRef;
   quantity=0
   items:any
@@ -17,8 +21,9 @@ export class ShoppingCartComponent implements OnInit {
   couponDicount =0
   couponCode :String
   orderTotal=0
-
-  constructor(private renderer: Renderer2,public caddyService :CaddyService,public categoryService:CategoryService){
+  customer:any
+  productsOutStock:string[] =[]
+  constructor(private  router: Router,private authService : AuthService ,private renderer: Renderer2,public caddyService :CaddyService,public categoryService:CategoryService){
     this.couponCode="124GN%SI&13DDF"
   }
   ngOnInit(): void {
@@ -109,4 +114,59 @@ calculTotal(){
           console.log(err);
         })
     }
+    onPlaceOrder(){
+      this.showItems()
+      
+      let NotoutOfStock=true
+      
+      this.productsOutStock.length=0
+      this.items.forEach((item:any) => {
+        if(item.product.qteStock<item.quantity){
+          NotoutOfStock=false
+          this.productsOutStock.push(item.product.nom)
+        }
+      });
+
+      if(!NotoutOfStock){
+        
+        this.authService.loadUser()
+        this.customer = this.authService.userAutenticated
+       this.openModelopen()
+      }else{
+
+        this.router.navigate(["/check-out"]);
+      }
+    }
+  openModelopen(){
+  
+      $('#productModal').modal('show')
+     
+  }
+  onProceed(){
+
+    this.items.forEach((item:any) => {
+      if(item.product.qteStock<item.quantity){
+       if(item.product.qteStock==0){
+       
+        
+          this.caddyService.deleteItem(item.product.id).subscribe(data => 
+            {
+            
+            },err=>{
+              console.log(err);
+            })
+        
+       }else{
+     
+        let newQ = item.quantity - item.product.qteStock;
+        this.caddyService.addItemToCart(item.product.id,-newQ);}
+      
+      
+      }
+      this.showItems()
+    });
+    setTimeout(() => {
+    this.router.navigate(["/check-out"]);
+  }, 2000);
+  }
 }

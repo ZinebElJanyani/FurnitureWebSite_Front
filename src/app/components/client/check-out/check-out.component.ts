@@ -1,10 +1,11 @@
 import { CommandService } from './../../../services/command.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { stat } from 'fs';
 import { CaddyService } from 'src/app/services/caddy.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CheckOutValidators } from './checkOutValidators';
+//import{render} from 'cresditcardpayments/cresditcardpayments';
 
 @Component({
   selector: 'app-check-out',
@@ -24,10 +25,12 @@ import { CheckOutValidators } from './checkOutValidators';
   ]
 })
 export class CheckOutComponent implements OnInit{
- 
+  @ViewChild('paypalref',{static:true}) private paypalRef:ElementRef | undefined
+
   isCreditCart=false
   isCOD=false;
   isPayPal=false
+  ispaypalPayed=false
   user={
     id:0,
     name:"koko",
@@ -63,6 +66,7 @@ export class CheckOutComponent implements OnInit{
     this.getItems()
     this.getCartIfo()
     this.initilizeForm()
+    this.paypal()
   }
   constructor(private commandService:CommandService,private caddyService : CaddyService){
    
@@ -245,21 +249,22 @@ export class CheckOutComponent implements OnInit{
     
     }
   Fcommand(){
-    if(this.isCOD||this.isCreditCart||this.isPayPal){
+    if(this.isCOD||this.isCreditCart||this.ispaypalPayed ){
       this.setDeliveryAddress(this.commandForm.value.city,this.commandForm.value.address,this.commandForm.value.regesterAddress)
-      
+      console.log('of1')
       setTimeout(() => {
-         
+        console.log('of2')
           this.setCommand(this.commandForm.value.phone,this.commandForm.value.email,this.commandForm.value.name,this.commandForm.value.dateD,this.commandForm.value.withAssembly)
         }, 1000);
       
       if(this.isCreditCart){
       setTimeout(() => {
-        
+        console.log('of3')
         this.setCreditCard(this.commandForm.value.cardName,this.commandForm.value.cardNumber,this.commandForm.value.cvc)
 
-        }, 2000);
+        }, 3000);
         }
+        alert("Thank you for your purchase at Comfy! Your order has been successfully registered and a confirmation email with the details of your order will be sent to you.\nYou can check the status of your order by logging in to your account and accessing the 'My Orders' section.")
       }else{
         alert("In order to complete your command process, you should choose a payment method")
       }
@@ -291,8 +296,48 @@ export class CheckOutComponent implements OnInit{
         },err=>{
           console.log(err);
         })
-      }
+    }
 
+    paypal(){
+      const self = this; 
+        let paypalButton= window.paypal
+        .Buttons({
+          style:{
+            layout:'vertical',
+            color:'gold',
+            shape:'rect',
+            label:'paypal'
+          },
+          
+          createOrder:(data:any,actions:any)=>{
+            return actions.order.create({
+              purchase_units:[
+                {
+                  amount:{
+                    value:12,
+                    currency_code:'USD'
+                  }
+                }
+              ]
+            })
+          },
+    
+          onApprove:(data:any,actions:any)=>{
+          
+            return actions.order.capture().then(function(details:any) {
+              
+              self.ispaypalPayed = true
+            });
+            
+          },
+         
+          onError:(error:any )=> {
+            paypalButton.close()
+            console.log(error)
+          }
+    
+        }).render(this.paypalRef?.nativeElement);
+      }
 }
 
 

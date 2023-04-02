@@ -1,1 +1,142 @@
-<p>orders,,works!</p>
+<div class="heading-banner-area overlay-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-banner">
+                    <div class="heading-banner-title">
+                        <h2>My orders</h2>
+                    </div>
+                    <div class="breadcumbs pb-15">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li>check out</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container"  *ngFor="let order of orders">
+    
+    <article class="card" style="margin: 50px 60px;" >
+        <header class="card-header"> <h4 class="title-1 title-border text-uppercase">Oreder in ( {{order.date}} )</h4> </header>
+        <div class="card-body">
+            <h6>ID: {{order.ref}}</h6>
+            <article class="card">
+                <div class="card-body row">
+                    <div class="col"> <strong>Estimated Delivery time:</strong> <br>{{order.deliveryDate}} </div>
+                    <div class="col"> <strong>Shipping BY:</strong> <br> BLUEDART, | <i class="bi bi-telephone-fill"></i> +1598675986 </div>
+                    <div class="col"> <strong>Status:</strong> <br> {{order.commandState}} </div>
+                    <div class="col" *ngIf="order.withAssembly==true"> <strong>Assembly:</strong> <br> With Assembly </div>
+                    <div class="col" *ngIf="order.withAssembly==false"> <strong>Assembly:</strong> <br> Without Assembly </div>
+
+                </div>
+            </article>
+            <div class="track">
+                <div class="step active"> <span class="icon"> <i class="bi bi-calendar-plus-fill"  style="font-size: 1.4em;"></i> </span> <span class="text">Order confirmed</span> </div>
+                <div class="step active"> <span class="icon"> <i class="bi bi-check-lg"  style="font-size: 1.5em;"></i> </span> <span class="text"> Picked by courier</span> </div>
+                <div class="step active"> <span class="icon"> <i class="bi bi-truck"  style="font-size: 1.6em;"></i> </span> <span class="text"> On the way </span> </div>
+                <div class="step"> <span class="icon"> <i class="bi bi-house-door-fill"  style="font-size: 1.4em;"></i> </span> <span class="text">Ready for pickup</span> </div>
+            </div>
+            <hr>
+            <div class="orderInfo" style="display: flex;justify-content: space-between;margin-bottom: 20px;">
+                <div style="  width: 40%;">
+                    <div (click)="isPaymentDisplay=!isPaymentDisplay" ><h3 class="payment-accordion-toggle">Payment Detail</h3></div>
+                    <div class="payment-content payment-details"  [class.displayb]="isPaymentDisplay" [class.displayn]="!isPaymentDisplay"   >
+                            
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Payment Method</td>
+                                    <td class="text-right">{{order.paymentMethod}} payment</td>
+                                </tr>
+                          
+                           
+                               <tr *ngFor="let item of order.commandItems">
+                                    <td>{{item.product.nom}} x {{item.quantity}}</td>
+                                    <td class="text-right">{{item.product.price-item.product.promotion}} DH</td>
+                                </tr>
+                        
+                            
+                                <tr >
+                                    <td>Coupon Discount</td>
+                                    <td class="text-right" *ngIf="order.couponDiscount>0" style="color: rgb(22, 142, 40);">- {{order.couponDiscount}} DH</td>
+                                    <td class="text-right" *ngIf="order.couponDiscount==0">00.00 DH</td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Subtotal</td>
+                                    <td class="text-right" *ngIf="order.deliveryPrice>0">+  DH</td>
+                                    <td class="text-right" *ngIf="order.deliveryPrice==0" style="color: rgb(22, 142, 40);"><i class="bi bi-truck"></i> Free Delivery</td>
+                                </tr>
+                                <tr>
+                                    <td>Assembly Subtotal</td>
+                                    <td class="text-right" *ngIf="order.assemblyPrice>0">+  DH</td>
+                                    <td class="text-right" *ngIf="order.assemblyPrice==0">00.00 DH</td>
+                                </tr>
+                                <tr id="lastC">
+                                    <td>Order Total</td>
+                                    <td class="text-right">{{order.totalPrice}} DH</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="  width: 40%;">
+                    <div (click)="isDeliveryDisplay=!isDeliveryDisplay"><h3 class="payment-accordion-toggle" >Delivery Address</h3></div>
+                    <div class="payment-content payment-details " [class.displayb]="isDeliveryDisplay" [class.displayn]="!isDeliveryDisplay"  >
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Region</td>
+                                    <td class="text-right">{{order.deliveryAdress.city.region.nom}}</td>
+                                </tr>
+                          
+                           
+                                <tr>
+                                    <td>City</td>
+                                    <td class="text-right">{{order.deliveryAdress.city.nom}}</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>Complete Address</td>
+                                    <td class="text-right">{{order.deliveryAdress.addess}}</td>
+                                </tr>
+                                <tr >
+                                    <td>Name of Recipient</td>
+                                    <td class="text-right">{{order.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email Address of Recipient</td>
+                                    <td class="text-right">{{order.email}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Phone of Recipient</td>
+                                    <td class="text-right">{{order.phone}}</td>
+
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <h4 class="title-1 title-border text-uppercase" style="margin-left: 1%;">Items</h4>
+            <ul class="row" >
+                <li class="col-md-4" *ngFor="let item of order.commandItems">
+                    <figure class="itemside mb-3">
+                        <div class="aside"><img src="{{this.categoryService.host+'/productFirst_P/'+item.product.id}}" class="img-sm border"></div>
+                        <figcaption class="info align-self-center">
+                            <p class="title">{{item.product.nom}} <br> {{item.product.color}} </p> <span class="text-muted">{{item.price}} DH x ( {{item.quantity}} )  </span>
+                        </figcaption>
+                    </figure>
+                </li>
+              
+            </ul>
+            <hr>
+            <a href="#" class="btn btn-warning" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
+        </div>
+    </article>
+  
+</div>

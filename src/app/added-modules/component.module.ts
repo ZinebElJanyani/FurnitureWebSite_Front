@@ -19,6 +19,7 @@ import { ProductsComponent } from '../components/client/products/products.compon
 import { ProductDetailComponent } from '../components/client/product-detail/product-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersComponent } from '../components/client/orders/orders.component';
 
 const components=[
   NavbarComponent,
@@ -33,7 +34,8 @@ const components=[
   LoginComponent,
   ProductsComponent,
   ProductDetailComponent,
-  ZippyComponent
+  ZippyComponent,
+  OrdersComponent
 ]
 
 @NgModule({

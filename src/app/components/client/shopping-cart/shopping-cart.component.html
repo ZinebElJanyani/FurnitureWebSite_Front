@@ -119,7 +119,7 @@
                                                     </tbody>
                                                 </table>
                                                 
-                                                    <button type="submit" data-text="get a quote" class="button-one submit-button mt-15" >place order</button>
+                                                    <button type="submit" data-text="get a quote" class="button-one submit-button mt-15" (click)="onPlaceOrder()">place order</button>
 
                                                 
                                             </div>
@@ -154,6 +154,47 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="quickview-wrapper">
+        <!-- Modal -->
+        <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-product container">
+                            <div style="text-align: center;">
+                            <img src="assets/images/home_img/oops.jpg" alt="" style="width: 30%;height: 30%;">
+                            </div>
+                            <h1 *ngIf="customer!=null">Dear valued {{customer.name}},</h1>
+                            <div class="quick-desc">
+                                <p>Thank you for your order! We appreciate your business and we are sorry to inform you that some of the items you have selected are currently out of stock with the required quantity.</p>
+                              
+                                <p>Unfortunately, we do not have the following items available at the moment with the required quantity:</p>
+                                <ul style="margin-left: 2%; color: #C8A165;">
+                                    <li *ngFor="let prod of productsOutStock"> ☆ {{prod}}</li>
+                                </ul>
+                                <br>
+                                <p>We understand that this may be disappointing news, but we want to assure you that we are doing everything we can to restock these items as soon as possible. If you would like to wait for the items to become availabl click on<strong>Cancel</strong> , we will be happy to hold your order and ship it out as soon as we receive the products..</p>
+                                
+                                <p>Alternatively, if you would prefer to receive a partial shipment of the items that are currently in stock, please click on <strong>Proceed</strong>  and we will be happy to process the order accordingly with the available products.</p>
+
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                            <button class="single_add_to_cart_button" type="submit" (click)="onProceed()" data-dismiss="modal" >Proceed</button>
+                            <button class="single_add_to_cart_button" type="submit" data-dismiss="modal"   >Concel</button>
+                            </div>
+                        </div>
+                    </div>  
+                                 
+                </div>  
+            </div>                  
+                                 
+                              
+        </div>
+        <!-- END Modal -->
     </div>
     <!-- SHOPPING-CART-AREA END --> 
 </div>

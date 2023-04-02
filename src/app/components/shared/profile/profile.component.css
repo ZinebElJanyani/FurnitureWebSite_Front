@@ -1,0 +1,318 @@
+/* ===== =====  Poppins Google Font  ===== =====  */
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+/* ===== =====>>  Universal Selector  <<===== =====  */
+
+
+/* ===== =====>>  Body Font Size  <<===== =====  */
+html {
+  font-size: 10px;
+}
+
+/* ===== =====>> Css Variables  <<===== =====  */
+:root {
+  
+  --C-lg-bg: linear-gradient(45deg, #ff3399, #ff9933);
+
+  /* ===== =====>>  Font Size  <<===== =====  */
+  --xxxl-fs: 2.2rem;
+  --xxl-fs: 1.8rem;
+  --xl-fs: 1.6rem;
+  --l-fs: 1.4rem;
+  --m-fs: 1.2rem;
+  --s-fs: 1.1rem;
+  --xs-fs: 1rem;
+
+  /* =====>>  Margin  <<===== */
+  --m-2-5: 2.5rem;
+  --m-1-8: 1.8rem;
+  --m-1-5: 1.5rem;
+  --m-0-6: 0.6rem;
+  --m-0-5: 0.5rem;
+  --m-0-3: 0.3rem;
+
+  /* =====>>  Padding  <<===== */
+  --p-2-5: 2.5rem;
+  --p-1-5: 1.5rem;
+  --p-1-0: 1rem;
+  --p-0-8: 0.8rem;
+  --p-0-5: 0.5rem;
+  --p-0-4: 0.4rem;
+  --p-0-3: 0.3rem;
+}
+
+/* ===== =====>>  Body Css  <<===== =====  */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== =====>>  Body Main-Background Css  <<===== =====  */
+.main_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 138%;
+  background: url(~src/assets/images/home_img/bg.png);
+  background-position: left;
+  z-index: -1;
+ /* filter: blur(10px);*/
+}
+
+/* ===== =====>>  Main-Container Css  <<===== =====  */
+.main {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "header header"
+    "userProfile userDetails"
+    "work_skills timeline_about"
+    "work_skills timeline_about";
+  width: 85%;
+  height: 90vh;
+  background: var(--glass-bg);
+  padding: var(--p-1-5);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== =====>>  Container Cards Grid-Area Css Start  <<===== =====  */
+header {
+  grid-area: header;
+}
+
+.userProfile {
+  grid-area: userProfile;
+}
+
+.work_skills {
+  grid-area: work_skills;
+}
+
+.userDetails {
+  grid-area: userDetails;
+}
+
+.timeline_about {
+  grid-area: timeline_about;
+}
+
+/* ===== =====>>  Container Cards Css  <<===== =====  */
+.container .card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(3rem);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+  padding: var(--p-1-5);
+}
+
+
+
+
+
+
+/* ===== =====>>  User Main-Profile Css Start  <<===== ===== */
+.container .userProfile {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  backdrop-filter: blur(10px);
+  
+  box-shadow: none;
+  margin-right: 5%;
+ 
+}
+
+.container .userProfile .profile figure img {
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+}
+
+
+
+
+/* ===== =====>>  User Details Css Start  <<===== ===== */
+.userDetails {
+  position: relative;
+  padding: var(--p-1-5) var(--p-2-5);
+}
+
+.userDetails .userName h1 {
+  font-size: var(--xxxl-fs);
+}
+
+.userDetails .userName .map {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.userDetails .userName .map .ri {
+  margin-right: var(--m-0-3);
+  font-size: var(--m-fs);
+}
+
+.userDetails .userName .map span {
+  font-size: var(--s-fs);
+  color: var(--f3-color);
+  font-weight: 700;
+}
+
+.userDetails .userName p {
+  font-size: var(--m-fs);
+  font-weight: 700;
+  color: var(--f5-color);
+  margin-bottom: var(--m-1-8);
+}
+@media screen and (max-width: 1024px) {
+    html {
+      font-size: 9px;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    html {
+      font-size: 8px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 10px;
+    }
+  
+    /* ===== =====>>  Container Css Start  <<===== ===== */
+    .main {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "userProfile"
+        "userDetails"
+        "work_skills"
+        "timeline_about";
+      overflow-x: hidden;
+      overflow-y: inherit;
+      padding: 0;
+      width: 90%;
+      height: 100%;
+      box-shadow: none;
+    }
+  
+    /* ===== =====>>  Container Card Css Start  <<===== ===== */
+    .container .card {
+      backdrop-filter: none;
+    }
+  
+    .userDetails {
+      margin-bottom: 3rem;
+    }
+  
+    .container::before,
+    .container::after {
+      display: none;
+    }
+  
+    /* ===== =====>>  Header/Navbar Css Start  <<===== ===== */
+    .main header {
+      padding: 2.5rem;
+    } 
+  }
+  
+  @media screen and (max-width: 500px) {
+    .main {
+      width: 100%;
+      overflow: initial;
+    }
+  }
+  
+  @media screen and (max-width: 350px) {
+    .main_bg {
+      animation: none;
+    }
+  }
+  /*.heading-banner-area {
+    background: rgba(0, 0, 0, 0.034) url(https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=787&q=80) no-repeat scroll center center / cover ;
+  }*/
+  
+  .breadcumbs ul { overflow: hidden;}
+  .breadcumbs li {
+    color: #eee;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 38px;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .breadcumbs li:first-child { margin-left: 0px;}
+  .breadcumbs ul li a {
+    color: #fff;
+    display: block;
+  }
+  .breadcumbs ul li:hover a { color: #C87065;}
+  .breadcumbs li::after {
+    color: #fff;
+    content: "/";
+    left: -22px;
+    position: absolute;
+    top: 0;
+  }
+  .breadcumbs li:first-child::after { content: "";}
+  .overlay-bg { position: relative;}
+  .overlay-bg::before {
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  /* Product-option */
+  .option-btn {
+    margin-right: 20px;
+    padding: 0;
+    color: #999;
+  }
+  .option-btn.active, .option-btn:hover { color: #c8a165;}
+  .dropdown-menu { border-radius: 0;}
+  .dropdown-width { width: 290px;}
+  @media (min-width: 1400px){
+.container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1320px;
+}}
+#heading-banner-title{
+    position: relative;
+    color: #fff;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 33px;
+    margin-bottom: 0;
+    padding: 100px 0 8px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    margin: 0 0 10px;
+}
+.pb-15 {
+    padding-bottom: 15px;
+}
+
+.btn.btn-primary:hover{
+    background-color: #c8a165;
+    border-color: #c8a165;
+}
+button{
+    background-color:var( --clr-primary-7) ;
+}
+
+

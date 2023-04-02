@@ -916,7 +916,7 @@ h3.widget-title-modal {
 /*  1.  Theme default CSS
 /*----------------------------------------*/
 html, body {height: 100%;}
-.floatleft {float:left}
+.floatleft {float:left;width: 50%}
 .floatright {float:right}
 .alignleft {float:left;margin-right:15px;margin-bottom: 15px}
 .alignright {float:right;margin-left:15px;margin-bottom: 15px}
@@ -1646,4 +1646,23 @@ a{
 
 .img-responsive{
   display: block;
+}
+.bv-content-data-label-container{
+  display: inline-block;
+  font-weight: 700!important;
+color:var(--bs-success) ;
+}
+.bv-content-data-value{
+  display: inline-block;
+  
+  color:rgb(21, 127, 21);
+}
+.thank-recieve p {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  padding: 20px 0;
+  text-align: center;
+  color: #666666;
+  letter-spacing: 1px;
 }

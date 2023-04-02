@@ -138,97 +138,117 @@
                                 <div class="pro-tab-info pro-reviews">
                                     <div class="customer-review mb-60">
                                         <h3 class="tab-title title-border mb-30">Customer review</h3>
+                                        <div class="thank-recieve bg-white mb-30" *ngIf="reviews.length==0">
+                                            <p>Be the first to review this product.</p>
+                                        </div>
                                         <ul class="product-comments clearfix">
-                                            <li class="mb-30">
+                                            <li class="mb-30" *ngFor="let review of reviews">
                                                 <div class="pro-reviewer">
                                                     <img src="assets/images/home_img/review1.jpg" alt="" />
                                                 </div>
-                                                <div class="pro-reviewer-comment">
+                                                <div class="pro-reviewer-comment" >
                                                     <div class="fix">
                                                         <div class="floatleft mbl-center">
-                                                            <h5 class="text-uppercase mb-0"><strong>Gerald Barnes</strong></h5>
-                                                            <p class="reply-date">27 Jun, 2016 at 2:30pm</p>
+                                                            <h5 class="text-uppercase mb-0"><strong>{{review.name}}</strong></h5>
+                                                            <p class="reply-date" style="display: inline-block;margin-right:5% ;"> {{review.creeA}} (27 Jun, 2016 at 2:30pm)</p>
+                                                            <span *ngFor="let i of numbers" style="display: inline-block;" >
+                                                                <a *ngIf="i<=review.nbre_etoile" style="color:#C8A165;padding-right: 2%;font-size: 19px;"><i class="zmdi zmdi-star"></i></a>
+                                                                <a *ngIf="i>review.nbre_etoile"><i class="zmdi zmdi-star-outline" style="font-size: 19px;" ></i></a>
+                                                            </span>
                                                         </div>
-                                                        <div class="comment-reply floatright">
-                                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                                </div>
-                                            </li>
-                                            <li class="threaded-comments">
-                                                <div class="pro-reviewer">
-                                                   
-                                                    <img src="assets/images/home_img/reviews2.jpg" alt="" />
-                                                   
-                                                </div>
-                                                <div class="pro-reviewer-comment">
-                                                    <div class="fix">
-                                                        <div class="floatleft mbl-center">
-                                                            <h5 class="text-uppercase mb-0"><strong>Gerald Barnes</strong></h5>
-                                                            <p class="reply-date">27 Jun, 2016 at 2:30pm</p>
-                                                        </div>
-                                                        <div class="comment-reply floatright">
-                                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                        <div class="comment-reply floatright" *ngIf="review.id_customer==this.authService.userAutenticated.id">
+                                                            
+                                                            <a (click)="onRemoveReview(review.id)"><i class="zmdi zmdi-close"></i></a>
                                                         </div>
                                                     </div>
-                                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                                    <h5 class="mb-10" >{{review.titre}}</h5>
+
+                                                    <p class="mb-10">{{review.text}}</p>
+                                                    <div class="bv-content-data-label-container mr-10" *ngIf="review.isRecommanded==true"> Recommends this product </div>
+                                                    <div class="bv-content-data-value" *ngIf="review.isRecommanded==true">
+                                                         <span class="bv-content-data-icon" aria-hidden="true">✔</span>
+                                                          <span class="bv-content-data-label">Yes</span> 
+                                                    </div>
+                                                    <div style="width: 30%;height: 20%;margin-top: 5%;">
+                                                    <img src="{{this.categoryService.host+'/ReviewImage/'+review.id}}" alt="" >
+                                                    </div>
+                                                    <hr>
+
                                                 </div>
                                             </li>
+                                          
+                                           
                                         </ul>
                                     </div>
                                     <div class="leave-review">
                                         <h3 class="tab-title title-border mb-30">Leave your reviw</h3>
                                         <div class="your-rating mb-30">
                                             <p class="mb-10"><strong>Your Rating</strong></p>
-                                            <span>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                            <span (click) = "onOneStar()">
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!oneStar" [class.zmdi-star]="oneStar"></i></a>
                                             </span>
                                             <span class="separator">|</span>
-                                            <span>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                            <span (click) ="onTwoStar()">
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!twoStar" [class.zmdi-star]="twoStar"></i></a>
+                                                <a><i class="zmdi" [class.zmdi-star-outline]="!twoStar" [class.zmdi-star]="twoStar"></i></a>
                                             </span>
                                             <span class="separator">|</span>
-                                            <span>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                            <span (click) ="onThreeStar()">
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!threeStar" [class.zmdi-star]="threeStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!threeStar" [class.zmdi-star]="threeStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!threeStar" [class.zmdi-star]="threeStar"></i></a>
                                             </span>
                                             <span class="separator">|</span>
-                                            <span>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                            <span (click) =" onFourStar()">
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fourStar" [class.zmdi-star]="fourStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fourStar" [class.zmdi-star]="fourStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fourStar" [class.zmdi-star]="fourStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fourStar" [class.zmdi-star]="fourStar"></i></a>
+
                                             </span>
                                             <span class="separator">|</span>
-                                            <span>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                            <span (click) ='onFiveStar()'>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fiveStar" [class.zmdi-star]="fiveStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fiveStar" [class.zmdi-star]="fiveStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fiveStar" [class.zmdi-star]="fiveStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fiveStar" [class.zmdi-star]="fiveStar"></i></a>
+                                                <a ><i class="zmdi" [class.zmdi-star-outline]="!fiveStar" [class.zmdi-star]="fiveStar"></i></a>
+
                                             </span>
                                         </div>
                                         <div class="reply-box">
-                                            <form action="#">
+                                            <form  [formGroup]="reviewForm" (ngSubmit)="Freview()">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input type="text" placeholder="Your name here..." name="name" />
+                                                        <input type="text" placeholder="Your name here..." name="name" formControlName="name" />
+                                                    </div>
+                                                    <div *ngIf="name?.touched && name?.invalid" class="alert alert-danger error" >
+                                                        Name is required 
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" placeholder="Subject..." name="name" />
+                                                        <input type="text" placeholder="Title..." formControlName="title" />
+                                                    </div>
+                                                    <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger error" >
+                                                        Title is required 
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <textarea class="custom-textarea" name="message" placeholder="Your review here..." ></textarea>
-                                                        <button type="submit" data-text="submit review" class="button-one submit-button mt-20">submit review</button>
+                                                        <textarea class="custom-textarea" name="message" placeholder="Your review here..." formControlName="text"></textarea>
+                                                        <label for="file">Upload an image</label>
+                                                        <br>
+                                                        <input (change)="onSelectedFile($event)" id="file" type="file" name="myImage" class="form-control" >
+                                                      
+                                                        <br>
+                                                        <label>
+                                                            <input type="checkbox" name="example" formControlName="recommandProduct"  >
+                                                            Would you recommend this product to a friend ?
+                                                        </label>  
+                                                        <br>
+                                                        <button type="submit" data-text="submit review" class="button-one submit-button mt-20" [disabled]="!reviewForm.valid">submit review</button>
                                                     </div>
                                                 </div>
+                                              
                                             </form>
                                         </div>
                                     </div>

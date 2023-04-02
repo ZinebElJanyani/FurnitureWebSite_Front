@@ -1,1 +1,103 @@
-<p>profile works!</p>
+<div class="wrapper bg-dark-white">
+	<!-- HEADING-BANNER START -->
+	<div class="heading-banner-area overlay-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="heading-banner">
+						<div id="heading-banner-title">
+							<h2>My Account</h2>
+						</div>
+						<div class="breadcumbs pb-15">
+							<ul>
+								<li><a href="#">Home</a></li>
+								<li>Product grid view</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <span class="main_bg"></span>
+
+
+    <!-- ===== ===== Main-Container ===== ===== -->
+    <div class="container main">
+    
+            <!-- ===== ===== User Main-Profile ===== ===== -->
+            <section class="userProfile card" >
+                <div class="profile">
+                    <div class="container">
+                    <figure><img src="assets/images/home_img/review1.jpg" alt="profile" width="250px" height="250px"></figure>
+                    <div class="form-group">
+                        <label for="photo">Change Photo:</label>
+                        <input type="file" class="form-control" id="photo" name="photo">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                </div>
+                
+            </section>
+
+
+            <!-- ===== ===== Work & Skills Section ===== ===== -->
+            <!--<section class="work_skills card">
+
+                ===== ===== Skills Contaienr ===== ===== -->
+                <!--<div class="skills">
+                    <h1 class="heading">Skills</h1>
+                    <ul>
+                        <li style="--i:0">Android</li>
+                        <li style="--i:1">Web-Design</li>
+                        <li style="--i:2">UI/UX</li>
+                        <li style="--i:3">Video Editing</li>
+                    </ul>
+                </div>
+            </section>-->
+
+
+            <!-- ===== ===== User Details Sections ===== ===== -->
+            <section class="userDetails card" >
+                <div class="userName">
+                    
+                    
+                    
+                    <div class="container">
+                        <div class="map">
+                     
+                            <span>{{this.authService.userAutenticated.name}}</span>
+                        </div>
+                        <span>{{this.authService.userAutenticated.name}}</span>
+                        <form >
+                            <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" formControlName="name">
+                            </div>
+                            <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" formControlName="email">
+                            </div>
+                            <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" formControlName="phone">
+                            </div>
+                            <div class="form-group">
+                            <label for="birthday">Birthday:</label>
+                            <input type="date" class="form-control" id="birthday" name="birthday" formControlName="birthday">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" >Submit</button>
+                        </form>
+                    </div>
+                    
+                </div>
+                
+
+            </section>
+
+                        
+                    
+    </div>
+
+</div>
