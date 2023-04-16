@@ -10,8 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 /*import { ProfileComponent } from './components/shared/profile/profile.component';*/
-import { OrdersComponent } from './components/client/orders/orders.component';
-import { WishlistComponent } from './components/client/wishlist/wishlist.component';
+
 /*import { ZippyComponent } from './shared/zippy/zippy.component';*/
 
 
@@ -23,11 +22,7 @@ import { WishlistComponent } from './components/client/wishlist/wishlist.compone
 @NgModule({
   declarations: [
     AppComponent,
-  
-   
     
-    
-  
     
   ],
   imports: [
@@ -35,7 +30,8 @@ import { WishlistComponent } from './components/client/wishlist/wishlist.compone
     AppRoutingModule,
     ComponentModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+ 
   ],
   providers: [AuthService,CategoryService,CaddyService],
   bootstrap: [AppComponent]

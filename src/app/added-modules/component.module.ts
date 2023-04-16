@@ -22,6 +22,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrdersComponent } from '../components/client/orders/orders.component';
 import { ProfileComponent } from '../components/shared/profile/profile.component';
 import { WishlistComponent } from '../components/client/wishlist/wishlist.component';
+import { ChartsComponent } from '../components/admin/charts/charts.component';
+import { DataTablesModule } from 'angular-datatables';
+import { ProductManagmentComponent } from '../components/admin/product-managment/product-managment.component';
+import { CategoryManagmentComponent } from '../components/admin/category-managment/category-managment.component';
 
 const components=[
   NavbarComponent,
@@ -39,7 +43,11 @@ const components=[
   ZippyComponent,
   OrdersComponent,
   ProfileComponent,
-  WishlistComponent
+  WishlistComponent,
+  ChartsComponent,
+  ProductManagmentComponent,
+    CategoryManagmentComponent,
+    AdminProductsComponent
 ]
 
 @NgModule({
@@ -51,7 +59,8 @@ const components=[
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
 
   exports:[

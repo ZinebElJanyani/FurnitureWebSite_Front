@@ -14,6 +14,9 @@ import { NotFoundComponent } from './components/shared/not-found/not-found.compo
 import { OrdersComponent } from './components/client/orders/orders.component';
 import { ProfileComponent } from './components/shared/profile/profile.component';
 import { WishlistComponent } from './components/client/wishlist/wishlist.component';
+import { ChartsComponent } from './components/admin/charts/charts.component';
+import { ProductManagmentComponent } from './components/admin/product-managment/product-managment.component';
+import { CategoryManagmentComponent } from './components/admin/category-managment/category-managment.component';
 
 const routes: Routes = [
   
@@ -31,7 +34,9 @@ const routes: Routes = [
     {path : 'wishlist' , component: WishlistComponent},
     {path : 'orders' , component: OrdersComponent},
     {path : 'profile' , component: ProfileComponent},
-    {path : 'admin/products' , component: AdminProductsComponent},
+    {path : 'admin/products' , component: ProductManagmentComponent},
+    {path : 'charts' , component: ChartsComponent},
+    {path : 'admin/categories' , component: CategoryManagmentComponent},
     /*{path : 'shared/profile' , component: ProfileComponent},*/
     {path : '**' , component: NotFoundComponent}
 ];

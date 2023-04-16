@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent {
-
+isProductActive=false;
+activeLi=0
 }

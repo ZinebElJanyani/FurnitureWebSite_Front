@@ -84,7 +84,7 @@ export class LoginComponent {
     },err =>{
       console.log(err)
     }) 
-  }, 1000);
+  }, 2000);
    
     this.authService.isRegisterd$.subscribe(v=>{this.isAUth=v;})
     setTimeout(() => {

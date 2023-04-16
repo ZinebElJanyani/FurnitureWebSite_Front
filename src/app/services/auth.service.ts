@@ -164,7 +164,10 @@ createCaddyForCostomer(accesstoken:string){
     {
       this.userAutenticated= JSON.parse(data);
       this.userAutenticated.token=rtoken;
-      this.setUser();
+      setTimeout(() => {
+        this.setUser();
+      }, 500);
+      
     
     },err=>{
       console.log(err);

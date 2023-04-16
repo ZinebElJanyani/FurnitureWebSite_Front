@@ -235,7 +235,7 @@ export class ProductDetailComponent implements OnInit{
         })
     }
     onRemoveReview(id_review:number){
-      this.categoryService.deleteReview(id_review).subscribe(data => {this.reviews = data;
+      this.categoryService.delete(id_review,"removeReview/").subscribe(data => {this.reviews = data;
         console.log(data)
         setTimeout(() => {
           this.getReviews()

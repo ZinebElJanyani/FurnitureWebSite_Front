@@ -2129,3 +2129,6 @@ body {
       display:none;
       animation: fade 2s linear forwards;
   }
+  a:not([href]):not([tabindex]) {
+    color: white;
+  }

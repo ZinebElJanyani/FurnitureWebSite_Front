@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -96,4 +97,13 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
        
         return this.http.get("http://localhost:8084/api/command/getCommand/"+this.authService.userAutenticated.id,{headers})
       }
+
+    exportPdfProduct(commandId:number){
+      console.log(commandId)
+      const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+      const headers = new HttpHeaders({
+        'Authorization': authToken
+      });
+        return this.http.get("http://localhost:8084/api/command/getInvoice/"+commandId,{headers,responseType: 'blob'})
+    }
 }

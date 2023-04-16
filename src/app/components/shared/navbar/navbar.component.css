@@ -201,3 +201,6 @@ Sidebar
   cursor: pointer;
 
 }
+nav [class*=mdi-], nav [class^=mdi-], nav i {
+  all: unset;
+}

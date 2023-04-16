@@ -59,7 +59,7 @@ export class CategoryService {
     return this.http.request(req)
   }
 
-  deleteReview(idReview : number){
+  delete(id : number, url:string){
 
     const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
     const headers = new HttpHeaders({
@@ -68,7 +68,7 @@ export class CategoryService {
   
  
     
-    return this.http.delete("http://localhost:8084/api/products/removeReview/"+idReview,{headers})
+    return this.http.delete("http://localhost:8084/api/products/"+url+id,{headers})
   }
 
   favoriteProduct(productId:number,isfavorite:boolean){
@@ -124,6 +124,8 @@ export class CategoryService {
       ids: whichList
     }
   };
+  console.log(this.authService.userAutenticated.id)
+
   console.log(this.authService.userAutenticated.token.acces_token)
   const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
   const headers = new HttpHeaders({
@@ -132,5 +134,19 @@ export class CategoryService {
   return this.http.post("http://localhost:8084/api/products/addFavorite/"+this.authService.userAutenticated.id,null,{headers, params: options.params})
  }
 
+ createCatg(title:string,idCollection:string,idCat:number){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  let body = {
+    "id":idCat,
+    "title":title,
+    "collection":idCollection
+  }
+  return this.http.post("http://localhost:8084/api/products/newCategory/",body,{headers})
+ }
+
+ 
 }
 
