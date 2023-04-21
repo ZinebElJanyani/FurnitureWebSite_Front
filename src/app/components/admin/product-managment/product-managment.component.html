@@ -2,20 +2,20 @@
 <app-admin-products></app-admin-products>
 <div id="main">
   <div class="row">
-    <div id="breadcrumbs-wrapper" data-image="../../../app-assets/images/gallery/breadcrumb-bg.jpg">
+    <div id="breadcrumbs-wrapper" >
       <!-- Search for small screen-->
       <div class="container">
         <div class="row">
           <div class="col s12 m6 l6">
-            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Form Validation</span></h5>
+            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Product Managment</span></h5>
           </div>
           <div class="col s12 m6 l6 right-align-md">
             <ol class="breadcrumbs mb-0">
               <li class="breadcrumb-item"><a href="index.html">Home</a>
               </li>
-              <li class="breadcrumb-item"><a href="#">Form</a>
+              <li class="breadcrumb-item"><a href="#">Product Managment</a>
               </li>
-              <li class="breadcrumb-item active">Form Validation
+              <li class="breadcrumb-item active">Product Categories
               </li>
             </ol>
           </div>
@@ -27,14 +27,30 @@
         <div class="section">
 <div class="card">
 <div class="card-content">
-  <p class="caption">jQuery Validation Plugin</p>
-  <p><a href="http://jqueryvalidation.org/" target="_blank">jQuery Validation</a> This jQuery plugin makes simple
-    clientside form validation easy, whilst still offering plenty of customization options.</p>
+  <p class="caption">Add or edit product</p>
+  
 </div>
 </div>
 
 <!-- HTML VALIDATION  -->
 
+<div class="swal-overlay" [class.swal-overlay--show-modal]="isShow" tabindex="-1">
+  <div class="swal-modal"><div class="swal-icon swal-icon--success">
+    <span class="swal-icon--success__line swal-icon--success__line--long"></span>
+    <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
+
+    <div class="swal-icon--success__ring"></div>
+    <div class="swal-icon--success__hide-corners"></div>
+  </div><div class="swal-title" style="">Good job!</div><div class="swal-text" style="">The product has been added with success!</div><div class="swal-footer"><div class="swal-button-container">
+
+
+    <div class="swal-button__loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+  </div></div></div></div>
 <div class="row">
 <div class="col s12">
   <div id="html-validations" class="card card-tabs">
@@ -42,79 +58,98 @@
       <div class="card-title">
         <div class="row">
           <div class="col s12 m6 l10">
-            <h4 class="card-title">HTML Validation Example</h4>
+            <h4 class="card-title">Product</h4>
           </div>
           <div class="col s12 m6 l2">
           </div>
         </div>
       </div>
       <div id="html-view-validations">
-        <form class="formValidate0" id="formValidate0" method="get">
+        <form class="formValidate0" [formGroup] = "productForm" (ngSubmit)="onSubmit()">
           <div class="row">
             <div class="input-field col s12">
-              <label for="uname0" [class.active]="isInputActive">Username*</label>
-              <input class="validate" required="" id="uname0" name="uname0" type="text" (focus)="isInputActive=true" (blur)="onInputBlur(uname.value) " #uname>
+              <label for="uname0" [class.active]="isInputActive[0]">Product Name*</label>
+              <input [class.invalid]="name?.touched && name?.invalid" formControlName="name" class="validate" required="" id="uname0" type="text" (focus)="isInputActive[0]=true" (blur)="onInputBlur(uname.value,0) " #uname>
             </div>
             <div class="input-field col s12">
-              <label for="cemail0" class="active">E-Mail *</label>
-              <input class="validate" required="" id="cemail0" type="email" name="cemail0">
+              <label for="cemail0" [class.active]="isInputActive[1]">Description *</label>
+              <textarea [class.invalid]="description?.touched && description?.invalid" formControlName="description" id="cemail0" class="materialize-textarea"(focus)="isInputActive[1]=true"  (blur)="onInputBlur(descrp.value,1) " #descrp></textarea>
+            </div>
+            <div class="col s12" >
+              <div class="row">
+                <div class="input-field col m6 s12">
+                  <label for="price" [class.active]="isInputActive[2]">Price *</label>
+                  <input [class.invalid]="price?.touched && price?.invalid" formControlName="price" class="validate" id="price" type="text"  (focus)="isInputActive[2]=true"  (blur)="onInputBlur(price.value,2) ">
+                  <div   *ngIf="price?.touched && price?.invalid" class="alert alert-danger error" style="margin-left: 5px; width: 500px;padding: 5px;float: left;" >
+                    <div *ngIf="price?.errors?.['pattern']">Price should be a number</div>
+                </div>
+                </div>
+                <div class="input-field col m6 s12">
+                  <label for="promotion" [class.active]="isInputActive[3]">Promotion</label>
+                  <input formControlName="promotion" class="validate" required="" id="promotion" type="number"  (focus)="isInputActive[3]=true" (blur)="onInputBlur(promotion.value,3) " #promotion>
+           
+                </div>
+              </div>
             </div>
             <div class="input-field col s12">
-              <label for="password0">Password *</label>
-              <input class="validate" required="" id="password0" type="password" name="password0">
+              <label for="qteStock" [class.active]="isInputActive[4]">Stock Quantity :</label>
+              <input  [class.invalid]="qteStock?.touched && qteStock?.invalid" formControlName="qteStock" class="validate" required="" id="qteStock" type="number"  (focus)="isInputActive[4]=true"  (blur)="onInputBlur(stock.value,4) " #stock>
             </div>
             <div class="input-field col s12">
-              <label for="cpassword0">Confirm Password *</label>
-              <input class="validate" required="" id="cpassword0" type="password" name="cpassword0">
-            </div>
-            <div class="input-field col s12">
-              <label for="curl0">URL *</label>
-              <input class="validate" required="" id="curl0" type="url" name="curl0">
-            </div>
-            <div class="col s12">
-              <label for="role">Role</label>
-              <select class="error validate" id="role" name="role" required="">
-                <option value="" disabled="" selected="">Choose your profile</option>
-                <option value="1">Manager</option>
-                <option value="2">Developer</option>
-                <option value="3">Business</option>
+              <label for="color" class="active">Color :</label>
+              <select id="color" formControlName="color">
+                <option value=""></option>
+                <option value="{{i}}" *ngFor="let color of colors; let i=index">{{color}}</option>
+               
               </select>
-              <div class="input-field">
-              </div>
             </div>
             <div class="input-field col s12">
-              <textarea id="ccomment0" name="ccomment0" class="materialize-textarea validate" required=""></textarea>
-              <label for="ccomment0">Your comment *</label>
+              <label for="category" class="active">Category:</label>
+            <select id="category" formControlName="category" [class.invalid]="category?.touched && category?.invalid">
+              <option value=""></option>
+              <option value="{{category.id}}" *ngFor="let category of categories">{{category.title}}</option>
+             
+            </select>
             </div>
             <div class="col s12">
-              <p>Gender</p>
+              <label for="tnc_select1">Selected product</label>
               <p>
                 <label>
-                  <input class="validate" required="" name="gender0" type="radio" checked="">
-                  <span>Male</span>
-                </label>
-              </p>
-
-              <label>
-                <input class="validate" required="" name="gender0" type="radio">
-                <span>Female</span>
-              </label>
-              <div class="input-field">
-              </div>
-            </div>
-            <div class="col s12">
-              <label for="tnc_select1">T&C *</label>
-              <p>
-                <label>
-                  <input class="validate" required="" id="tnc_select1" type="checkbox">
-                  <span>Please agree to our policies</span>
+                  <input class="validate"  id="tnc_select1" type="checkbox" formControlName="selectProduct">
+                  <span>Display ths product in the first product page</span>
                 </label>
               </p>
               <div class="input-field">
               </div>
             </div>
+            
+            <label for="images" class="active">Images:</label>
+            <div class="form-group">
+              <div class="upload-image">
+                <div #image class="image-wrapper">
+                  <li class="list"  *ngFor="let image of images_product; let i = index;">
+                    <a class="delete-btn" (click)="deleteProductImage(null, a,i)" #a>
+                      <i class="material-icons">delete_forever</i>
+                    </a>
+                    <img [src]="image" class="product-image">
+                  </li>
+                </div>
+                <div class="browse-btn">
+                <div class="dropify-wrapper" style="height: 230px;width: 150px;"><div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong appended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input #inputFile (change)="onSelectedFile($event)" type="file" id="input-file-now-custom-2" class="dropify" data-height="500"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div>
+                
+                  <!--<input type="file" name="cameraImg"  id="input-file-now-custom-2" class="dropify" data-height="500" (change)="onSelectedFile($event)" />
+                  <div class="browse-image">
+                    <img src="assets/images/camera.png" width="60px" />
+                    <p>Browse image</p>
+                  </div>-->
+                </div>
+              </div>
+            </div>
+           
+            
+            
             <div class="input-field col s12">
-              <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+              <button [disabled]="productForm.invalid " class="btn waves-effect waves-light right" type="submit" name="action">Validate
                 <i class="material-icons right">send</i>
               </button>
             </div>

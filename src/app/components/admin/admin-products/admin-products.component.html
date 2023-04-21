@@ -87,19 +87,21 @@
             </a>
         </li>
 
+        <li class="navigation-header"><a class="navigation-header-text">Stock Management</a><i class="navigation-header-icon material-icons">more_horiz</i>
+        </li>
         <li class="bold open" [class.active]="isProductActive">
           <a class="collapsible-header waves-effect waves-cyan " (click)="isProductActive = !isProductActive">
               <i class="material-icons">content_paste</i>
-              <span class="menu-title" data-i18n="Dashboard">Products Managment</span>
+              <span class="menu-title" data-i18n="Dashboard">Products</span>
               
           </a>
           <div class="collapsible-body" [style.display]="isProductActive? 'block':'none'">
               <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                <li><a (click)="activeLi=4" [class.active]="activeLi===4" routerLink="admin/categories"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Modern">Categories</span></a>
+                <li><a (click)="activeLi=4" [class.active]="activeLi===4" routerLink="/admin/categories"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Modern">Categories</span></a>
                 </li>
-              <li><a (click)="activeLi=1 " [class.active]="activeLi===1" routerLink="/admin/products"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Modern">Add Product</span></a>
+              <li><a (click)="activeLi=1 " [class.active]="activeLi===1" [routerLink]="['/admin/products',0]"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Modern">Add Product</span></a>
               </li>
-              <li ><a (click)="activeLi=2 " [class.active]="activeLi===2" href="dashboard-ecommerce.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="eCommerce">Products List</span></a>
+              <li ><a (click)="activeLi=2 " [class.active]="activeLi===2" routerLink="/admin/products/list"><i class="material-icons">radio_button_unchecked</i><span data-i18n="eCommerce">Products List</span></a>
               </li>
               <li><a (click)="activeLi=3 " [class.active]="activeLi===3" href="dashboard-analytics.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Analytics">Out Of Stock</span><span class="badge badge pill orange float-right mr-10">3</span></a>
               </li>
@@ -107,13 +109,14 @@
           </div>
       </li>
       
-      <li class="navigation-header"><a class="navigation-header-text">Applications</a><i class="navigation-header-icon material-icons">more_horiz</i>
+      <li class="navigation-header"><a class="navigation-header-text">Customer Management</a><i class="navigation-header-icon material-icons">more_horiz</i>
       </li>
       <li class="bold">
-        <a class="waves-effect waves-cyan " href="app-email.html"><i class="material-icons">mail_outline</i><span class="menu-title" data-i18n="Mail">Mail</span><span class="badge new badge pill pink accent-2 float-right mr-2">5</span></a>
+        <a class="waves-effect waves-cyan " href="app-email.html"><i class="material-icons">group</i><span class="menu-title" data-i18n="Mail">Customers</span><span class="badge new badge pill orange accent-2 float-right mr-2">5</span></a>
       </li>
-     
-      <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">receipt</i><span class="menu-title" data-i18n="Invoice">Invoice</span></a>
+      <li class="navigation-header"><a class="navigation-header-text">Orders Management</a><i class="navigation-header-icon material-icons">more_horiz</i>
+      </li>
+      <li class="bold"><a class="collapsible-header waves-effect waves-cyan " routerLink="/admin/orders/list"><i class="material-icons">receipt</i><span class="menu-title" data-i18n="Invoice">Orders</span></a>
         <div class="collapsible-body">
           <ul class="collapsible collapsible-sub" data-collapsible="accordion">
             <li><a href="app-invoice-list.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Invoice List">Invoice List</span></a>

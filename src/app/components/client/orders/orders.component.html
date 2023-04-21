@@ -33,11 +33,15 @@
 
                 </div>
             </article>
-            <div class="track">
-                <div class="step active"> <span class="icon"> <i class="bi bi-calendar-plus-fill"  style="font-size: 1.4em;"></i> </span> <span class="text">Order confirmed</span> </div>
-                <div class="step active"> <span class="icon"> <i class="bi bi-check-lg"  style="font-size: 1.5em;"></i> </span> <span class="text"> Picked by courier</span> </div>
-                <div class="step active"> <span class="icon"> <i class="bi bi-truck"  style="font-size: 1.6em;"></i> </span> <span class="text"> On the way </span> </div>
-                <div class="step"> <span class="icon"> <i class="bi bi-house-door-fill"  style="font-size: 1.4em;"></i> </span> <span class="text">Ready for pickup</span> </div>
+            <div class="track" *ngIf="order.commandState!='cancelled'">
+                <div class="step active"> <span class="icon"> <i class="bi bi-calendar-plus-fill"  style="font-size: 1.4em;"></i> </span> <span class="text">Order placed</span> </div>
+                <div class="step" [class.active]="order.commandState=='confirmed'||order.commandState=='inDelivery'||order.commandState=='recieved'"> <span class="icon"> <i class="bi bi-check-lg"  style="font-size: 1.5em;"></i> </span> <span class="text"> Order confirmed</span> </div>
+                <div class="step" [class.active]="order.commandState=='inDelivery'||order.commandState=='recieved'"> <span class="icon"> <i class="bi bi-truck"  style="font-size: 1.6em;"></i> </span> <span class="text"> On the way </span> </div>
+                <div class="step" [class.active]="order.commandState=='recieved'"> <span class="icon"> <i class="bi bi-house-door-fill"  style="font-size: 1.4em;"></i> </span> <span class="text">Ready for pickup</span> </div>
+            </div>
+            <div class="track" *ngIf="order.commandState=='cancelled'" style="background-color: rgba(236, 91, 91, 0.797);">
+                <div class="step"> <span class="icon" style="background-color: rgb(236, 85, 85);"> <i class="bi bi-exclamation-lg"  style="font-size: 1.4em;color: white;"></i> </span> <span class="text">Order cancelled</span> </div>
+
             </div>
             <hr>
             <div class="orderInfo" style="display: flex;justify-content: space-between;margin-bottom: 20px;">
@@ -135,7 +139,7 @@
               
             </ul>
             <hr>
-            <a  (click)="OnInvoiceClick(order.id)" class="btn btn-warning section" data-abc="true"> <i class="bi bi-filetype-pdf" style="font-size: 1.5em;"></i> Download Invoice</a>
+            <a *ngIf="order.commandState!='cancelled'"   (click)="OnInvoiceClick(order.id)" class="btn btn-warning section" data-abc="true"> <i class="bi bi-filetype-pdf" style="font-size: 1.5em;"></i> Download Invoice</a>
         </div>
     </article>
   

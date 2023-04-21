@@ -30,7 +30,7 @@ export class CategoryManagmentComponent implements OnInit {
 
   constructor(private categoryService:CategoryService,){
     this.categoryForm=new FormGroup({
-      title:new FormControl("",Validators.required),})
+      tnameitle:new FormControl("",Validators.required),})
   }
   get title(){
     return this.categoryForm.get('title');

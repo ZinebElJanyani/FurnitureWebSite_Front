@@ -99,11 +99,34 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
       }
 
     exportPdfProduct(commandId:number){
-      console.log(commandId)
       const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
       const headers = new HttpHeaders({
         'Authorization': authToken
       });
         return this.http.get("http://localhost:8084/api/command/getInvoice/"+commandId,{headers,responseType: 'blob'})
+    }
+    public getRessource(url : String){
+      const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+      const headers = new HttpHeaders({
+        'Authorization': authToken
+      });
+      return this.http.get("http://localhost:8084/api/command/"+url,{headers})
+    }
+
+    changeState(commandState : string,idCommande:number){
+       
+    const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+    const headers = new HttpHeaders({
+      'Authorization': authToken
+    });
+    const options = {
+      params: {
+        state: commandState
+       
+      }
+    };
+    
+    return this.http.post("http://localhost:8084/api/command/changeState/"+idCommande,null,{headers, params: options.params})
+    
     }
 }

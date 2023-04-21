@@ -26,6 +26,11 @@ import { ChartsComponent } from '../components/admin/charts/charts.component';
 import { DataTablesModule } from 'angular-datatables';
 import { ProductManagmentComponent } from '../components/admin/product-managment/product-managment.component';
 import { CategoryManagmentComponent } from '../components/admin/category-managment/category-managment.component';
+import { SwitAlertComponent } from '../components/admin/swit-alert/swit-alert.component';
+import { ProductListComponent } from '../components/admin/product-list/product-list.component';
+import { CustomerManagementComponent } from '../components/admin/customer-management/customer-management.component';
+import { OrederManagementComponent } from '../components/admin/oreder-management/oreder-management.component';
+import { OredersListComponent } from '../components/admin/oreders-list/oreders-list.component';
 
 const components=[
   NavbarComponent,
@@ -47,7 +52,12 @@ const components=[
   ChartsComponent,
   ProductManagmentComponent,
     CategoryManagmentComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    SwitAlertComponent,
+    ProductListComponent,
+    CustomerManagementComponent,
+    OrederManagementComponent,
+    OredersListComponent
 ]
 
 @NgModule({
@@ -60,7 +70,7 @@ const components=[
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
   ],
 
   exports:[

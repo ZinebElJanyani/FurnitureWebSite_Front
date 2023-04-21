@@ -1,0 +1,154 @@
+
+<app-admin-products></app-admin-products>
+<div id="main">
+  <div class="row" style="margin-top: 2%;">
+    <div id="breadcrumbs-wrapper">
+      <!-- Search for small screen-->
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Product Managment</span></h5>
+          </div>
+          <div class="col s12 m6 l6 right-align-md">
+            <ol class="breadcrumbs mb-0">
+              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Product Managment</a>
+              </li>
+              <li class="breadcrumb-item active">Product Categories
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="container">
+        <div class="section section-data-tables">
+          <div class="card">
+          <div class="card-content">
+          <p class="caption">Add New Category or show categories that are available.</p>
+
+          </div>
+          </div>
+          <div class="modal" tabindex="-1" role="dialog" *ngIf="showConfirmationDialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">  Oreder State</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeConfirmationDialog()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  choose a state
+                </div>
+                <form [formGroup]="orderForm" (ngSubmit)="onEditOrder()">
+
+                <div class="input-field" data-select2-id="130">
+                    <select formControlName="state" class="select2 browser-default select2-hidden-accessible"  tabindex="-1" aria-hidden="true" style="width: auto; min-width: 449px; position: relative;">
+                        
+                        <option value="{{state}}" data-select2-id="6" style="color: rgb(20, 181, 225);font-weight: 600;" *ngFor="let state of StateValues; let i= index" [selected]="stateSelected== state "> {{state}}</option>
+                        
+                        
+                    </select>
+                
+                </div>
+                <div class="modal-footer">
+                  <button [disabled]="orderForm.invalid" type="submit" class="btn btn-warning" >OK</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeConfirmationDialog()">Cancel</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <div class="card">
+                <div class="card-content">
+                  <h4 class="card-title">List Of Orders</h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <table id="orders-list" class="display">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Ref</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Paymant Method</th>
+                            <th>State</th>
+                            <th>Total Price</th>
+                            
+                            <th>Delivery Date</th>
+                            <th>with Assembly</th>
+                            <th>Discount</th>
+                            <th>Change State</th>
+                          
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let o of commands; let i = index;">
+                            <td>{{o.id}}</td>
+                            <td style="color: rgb(9, 184, 228);">{{o.ref}}</td>
+                            <td>{{o.customerRegisterDTO.name}}</td>
+                            <td>{{o.date | date:'short' }}</td>
+                            <td *ngIf="o.paymentMethod=='Cash'"><i class="material-icons">payments</i></td>
+                            <td *ngIf="o.paymentMethod=='CreditCards'"><i class="material-icons">credit_card</i></td>
+                            <td *ngIf="o.paymentMethod=='PayPal'"><i class="bi bi-paypal"></i></td>
+
+                            <td *ngIf="o.commandState==StateValues[0]"><span class="chip lighten-5 blue bleu-text">{{o.commandState}}</span></td>
+                            <td *ngIf="o.commandState==StateValues[1]"><span class="chip lighten-5 orange orange-text">{{o.commandState}}</span></td>
+                            <td *ngIf="o.commandState==StateValues[2]"><span class="chip lighten-5 gray gray-text">{{o.commandState}}</span></td>
+                            <td *ngIf="o.commandState==StateValues[3]"><span class="chip lighten-5 red red-text">{{o.commandState}}</span></td>
+                            <td *ngIf="o.commandState==StateValues[4]"><span class="chip lighten-5 green green-text">{{o.commandState}}</span></td>
+
+                            <td>{{o.totalPrice}} DH</td>
+                            <td>{{o.deliveryDate | date:'short' }}</td>
+
+                           
+                            <td *ngIf="o.withAssembly" style="color: rgb(19, 132, 19);"><i class="material-icons">check</i></td>
+                            <td *ngIf="!o.withAssembly" style="color: rgb(188, 30, 30);"><i class="material-icons">clear</i></td>
+
+                            <td>{{o.couponDiscount}} DH</td>
+                            <td><button class="btn btn-warning" (click)="openConfirmationDialog(o.id,i)"> <i class="material-icons Small">edit_square</i></button><button class="btn btn-info" (click)="openConfirmationDialog(o.id,i)"> <i class="material-icons Small">visibility</i></button></td>
+
+                          </tr>
+                          
+                         
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>ID</th>
+                            <th>Ref</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Paymant Method</th>
+                            <th>State</th>
+                            <th>Total Price</th>
+                            
+                            <th>Delivery Date</th>
+                            <th>with Assembly</th>
+                            <th>Discount</th>
+                            <th>Change State</th>
+
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

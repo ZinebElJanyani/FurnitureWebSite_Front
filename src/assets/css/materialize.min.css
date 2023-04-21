@@ -16,4 +16,9 @@
     width: auto;
     height: auto;
 }
+select {
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
 

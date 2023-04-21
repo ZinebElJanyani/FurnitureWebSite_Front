@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders,HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams,HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Http2ServerRequest } from 'http2';
@@ -145,6 +145,55 @@ export class CategoryService {
     "collection":idCollection
   }
   return this.http.post("http://localhost:8084/api/products/newCategory/",body,{headers})
+ }
+
+ uploadProductImg(deletedP:number[],files:File[],productId:number){
+  
+  let formData = new FormData();
+
+     
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+
+console.log("formdata:"+formData)
+console.log("list:"+deletedP.length)
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  
+ 
+   const parameter = new HttpParams( {
+      fromObject:{ dimgs: deletedP }
+    })
+
+  const req=new HttpRequest('POST',"http://localhost:8084/api/products/uploadImageProduct/"+productId,formData,{
+    reportProgress:true,
+    responseType:'text',
+    headers:new HttpHeaders({'Authorization': authToken}),
+    params: parameter
+  })
+  return this.http.request(req)
+}
+ addNewProduct(idP:number,nom:string,description:string,idCat:number,price:number,qteStock:number,color:string,selected:boolean,promotion:number){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  let body = {
+    "id":idP,
+    "nom":nom,
+    "description":description,
+    "price":price,
+    "qteStock":qteStock,
+    "promotion":promotion,
+    "created_at":new Date(),
+    "style":null,
+    "color":color,
+    "material":null,
+    "selected":selected,
+    "categoryId":idCat
+  }
+ 
+  return this.http.post("http://localhost:8084/api/products/new",body,{headers})
  }
 
  

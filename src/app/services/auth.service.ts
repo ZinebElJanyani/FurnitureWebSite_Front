@@ -224,4 +224,14 @@ uploadImageUser(file:File){
   })
   return this.http.request(req)
 }
+
+
+public getRessource(url : String){
+  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  return this.http.get("http://localhost:8084/api/UserAccount/"+url,{headers})
+}
+
 }

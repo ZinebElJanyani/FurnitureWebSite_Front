@@ -1,3 +1,4 @@
+
 /*import { ProfileComponent } from './components/shared/profile/profile.component';*/
 import { OrderSuccessComponent } from './components/client/order-success/order-success.component';
 import { CheckOutComponent } from './components/client/check-out/check-out.component';
@@ -17,6 +18,9 @@ import { WishlistComponent } from './components/client/wishlist/wishlist.compone
 import { ChartsComponent } from './components/admin/charts/charts.component';
 import { ProductManagmentComponent } from './components/admin/product-managment/product-managment.component';
 import { CategoryManagmentComponent } from './components/admin/category-managment/category-managment.component';
+import { ProductListComponent } from './components/admin/product-list/product-list.component';
+import { CustomerManagementComponent } from './components/admin/customer-management/customer-management.component';
+import { OredersListComponent } from './components/admin/oreders-list/oreders-list.component';
 
 const routes: Routes = [
   
@@ -34,7 +38,12 @@ const routes: Routes = [
     {path : 'wishlist' , component: WishlistComponent},
     {path : 'orders' , component: OrdersComponent},
     {path : 'profile' , component: ProfileComponent},
-    {path : 'admin/products' , component: ProductManagmentComponent},
+    {path : 'admin/customers' , component: CustomerManagementComponent},
+    {path : 'admin/products/list' , component: ProductListComponent},
+    {path : 'admin/orders/list' , component: OredersListComponent},
+
+    {path : 'admin/products/:id' , component: ProductManagmentComponent},
+   
     {path : 'charts' , component: ChartsComponent},
     {path : 'admin/categories' , component: CategoryManagmentComponent},
     /*{path : 'shared/profile' , component: ProfileComponent},*/

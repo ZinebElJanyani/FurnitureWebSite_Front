@@ -30,7 +30,6 @@ export class NavbarComponent {
    let result=localStorage.getItem('isAuthenticated')
    this.isAuthenticated = (result=="true")? true:false
    
-    console.log("1"+this.isAuthenticated)
 
   // Listen for changes to the local storage
  /* window.addEventListener('storage', (event) => {

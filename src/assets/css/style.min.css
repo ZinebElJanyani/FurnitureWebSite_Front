@@ -4,3 +4,8 @@ select[name="page-length-option_length"] {
     width: auto;
     height: auto;
 }
+select {
+    display: inline-block;
+    width: auto;
+    height: auto;
+}

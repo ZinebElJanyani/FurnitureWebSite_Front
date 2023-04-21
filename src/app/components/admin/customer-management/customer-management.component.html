@@ -1,0 +1,109 @@
+
+<app-admin-products></app-admin-products>
+<div id="main">
+  <div class="row" style="margin-top: 2%;">
+    <div id="breadcrumbs-wrapper">
+      <!-- Search for small screen-->
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Product Managment</span></h5>
+          </div>
+          <div class="col s12 m6 l6 right-align-md">
+            <ol class="breadcrumbs mb-0">
+              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Product Managment</a>
+              </li>
+              <li class="breadcrumb-item active">Product Categories
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="container">
+        <div class="section section-data-tables">
+          <div class="card">
+          <div class="card-content">
+          <p class="caption">Add New Category or show categories that are available.</p>
+
+          </div>
+          </div>
+
+         
+         
+
+          <div class="row">
+            <div class="col s12">
+              <div class="card">
+                <div class="card-content">
+                  <h4 class="card-title">List Of Customers</h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <table id="customers-list" class="display">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>Registered At</th>
+                            
+                            <th>Birthday</th>
+                            <th>Number of Commands</th>
+                            <th>Number of Reviews</th>
+                          
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let c of customers;let i = index">
+                            <td>{{c.id}}</td>
+                            <td>{{c.name}}</td>
+                            <td>{{c.email}}</td>
+                            <td>{{c.phone}}</td>
+                            <td>{{c.created_at | date:'short' }}</td>
+                            <td>{{c.birthday}}</td>
+                           
+                            <td *ngIf="nbreCommands[i]==0"><span _ngcontent-ygv-c128="" class="badge new badge pill red accent-2  mr-2">0</span></td>
+                            <td *ngIf="nbreCommands[i]>0"><span _ngcontent-ygv-c128="" class="badge new badge pill green accent-2  mr-2"> {{nbreCommands[i]}}</span></td>
+
+                            <td *ngIf="nbreReviews[i]==0"><span _ngcontent-ygv-c128="" class="badge new badge pill red accent-2  mr-2">0</span></td>
+                            <td *ngIf="nbreReviews[i]>0"><span _ngcontent-ygv-c128="" class="badge new badge pill #03a9f4 accent-2  mr-2"> {{nbreReviews[i]}}</span></td>
+                            
+                           
+                          </tr>
+                          
+                         
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>Registered At</th>
+                            
+                            <th>Birthday</th>
+                            <th>Number of Commands</th>
+                            <th>Number of Reviews</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
