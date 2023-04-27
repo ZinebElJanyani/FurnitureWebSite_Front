@@ -7,4 +7,23 @@ p {
     color: #fff!important;
 }
 
+b{
+    font-family: Muli,sans-serif;
+    font-weight: bolder;
+    line-height: 1.5;
+    font-size: 20px;
+    color: #6b6f82!important;
+}
+
+.info{
+    font-family: Muli,sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6b6f82!important;
+}
+span{
+    color: rgb(214, 135, 32);
+}
+
    

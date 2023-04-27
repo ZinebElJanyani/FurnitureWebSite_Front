@@ -21,6 +21,7 @@ import { CategoryManagmentComponent } from './components/admin/category-managmen
 import { ProductListComponent } from './components/admin/product-list/product-list.component';
 import { CustomerManagementComponent } from './components/admin/customer-management/customer-management.component';
 import { OredersListComponent } from './components/admin/oreders-list/oreders-list.component';
+import { RoleGuard } from './role.guard';
 
 const routes: Routes = [
   
@@ -32,26 +33,27 @@ const routes: Routes = [
     {path : '' , redirectTo:'products/1/0',pathMatch:'full'},
     {path : 'product-detail/:p' , component: ProductDetailComponent},
     {path : 'login' , component: LoginComponent},
-    {path : 'shopping-cart' , component: ShoppingCartComponent},
-    {path : 'check-out' , component: CheckOutComponent},
+    {path : 'shopping-cart' , component: ShoppingCartComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
+    {path : 'check-out' , component: CheckOutComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
     {path : 'order-success' , component: OrderSuccessComponent},
     {path : 'wishlist' , component: WishlistComponent},
-    {path : 'orders' , component: OrdersComponent},
-    {path : 'profile' , component: ProfileComponent},
-    {path : 'admin/customers' , component: CustomerManagementComponent},
-    {path : 'admin/products/list' , component: ProductListComponent},
-    {path : 'admin/orders/list' , component: OredersListComponent},
+    {path : 'orders' , component: OrdersComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
+    {path : 'profile' , component: ProfileComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
+    {path : 'admin/customers' , component: CustomerManagementComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
+    {path : 'admin/products/list' , component: ProductListComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
+    {path : 'admin/orders/list' , component: OredersListComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
 
     {path : 'admin/products/:id' , component: ProductManagmentComponent},
    
-    {path : 'charts' , component: ChartsComponent},
-    {path : 'admin/categories' , component: CategoryManagmentComponent},
+    {path : 'charts' , component: ChartsComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
+    {path : 'admin/categories' , component: CategoryManagmentComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     /*{path : 'shared/profile' , component: ProfileComponent},*/
     {path : '**' , component: NotFoundComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers:[RoleGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

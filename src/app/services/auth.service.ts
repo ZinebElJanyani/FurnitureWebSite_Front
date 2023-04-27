@@ -34,12 +34,20 @@ export class AuthService {
     acces_token:"",
     refresh_token:""
   };
+  private previousUrl="";
   
   constructor(private http:HttpClient,private router : Router) { 
     this._isAuthenticated.next(false);
   
   }
 
+  setPreviousUrl(url: string) {
+    this.previousUrl = url;
+  }
+
+  getPreviousUrl(): string {
+    return this.previousUrl;
+  }
   login(name? : string,password?:string){
     if(name && password){
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
@@ -53,7 +61,7 @@ export class AuthService {
     .subscribe((response:any) => {
       this._isAuthenticated.next(true);
 
-  
+      
       this.token = response
      
       localStorage.setItem('access_token',this.token.acces_token);
@@ -62,14 +70,16 @@ export class AuthService {
       
       alert("login Success");
       this.getUserInfo_JWT();
+      if(this.userAutenticated.role == "customer"){
       this.createCaddyForCostomer(this.token.acces_token);
-    
+      }
       
-      //this.router.navigate(['/courses']);
+      
     },
     (err:HttpErrorResponse)=>
     { this._isAuthenticated.next(false);
       localStorage.setItem('isAuthenticated',"false");
+      alert("Invalid login credentials. Please try again. \uD83D\uDE1E"); 
     }
     );
   }

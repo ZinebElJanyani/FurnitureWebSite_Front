@@ -1415,4 +1415,35 @@ input.cart-plus-minus-box {
 }
 
 
+.product-action {
+  background: #fff none repeat scroll 0 0;
+  bottom: 50px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease 0s;
+  width: calc(100% - 40px);
+}
+.clearfix:before{
+  content: " ";
+    display: table;
+}
+.product-action a {
+  color: #666666;
+  float: left;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  width: 25%;
+}
 
+.single-product:hover .product-action{
+  visibility: visible;
+  bottom:140px;
+  opacity: 1;
+}

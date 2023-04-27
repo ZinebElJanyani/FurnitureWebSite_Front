@@ -1,22 +1,22 @@
 import { LoginValidators } from './LoginValidators';
 import { AuthService } from './../../../services/auth.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 /*import { LoginValidators } from '/login.validators';*/
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   isRight=false;
   isAUth=false;
   isRegister=false;
-  
+  returnUrl="";
   loginForm=new FormGroup({
     email:new FormControl('',[Validators.email,Validators.required]),
     password:new FormControl('',Validators.required)
@@ -27,7 +27,7 @@ export class LoginComponent {
   get password(){
     return this.loginForm.get('password');
   }
-  constructor(fb:FormBuilder,private authService: AuthService,private router : Router,private categoryService:CategoryService){
+  constructor(private route: ActivatedRoute,fb:FormBuilder,private authService: AuthService,private router : Router,private categoryService:CategoryService){
     /*this.registerForm=fb.group({
       Remail:['',Validators.email,Validators.required],
     Rpassword:['',Validators.required],
@@ -36,6 +36,9 @@ export class LoginComponent {
     birthDay:[''],
     Cpassword:['',[Validators.required]]
     },{validators:LoginValidators.passwordSouldMatch})*/
+  }
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   
   registerForm=new FormGroup({
@@ -78,22 +81,34 @@ export class LoginComponent {
     
       this.authService.login(this.loginForm.value.email?.toString(),this.loginForm.value.password?.toString());
    
-    setTimeout(() => {
-    this.categoryService.storeFavoriteInDB().subscribe(data => {
-      console.log(data)
-    },err =>{
-      console.log(err)
-    }) 
-  }, 2000);
+    
    
     this.authService.isRegisterd$.subscribe(v=>{this.isAUth=v;})
+   
     setTimeout(() => {
    if(this.isAUth==false){
-      
+
      this.loginForm.reset
       this.loginForm.setErrors({
         invalidLogin:true
       })
+  
+    }else{
+     
+      if(this.authService.userAutenticated.role == "admin"){
+
+        this.router.navigate(['charts']);}
+        else if(this.authService.userAutenticated.role == "customer"){
+          this.router.navigate([this.returnUrl]);
+          //register the favorite products for this user in the DB
+          setTimeout(() => {
+            this.categoryService.storeFavoriteInDB().subscribe(data => {
+             
+            },err =>{
+              console.log(err)
+            }) 
+          }, 2000);
+        }
     }
     }, 1000);
    
