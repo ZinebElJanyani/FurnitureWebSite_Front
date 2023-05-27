@@ -31,6 +31,7 @@ import { ProductListComponent } from '../components/admin/product-list/product-l
 import { CustomerManagementComponent } from '../components/admin/customer-management/customer-management.component';
 import { OrederManagementComponent } from '../components/admin/oreder-management/oreder-management.component';
 import { OredersListComponent } from '../components/admin/oreders-list/oreders-list.component';
+import { SummaryPipe } from '../pipes/summary.pipe';
 
 const components=[
   NavbarComponent,
@@ -57,7 +58,8 @@ const components=[
     ProductListComponent,
     CustomerManagementComponent,
     OrederManagementComponent,
-    OredersListComponent
+    OredersListComponent,
+    SummaryPipe
 ]
 
 @NgModule({

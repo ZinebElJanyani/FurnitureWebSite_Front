@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Console } from 'console';
 //import * as $ from 'jquery';
 
 /*declare global {
@@ -30,7 +31,7 @@ export class CategoryManagmentComponent implements OnInit {
 
   constructor(private categoryService:CategoryService,){
     this.categoryForm=new FormGroup({
-      tnameitle:new FormControl("",Validators.required),})
+      title:new FormControl("",Validators.required),})
   }
   get title(){
     return this.categoryForm.get('title');
@@ -106,6 +107,7 @@ export class CategoryManagmentComponent implements OnInit {
     this.idCat = id
     this.selectedValue = collection;
     this.categoryForm.get('title').setValue(title);
+ 
     this.isInputActive = true
   }
 

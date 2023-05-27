@@ -32,21 +32,21 @@ export class ProductsComponent implements OnInit{
   constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router,private CaddyService:CaddyService){
     this.numProducts=0;
   this.minPrice=0;
-  this.maxPrice = 10000;
-    this.product = {
-      id:0,
-      nom: 'Default product name',
-    description: 'Default product description',
-    price: 0,
-    qteStock: 0,
-    promotion: 0,
-    created_at: null,
-    style: null,
-    color: '',
-    material: '',
-    selected: false
+  this.maxPrice = 50000;
+  this.product = {
+    id:0,
+    nom: 'Default product name',
+  description: 'Default product description',
+  price: 0,
+  qteStock: 0,
+  promotion: 0,
+  created_at: null,
+  style: null,
+  color: '',
+  material: '',
+  selected: false
 
-    }
+  }
     //The fill() method is a built-in method in JavaScript that fills all the elements of an array with a specified value
     this.isFavorite = new Array(this.products.length).fill(false);
     /**** */
@@ -62,24 +62,25 @@ export class ProductsComponent implements OnInit{
     }else if (p1==2){
       let p2 = this.route.snapshot.params['p2']
       this.getProducts("/products_catg/"+p2+"/"+min+"/"+max)
+      console.log("max from loadProducts"+max)
      
     }
       
   }
   ngOnInit(): void {
     this.getCategories()
-    this.loadProducts(0,10000)
+    this.loadProducts(0,50000)
     this.router.events.subscribe((val)=>{
      
       if(val instanceof NavigationEnd){
         let p1 = this.route.snapshot.params['p1']
     if(p1==1){
       this.CurentCtg = undefined
-      this.getProducts("/selected_P/0/10000")
+      this.getProducts("/selected_P/0/50000")
      
     }else if (p1==2){
       let p2 = this.route.snapshot.params['p2']
-      this.getProducts("/products_catg/"+p2+"/0/10000")
+      this.getProducts("/products_catg/"+p2+"/0/50000")
      
     }
       }
@@ -145,7 +146,8 @@ export class ProductsComponent implements OnInit{
     this.categoryService.getRessource(url)
     .subscribe(data => 
       {this.produits = data;
-        
+        console.log("hello")
+        console.log(data)
       
       },err=>{
         console.log(err);
@@ -190,10 +192,10 @@ onInputMinChange(event :Event){
   let inputElement = event.target as HTMLInputElement
   this.minPrice = Number( inputElement.value)
   
-  if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 10000){
+  if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 50000){
     this.renderer.setProperty(this.minRange?.nativeElement,'value',String(this.minPrice))
     this.loadProducts(this.minPrice,this.maxPrice)
-    let leftrate = (this.minPrice/10000)*100;
+    let leftrate = (this.minPrice/50000)*100;
     this.renderer.setStyle(this.progresstElement?.nativeElement,'left',leftrate+"%")
   }
   
@@ -202,10 +204,10 @@ onInputMaxChange(event :Event){
   
   let inputElement = event.target as HTMLInputElement
   this.maxPrice = Number( inputElement.value)
-  if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 10000){
+  if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 50000){
     this.loadProducts(this.minPrice,this.maxPrice)
     this.renderer.setProperty(this.maxRange?.nativeElement,'value',String(this.maxPrice))
-    let rightrate = (this.maxPrice/10000)*100;
+    let rightrate = (this.maxPrice/50000)*100;
     this.renderer.setStyle(this.progresstElement?.nativeElement,'right',100-rightrate+"%")
   }
 }

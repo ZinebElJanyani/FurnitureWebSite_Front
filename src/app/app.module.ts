@@ -10,24 +10,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 /*import { ProfileComponent } from './components/shared/profile/profile.component';*/
 
 /*import { ZippyComponent } from './shared/zippy/zippy.component';*/
 
-
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
-    
-    
-    
-    
-
+  
     
     
   ],

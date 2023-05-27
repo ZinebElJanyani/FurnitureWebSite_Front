@@ -81,8 +81,8 @@
                         <tbody>
                           <tr *ngFor="let p of products">
                             <td>{{p.id}}</td>
-                            <td>{{p.nom}}</td>
-                            <td>{{p.description}}</td>
+                            <td>{{p.nom | Summary:20}}</td>
+                            <td>{{p.description | Summary:30}}</td>
                             <td>{{p.created_at | date:'short' }}</td>
                             <td>{{p.price}}</td>
                            

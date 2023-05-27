@@ -143,25 +143,27 @@
 			
 					<div class="row">
 					
-                        <div class="single-product col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="single-product col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let p of recommendations">
                             <div class="product-img">
-                                <span class="pro-label sale-label">Sale</span>
+        
+                                <span *ngIf="p.promotion>0" class="pro-label sale-label">-{{p.promotion}} %</span>
+                                <span *ngIf="p.qteStock==0" class="pro-label stock-label">Out Of Stock</span>
                                 <div class="product-action clearfix">
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi zmdi-favorite-outline"></i></a>
                                     <a href="#" data-toggle="modal"  data-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
                                 </div>
-                                <a href="single-product.html"><img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" /></a>
+                                <a [routerLink]="['/product-detail', p.id]"><img src="{{this.categoryService.host+'/productFirst_P/'+p.id}}" alt="" /></a>
                                
                             </div>
                             <div class="product-info clearfix">
                                 <div class="fix">
-                                    <h4 class="post-title floatleft"><a href="#">dummy Product name</a></h4>
+                                    <h4 class="post-title floatleft"><a href="#">{{p.nom}}</a></h4>
                                     <p class="floatright hidden-sm hidden-xs">Furniture</p>
                                 </div>
                                 <div class="fix">
-                                    <span class="pro-price floatleft">$ 56.20</span>
+                                    <span class="pro-price floatleft">{{p.price|number:'0.00'}} DH</span>
                                     <span class="pro-rating floatright">
                                         <a href="#"><i class="zmdi zmdi-star"></i></a>
                                         <a href="#"><i class="zmdi zmdi-star"></i></a>
@@ -172,9 +174,11 @@
                                 </div>
                             </div>
                         </div>
+                        
 							
 						
 					</div>
+                    
 				</div>
 			</div>
 		

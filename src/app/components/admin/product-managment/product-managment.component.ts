@@ -3,7 +3,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { data } from 'jquery';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-managment',
@@ -48,7 +48,7 @@ export class ProductManagmentComponent implements OnInit{
     idProduct:number=0
     images_product: any[] = [];
     deleted_images: number[] = [];
-  constructor(private sanitizer: DomSanitizer,private route:ActivatedRoute,private el: ElementRef, private renderer: Renderer2,private categoryService:CategoryService){
+  constructor( private router:Router,private sanitizer: DomSanitizer,private route:ActivatedRoute,private el: ElementRef, private renderer: Renderer2,private categoryService:CategoryService){
     
   }
   ngOnInit(): void {
@@ -127,12 +127,14 @@ export class ProductManagmentComponent implements OnInit{
         setTimeout(() => {
           this.categoryService.uploadProductImg(this.deleted_images,this.productImgs,idProduct).subscribe(data=>{
             })
-            this.productForm.reset()
             this.isShow=false
+            this.router.navigate(['/admin/products',0])
+            /*this.productForm.reset()
+           
             const elements = this.el.nativeElement.querySelectorAll('li.list');
               for (let i = 0; i < elements.length; i++) {
                 this.renderer.removeChild(elements[i].parentNode, elements[i]);
-              }
+              }*/
         }, 2000);
         
       },err =>{

@@ -203,6 +203,8 @@ createCaddyForCostomer(accesstoken:string){
      localStorage.setItem('access_token',"");
      localStorage.setItem('isAuthenticated',"false");
      localStorage.setItem('user',JSON.stringify(null));
+    
+     
  }
 
  updateUser(name?:string,phone?:string,email?:string,date?:Date){

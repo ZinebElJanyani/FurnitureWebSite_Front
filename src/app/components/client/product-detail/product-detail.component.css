@@ -218,6 +218,9 @@ input[type="text"], input[type="password"] {
   width: 100%;
   outline: none;
 }
+input[type="checkbox"]{
+  opacity: 1;
+}
 input::-webkit-input-placeholder {
   color: #999;
   opacity: 1;

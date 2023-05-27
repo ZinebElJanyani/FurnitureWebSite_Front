@@ -12,6 +12,10 @@ Chart.register(...registerables)
 export class ChartsComponent implements OnInit{
   statistics:any
   bestOrder:any
+  secondChartDataX:any
+  secondChartDataY:any
+  firstChartData: any;
+  thirdChartData: any;
  constructor(private chartService:ChartService,public categoryService:CategoryService){
   
  }
@@ -19,19 +23,51 @@ export class ChartsComponent implements OnInit{
   ngOnInit(): void {
     this.getStatistics()
     this.getmotSellerProduct()
-    this.firstChart()
-    this.secondChart()
-    this.thirdChart()
+    this.getSalesPerCategories()
+    this.getCountOfRating()
+    this.getSalesPerMonths()
+    setTimeout(() => {
+      this.secondChart()
+      this.firstChart()
+      this.thirdChart()
+
+    }, 2000);
+   
   }
 
   getStatistics(){
     this.chartService.getRessorces("generalInfo").subscribe(
       data => {
         this.statistics = data
+       
       },err =>{
         console.log(err)
       }
     )
+  }
+  getCountOfRating(){
+    this.chartService.getRessorces("ratingCount").subscribe((data:any) =>
+      {
+        this.firstChartData = data;
+        console.log(data)
+      
+      })
+  }
+  getSalesPerMonths(){
+    this.chartService.getRessorces("salesMonth").subscribe((data:any) =>
+      {
+        this.thirdChartData=data
+        
+      
+      })
+  }
+  getSalesPerCategories(){
+    this.chartService.getRessorces("salesCategory").subscribe((data:any) =>
+      {
+        this.secondChartDataX = Object.keys(data);
+        this.secondChartDataY = Object.values(data);
+      
+      })
   }
 
   getmotSellerProduct(){
@@ -44,75 +80,72 @@ export class ChartsComponent implements OnInit{
     )
   }
 
+
   thirdChart() {
     const labels =["january","february","march","april","may","june","july","august","november","october","september","december"];
 const data = {
   labels: labels,
   datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
+    label: 'Sales Per Months',
+    data: this.thirdChartData,
     fill: false,
     borderColor: 'rgb(75, 192, 192)',
     tension: 0.1
   }]
 };
-new Chart("thisYearRevenue2", {
+new Chart("salesMonths", {
   type: 'line',
   data: data,
 })
   }
   secondChart() {
     const data = {
-      labels: [
-        'Eating',
-        'Drinking',
-        'Sleeping',
-        'Designing',
-        'Coding',
-        'Cycling',
-        'Running'
-      ],
+      labels: this.secondChartDataX,
       datasets: [{
-        label: 'My First Dataset',
-        data: [65, 59, 90, 81, 56, 55, 40],
-        fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgb(255, 99, 132)',
-        pointBackgroundColor: 'rgb(255, 99, 132)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgb(255, 99, 132)'
-      }, {
-        label: 'My Second Dataset',
-    data: [28, 48, 40, 19, 96, 27, 100],
-    fill: true,
-    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-    borderColor: 'rgb(54, 162, 235)',
-    pointBackgroundColor: 'rgb(54, 162, 235)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(54, 162, 235)'
-  }]
-};
-new Chart("monthlyEarning", {
-  type: 'radar',
-  data: data,
-  options: {
-    elements: {
-      line: {
-        borderWidth: 3
-      }
-    }
-  },})
+        label: 'Sales',
+        data: this.secondChartDataY,
+        backgroundColor: [
+          'rgb(178, 178, 218)',
+          'rgb(153, 204, 204)',
+          'rgb(192, 192, 192)',
+          'rgb(153, 178, 218)',
+          'rgb(204, 153, 102)',
+          'rgb(230, 204, 204)',
+          'rgb(204, 230, 204)',
+          'rgb(230, 204, 179)',
+          'rgb(153, 204, 153)',
+          'rgb(230, 204, 153)',
+          'rgb(230, 230, 153)',
+          'rgb(204, 153, 51)',
+          'rgb(153, 153, 204)',
+          'rgb(128, 204, 204)',
+          'rgb(230, 204, 128)',
+          'rgb(230, 204, 102)',
+          'rgb(255, 204, 153)',
+          'rgb(179, 174, 96)'
+        ],
+        hoverOffset: 4
+      }]
+    };
+    new Chart("salesByCategories", {
+      type: 'pie',
+      data: data,
+      options: {
+        elements: {
+          line: {
+            borderWidth: 3
+          }
+        }
+      },})
   }
   firstChart() {
-    new Chart("thisYearRevenue", {
+    new Chart("Ratingcount", {
       type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['1★', '2★', '3★', '4★', '5★'],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'count of rating',
+            data: this.firstChartData,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -129,13 +162,16 @@ new Chart("monthlyEarning", {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 1.5
         }]
     },
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                  stepSize:2
+                }
             }
         }
     }}

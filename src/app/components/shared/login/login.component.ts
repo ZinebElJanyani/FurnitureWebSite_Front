@@ -102,11 +102,7 @@ export class LoginComponent implements OnInit{
           this.router.navigate([this.returnUrl]);
           //register the favorite products for this user in the DB
           setTimeout(() => {
-            this.categoryService.storeFavoriteInDB().subscribe(data => {
-             
-            },err =>{
-              console.log(err)
-            }) 
+           this.categoryService.getIntialsFavoriteProducts_fromDB();
           }, 2000);
         }
     }

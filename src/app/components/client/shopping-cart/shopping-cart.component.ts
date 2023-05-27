@@ -4,6 +4,7 @@ import { CategoryService } from './../../../services/category.service';
 import { CaddyService } from './../../../services/caddy.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Console } from 'console';
+import { data } from 'jquery';
 declare var $:any
 @Component({
   selector: 'app-shopping-cart',
@@ -22,6 +23,7 @@ export class ShoppingCartComponent implements OnInit {
   couponCode :String
   orderTotal=0
   customer:any
+  recommendations:any
   productsOutStock:string[] =[]
   constructor(private  router: Router,private authService : AuthService ,private renderer: Renderer2,public caddyService :CaddyService,public categoryService:CategoryService){
     this.couponCode="124GN%SI&13DDF"
@@ -31,8 +33,14 @@ export class ShoppingCartComponent implements OnInit {
     if(localStorage.getItem('coupon')){
       this.couponDicount=150
     }
+    this.getCRecommendations();
   }
-
+getCRecommendations(){
+  this.categoryService.getRecommendations().subscribe(data =>{
+    this.recommendations = data
+    console.log(data)
+  })
+}
 calculTotal(){
   this.orderTotal=this.cartSubTotal+this.deliverySubtotal-this.couponDicount
 

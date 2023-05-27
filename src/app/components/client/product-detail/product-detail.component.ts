@@ -61,8 +61,8 @@ export class ProductDetailComponent implements OnInit{
   }
   initilizeForm(){
     this.reviewForm=new FormGroup({
-      name:new FormControl("",Validators.required),
-      title:new FormControl("",Validators.required),
+      name:new FormControl(this.authService.userAutenticated.name,Validators.required),
+      title:new FormControl("my review"),
       text:new FormControl("",Validators.required),
 
        recommandProduct:new FormControl(''),
@@ -84,6 +84,8 @@ export class ProductDetailComponent implements OnInit{
   get recommandProduct(){
     return this.reviewForm.get('recommandProduct');
   }
+
+
   Freview(){
    
       

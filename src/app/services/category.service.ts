@@ -16,7 +16,13 @@ export class CategoryService {
 
     return this.http.get(this.host+url)
   }
-
+getRecommendations(){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  return this.http.get("http://localhost:8084/api/getRecommandation/"+this.authService.userAutenticated.id,{headers})
+}
   addReview(idProduct:number, nbre_etoile:number,titre:string,text:string,image:string,isRecommanded:boolean,name:String){
     
     const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
@@ -110,6 +116,25 @@ export class CategoryService {
   };
   return this.http.get("http://localhost:8084/api/products/products",{ params: options.params})
  }
+ getIntialsFavoriteProducts_fromDB(){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+   this.http.get(this.host+"/favoriteProducts/"+this.authService.userAutenticated.id,{ headers})
+   .subscribe((data: any )=> {
+    if(data.length>0){
+      for (let index = 0; index < data.length; index++) {
+        this.favoriteProduct(data[index].id,true) ;
+        
+      }
+      
+    }
+   },err =>{
+     console.log(err)
+   }) 
+ 
+  }
 
  storeFavoriteInDB(){
   let data =  localStorage.getItem('wishlist')
