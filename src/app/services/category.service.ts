@@ -16,12 +16,12 @@ export class CategoryService {
 
     return this.http.get(this.host+url)
   }
-getRecommendations(){
+getValues(url:String){
   const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
   const headers = new HttpHeaders({
     'Authorization': authToken
   });
-  return this.http.get("http://localhost:8084/api/getRecommandation/"+this.authService.userAutenticated.id,{headers})
+  return this.http.get("http://localhost:8084/api/"+url,{headers})
 }
   addReview(idProduct:number, nbre_etoile:number,titre:string,text:string,image:string,isRecommanded:boolean,name:String){
     
@@ -221,6 +221,17 @@ console.log("list:"+deletedP.length)
   return this.http.post("http://localhost:8084/api/products/new",body,{headers})
  }
 
+ saveProductQuantity(id:number,value:Text){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken,
+    'Content-Type': 'text/plain'
+  });
+
+  return this.http.post(this.host+"/feedStock/"+id,value,{headers})
+ 
+  
+ }
  
 }
 

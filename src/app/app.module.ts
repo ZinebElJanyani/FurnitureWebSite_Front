@@ -9,6 +9,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DurationPipe } from './components/admin/admin-products/duration.pipe';
+import { OutStockComponent } from './components/admin/out-stock/out-stock.component';
+import { OrderDetailComponent } from './components/admin/order-detail/order-detail.component';
 
 
 /*import { ProfileComponent } from './components/shared/profile/profile.component';*/
@@ -18,9 +21,10 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
+    OrderDetailComponent,
   
     
-    
+  
   ],
   imports: [
     BrowserModule,

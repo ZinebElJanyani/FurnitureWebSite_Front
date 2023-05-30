@@ -32,6 +32,9 @@ import { CustomerManagementComponent } from '../components/admin/customer-manage
 import { OrederManagementComponent } from '../components/admin/oreder-management/oreder-management.component';
 import { OredersListComponent } from '../components/admin/oreders-list/oreders-list.component';
 import { SummaryPipe } from '../pipes/summary.pipe';
+import { AdminProfileComponent } from '../components/admin/admin-profile/admin-profile.component';
+import { DurationPipe } from '../components/admin/admin-products/duration.pipe';
+import { OutStockComponent } from '../components/admin/out-stock/out-stock.component';
 
 const components=[
   NavbarComponent,
@@ -59,7 +62,10 @@ const components=[
     CustomerManagementComponent,
     OrederManagementComponent,
     OredersListComponent,
-    SummaryPipe
+    SummaryPipe,
+    AdminProfileComponent,
+    DurationPipe,
+    OutStockComponent
 ]
 
 @NgModule({

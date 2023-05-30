@@ -1,0 +1,144 @@
+
+<app-admin-products></app-admin-products>
+<div id="main">
+  <div class="row" style="margin-top: 2%;">
+    <div id="breadcrumbs-wrapper">
+      <!-- Search for small screen-->
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Product Managment</span></h5>
+          </div>
+          <div class="col s12 m6 l6 right-align-md">
+            <ol class="breadcrumbs mb-0">
+              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Product Managment</a>
+              </li>
+              <li class="breadcrumb-item active">Product Categories
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="container">
+        <div class="section section-data-tables">
+          <div class="card">
+          <div class="card-content">
+          <p class="caption">Add New Category or show categories that are available.</p>
+
+          </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" *ngIf="showConfirmationDialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Stock Management</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeConfirmationDialog()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  feed stock quantity
+                </div>
+                <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+                  <div class="input-field col s12">
+                    <label for="qteStock" >Stock Quantity :</label>
+                    <input  [class.invalid]="qteStock?.touched && qteStock?.invalid" formControlName="qteStock" class="validate" required="" id="qteStock" type="number" >
+                  </div>
+                <div class="modal-footer">
+                  <button [disabled]="productForm.invalid" type="submit" class="btn btn-warning" >OK</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeConfirmationDialog()">Cancel</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="row">
+            <div class="col s12">
+              <div class="card">
+                <div class="card-content">
+                  <h4 class="card-title">List Of Products Out of Stock</h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <table id="products-list" class="display">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Created At</th>
+                            <th>Price</th>
+                            
+                            <th>Promotion Value</th>
+                            <th>In Stock</th>
+                            <th>Stock quantity</th>
+                            <th>color</th>
+                            <th>Category</th>
+                            <th>Stock quantity</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let p of products">
+                            <td>{{p.id}}</td>
+                            <td>{{p.nom | Summary:20}}</td>
+                            <td>{{p.description | Summary:30}}</td>
+                            <td>{{p.created_at | date:'short' }}</td>
+                            <td>{{p.price}}</td>
+                           
+                            <td>{{p.promotion}}</td>
+                            
+                            <td *ngIf='p.qteStock>0'><span class="badge green lighten-5 green-text text-accent-4">In Stock</span></td>
+                            <td *ngIf='p.qteStock==0'><span class="badge pink lighten-5 pink-text text-accent-2">Out Of Stock</span></td>
+
+                            <td>{{p.qteStock}}</td>
+                            <td>{{p.color}}</td>
+                            <td>{{p.categorytitle}}</td>
+
+                            <td>
+                              <button class="btn btn-warning" (click)="openConfirmationDialog(p.id)"> <i class="material-icons center">edit_square</i></button>
+
+                            </td>
+                           
+                          </tr>
+                          
+                         
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Created At</th>
+                            <th>Price</th>
+                            <th>In Promotion</th>
+                            <th>Promotion Value</th>
+                            <th>Stock quantity</th>
+                            <th>color</th>
+                            <th>Category</th>
+                            <th>Stock quantity</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

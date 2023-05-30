@@ -22,6 +22,8 @@ import { ProductListComponent } from './components/admin/product-list/product-li
 import { CustomerManagementComponent } from './components/admin/customer-management/customer-management.component';
 import { OredersListComponent } from './components/admin/oreders-list/oreders-list.component';
 import { RoleGuard } from './role.guard';
+import { AdminProfileComponent } from './components/admin/admin-profile/admin-profile.component';
+import { OutStockComponent } from './components/admin/out-stock/out-stock.component';
 
 const routes: Routes = [
   
@@ -37,14 +39,17 @@ const routes: Routes = [
     {path : 'check-out' , component: CheckOutComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
     {path : 'order-success' , component: OrderSuccessComponent},
     {path : 'wishlist' , component: WishlistComponent},
+
     {path : 'orders' , component: OrdersComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
     {path : 'profile' , component: ProfileComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
+
     {path : 'admin/customers' , component: CustomerManagementComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'admin/products/list' , component: ProductListComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'admin/orders/list' , component: OredersListComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
-
-    {path : 'admin/products/:id' , component: ProductManagmentComponent},
+    {path : 'admin/outStock' , component: OutStockComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
+    {path : 'admin/products/:id' , component: ProductManagmentComponent,canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
    
+    {path : 'admin/profile' , component: AdminProfileComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'charts' , component: ChartsComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'admin/categories' , component: CategoryManagmentComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     /*{path : 'shared/profile' , component: ProfileComponent},*/

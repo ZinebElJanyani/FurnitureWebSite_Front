@@ -34,8 +34,8 @@ export class ProductManagmentComponent implements OnInit{
       id : 0,
       nom : "" ,
       description : "" ,
-      price : 0,
-      qteStock : 0,
+      price : "",
+      qteStock : "",
       promotion : 0,
       created_at : "",
       style : null,
@@ -129,13 +129,13 @@ export class ProductManagmentComponent implements OnInit{
             })
             this.isShow=false
             this.router.navigate(['/admin/products',0])
-            /*this.productForm.reset()
+            this.productForm.reset()
            
-            const elements = this.el.nativeElement.querySelectorAll('li.list');
+           /* const elements = this.el.nativeElement.querySelectorAll('li.list');
               for (let i = 0; i < elements.length; i++) {
                 this.renderer.removeChild(elements[i].parentNode, elements[i]);
               }*/
-        }, 2000);
+        }, 3000);
         
       },err =>{
         console.log(err)
@@ -259,4 +259,7 @@ export class ProductManagmentComponent implements OnInit{
   }
 
   
+  onShowList(){
+    this.router.navigate(['/admin/products/list'])
+  }
 }

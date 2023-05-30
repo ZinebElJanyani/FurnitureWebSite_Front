@@ -10,20 +10,11 @@ declare var $:any
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.css']
 })
-export class NotFoundComponent implements AfterViewInit {
-   
-  constructor() {
-   
-}
-  ngAfterViewInit(): void {
-    $(document).ready(function(){
-      $('.carousel').carousel();
-    });
-    
+export class NotFoundComponent {
+
     
 
 }
   
 
 
-}

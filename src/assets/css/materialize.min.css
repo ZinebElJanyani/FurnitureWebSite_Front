@@ -22,3 +22,9 @@ select {
     height: auto;
 }
 
+input[type=search]:not(.browser-default){
+    font-size: unset;
+    width: unset;
+    height: unset;
+    margin: unset;
+}

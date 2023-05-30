@@ -36,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
     this.getCRecommendations();
   }
 getCRecommendations(){
-  this.categoryService.getRecommendations().subscribe(data =>{
+  this.categoryService.getValues("getRecommandation/"+this.authService.userAutenticated.id).subscribe(data =>{
     this.recommendations = data
     console.log(data)
   })

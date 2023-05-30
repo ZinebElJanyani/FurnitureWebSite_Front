@@ -88,7 +88,7 @@ onSelectedFile(event:Event){
 }
 
 Fprofile(){
-this.authService.updateUser(this.profileForm.value.name,this.profileForm.value.phone,this.profileForm.value.email,this.profileForm.value.birthday)
+this.authService.updateCustomer(this.profileForm.value.name,this.profileForm.value.phone,this.profileForm.value.email,this.profileForm.value.birthday)
 .subscribe(data =>  {
   
   let result =JSON.parse(data)

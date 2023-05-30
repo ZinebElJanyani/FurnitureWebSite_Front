@@ -151,7 +151,8 @@ singUp( name?:string,email?:string,password?:string,phone?:string,birthDay?:stri
 createCaddyForCostomer(accesstoken:string){
   const authToken = 'Bearer ' + accesstoken; 
   const headers = new HttpHeaders({
-    'Authorization': authToken
+    'Authorization': authToken,
+   
   });
   this.http.post("http://localhost:8084/api/caddy/create/"+this.userAutenticated.email,null,{headers,responseType: 'text'})
   .subscribe(data => 
@@ -185,7 +186,26 @@ createCaddyForCostomer(accesstoken:string){
  }
 
  logout(){
-  this._isAuthenticated.next(false);
+  if(this.userAutenticated.role=="admin"){
+  const  d:Date=new Date()
+  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken,
+    'Content-Type': 'text/plain'
+  });
+
+  this.http.post("http://localhost:8084/api/UserAccount/logout/"+this.userAutenticated.id,d.toISOString(),{headers,responseType: 'text'})
+  .subscribe(data => 
+    {
+      console.log("last time set correctly")
+    
+    },err=>{
+      console.log(err);
+    })
+  }
+  
+  setTimeout(() => {
+    this._isAuthenticated.next(false);
   this.userAutenticated = {
     id: 0,
     name: "",
@@ -204,10 +224,12 @@ createCaddyForCostomer(accesstoken:string){
      localStorage.setItem('isAuthenticated',"false");
      localStorage.setItem('user',JSON.stringify(null));
     
+  }, 1000);
+  
      
  }
 
- updateUser(name?:string,phone?:string,email?:string,date?:Date){
+ updateCustomer(name?:string,phone?:string,email?:string,date?:Date){
 
   let bodyData = {
     "id":this.userAutenticated.id,
@@ -222,6 +244,23 @@ createCaddyForCostomer(accesstoken:string){
     'Authorization': authToken
   });
   return this.http.put("http://localhost:8084/api/UserAccount/edit",bodyData,{responseType: 'text',headers})
+   
+}
+updateUser(name?:string,phone?:string,email?:string){
+
+  let bodyData = {
+    "id":this.userAutenticated.id,
+    "name":name,
+    "phone":phone,
+    "email":email,
+
+    
+  };
+  const authToken = 'Bearer ' + this.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  return this.http.put("http://localhost:8084/api/UserAccount/editUser",bodyData,{responseType: 'text',headers})
    
 }
 uploadImageUser(file:File){

@@ -138,3 +138,16 @@ ol li a{
         transform: scaleX(1) scaleY(1);
     }
    
+    input[type=search]{
+        font-size: unset;
+        width: unset;
+        height: unset;
+        margin: unset;
+    }
+
+    input[type=search]:not(.browser-default){
+        font-size: unset;
+        width: unset;
+        height: unset;
+        margin: unset;
+    }

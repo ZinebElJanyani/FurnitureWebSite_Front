@@ -2,7 +2,7 @@
 <app-admin-products></app-admin-products>
 <div id="main">
   <div class="row">
-    <div id="breadcrumbs-wrapper" >
+    <div id="breadcrumbs-wrapper" style="margin-top: 3%;" >
       <!-- Search for small screen-->
       <div class="container">
         <div class="row">
@@ -41,16 +41,19 @@
 
     <div class="swal-icon--success__ring"></div>
     <div class="swal-icon--success__hide-corners"></div>
-  </div><div class="swal-title" style="">Good job!</div><div class="swal-text" style="">The product has been added with success!</div><div class="swal-footer"><div class="swal-button-container">
+  </div>
+  <div class="swal-title" style="">Good job!</div>
+  <div class="swal-text" style="">The product has been added with success!</div>
+  <div class="swal-footer">
+    <div class="swal-button-container">
+      <button class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4 showMore" (click)="onShowList()">Show Products?</button>
 
-
-    <div class="swal-button__loader">
-      <div></div>
-      <div></div>
-      <div></div>
     </div>
 
-  </div></div></div></div>
+  </div>
+</div>
+</div>
+
 <div class="row">
 <div class="col s12">
   <div id="html-validations" class="card card-tabs">
@@ -95,6 +98,7 @@
               <label for="qteStock" [class.active]="isInputActive[4]">Stock Quantity :</label>
               <input  [class.invalid]="qteStock?.touched && qteStock?.invalid" formControlName="qteStock" class="validate" required="" id="qteStock" type="number"  (focus)="isInputActive[4]=true"  (blur)="onInputBlur(stock.value,4) " #stock>
             </div>
+            <div class="sameLine">
             <div class="input-field col s12">
               <label for="color" class="active">Color :</label>
               <select id="color" formControlName="color">
@@ -111,6 +115,7 @@
              
             </select>
             </div>
+          </div>
             <div class="col s12">
               <label for="tnc_select1">Selected product</label>
               <p>

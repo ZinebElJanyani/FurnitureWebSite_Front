@@ -1,0 +1,182 @@
+<app-admin-products></app-admin-products>
+<div id="main">
+    <div class="row">
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen-->
+            <div class="container">
+              <div class="row">
+                <div class="col s12 m6 l6">
+                  <h5 class="breadcrumbs-title mt-0 mb-0"><span>Product Managment</span></h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                  <ol class="breadcrumbs mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">Product Managment</a>
+                    </li>
+                    <li class="breadcrumb-item active">Product Categories
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col s12">
+        <div class="container ">
+            <div class="section">
+                <div class="row user-profile mt-1 ml-0 mr-0">
+                <img class="responsive-img" alt="" src="assets/images/admin/admin_bg.jpg">
+                </div>
+                <div class="section" id="user-profile">
+                <div class="row">
+                    <!-- User Profile Feed -->
+                    <div class="col s12 m4 l3 user-section-negative-margin profileF">
+                    <div class="row">
+                        <div class="col s12 center-align">
+                        <img class="responsive-img circle z-depth-5"   src="{{imagePath}}" alt="">
+                        <br>
+                        </div>
+                    </div>
+                    <div class="container profileForm">
+                    <form [formGroup]="UserImgForm" (ngSubmit)="imgProfile() ">
+                        <div class="form-group">
+                            <input type="file" class="form-control" id="photo" name="photo" formControlName="photo" (change)="onSelectedFile($event)">
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="UserImgForm.invalid">Upload</button>
+                    </form>
+                    </div>
+                    <section class="userDetails card " >
+                        <div class="userName">
+                            
+                            <div class="container adminSection" >
+                                
+                                <form [formGroup]="profileForm" (ngSubmit)="Fprofile()">
+                                    <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" formControlName="name">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" formControlName="email">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="phone">Phone:</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" formControlName="phone">
+                                    </div>
+                                    
+                                    
+                                    <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid" >Edit profile</button>
+                                </form>
+                            </div>
+                            
+                        </div>
+                        
+
+                    </section>
+                    </div>
+                    <!-- User Post Feed -->
+                    <div class="col s12 m8 l6">
+                    <div class="row">
+                        <div class="card user-card-negative-margin z-depth-0" id="feed">
+                        <div class="card-content card-border-gray">
+                            <div class="row">
+                            <div class="col s12">
+                                <h5>{{authService.userAutenticated.name}}</h5>
+                                <p>Administrator <span class="amber-text"><span class="material-icons star-width vertical-align-middle">star_rate</span>
+                                    <span class="material-icons star-width vertical-align-middle">star_rate</span> <span class="material-icons star-width vertical-align-middle">star_rate</span>
+                                    <span class="material-icons star-width vertical-align-middle">star_rate</span> <span class="material-icons star-width vertical-align-middle">star_rate</span></span></p>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col s12">
+                                <ul class="tabs card-border-gray mt-4">
+                                <li class="tab col m3 s6 p-0"><a href="#test1">
+                                    <i class="material-icons vertical-align-middle">crop_portrait</i> Info
+                                    </a></li>
+                                <li class="tab col m3 s6 p-0"><a class="active" href="#test2">
+                                    <i class="material-icons vertical-align-middle">bookmark_border</i> Feed
+                                    </a></li>
+                                <li class="tab col m3 s6 p-0"><a href="#test3">
+                                    <i class="material-icons vertical-align-middle">date_range</i> Agenda
+                                    </a></li>
+                                <li class="tab col m3 s6 p-0"><a href="#test4">
+                                    <i class="material-icons vertical-align-middle">attach_file</i> Resume
+                                    </a></li>
+                                </ul>
+                            </div>
+                            </div>
+                            <div class="row mt-5">
+                            <div class="col s1 pr-0 circle1">
+                                <a href="#"><img class="responsive-img circle1" src="{{'http://localhost:8084/api/UserAccount/userImage/'+this.authService.userAutenticated.id}}" alt=""></a>
+                            </div>
+                            <div class="col s11">
+                                <a href="#">
+                                <p class="m-0">Suzanne Martin <span><i class="material-icons vertical-align-bottom">access_time</i>
+                                    1
+                                    days</span></p>
+                                </a>
+                                <div class="row">
+                                <div class="col s12">
+                                    <div class="card card-border z-depth-2">
+                                    <div class="card-image">
+                                        <img src="assets/images/admin/blog1.jpg" alt="">
+                                    </div>
+                                    <div class="card-content">
+                                        <h6 class="font-weight-900 text-uppercase"><a href="#">Designing Services</a></h6>
+                                        <p>UI/UX & Graphics Design</p>
+                                    </div>
+                                    </div>
+                                    <div class="social-icon">
+                                    <span><i class="material-icons vertical-align-bottom mr-1">favorite_border</i>90</span> <i class="material-icons vertical-align-bottom ml-3 mr-1">chat_bubble_outline</i>
+                                    15 <span><i class="material-icons vertical-align-bottom ml-3 mr-1">redo</i> 6</span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            <hr class="mt-5">
+                            <div class="row mt-5">
+                            <div class="col s1 pr-0 circle1">
+                                <a href="#"><img class="responsive-img circle1"  src="{{'http://localhost:8084/api/UserAccount/userImage/'+this.authService.userAutenticated.id}}" alt=""></a>
+                            </div>
+                            <div class="col s11">
+                                <a href="#">
+                                <p class="m-0">Suzanne Martin <span><i class="material-icons vertical-align-bottom">access_time</i>
+                                    5
+                                    days</span></p>
+                                </a>
+                                <div class="row">
+                                <div class="col s12">
+                                    <div class="card card-border z-depth-2">
+                                    <div class="card-image">
+                                        <img src="assets/images/admin/blog2.jpg" alt="">
+                                    </div>
+                                    <div class="card-content">
+                                        <h6 class="font-weight-900 text-uppercase"><a href="#">Australia office hours</a></h6>
+                                        <p>Working so hard</p>
+                                    </div>
+                                    </div>
+                                    <div class="social-icon">
+                                    <span><i class="material-icons vertical-align-bottom mr-1">favorite_border</i>90</span> <i class="material-icons vertical-align-bottom ml-3 mr-1">chat_bubble_outline</i>
+                                    15 <span><i class="material-icons vertical-align-bottom ml-3 mr-1">redo</i> 6</span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div><!-- START RIGHT SIDEBAR NAV -->
+
+
+        </div>
+       
+        </div>
+  </div>
+</div>
