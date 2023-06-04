@@ -75,11 +75,13 @@
   
   .hero h1 {
   font-weight: 700;
-  
+  color:var(--clr-white); 
+  font-size: 5rem !important;
   }
   .hero h3 {
   text-transform: none;
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
+  color:var(--clr-white); 
   
   }
   
@@ -119,11 +121,11 @@
   }
   @media screen and (min-width: 992px) {
   .hero h1 {
-    font-size: 5.25rem;
+    font-size: 1.5rem;
     letter-spacing: 5px;
   }
   .hero h3 {
-    font-size: 2.75rem;
+    font-size: 1rem;
     margin: 1.5rem 0;
   }
   .waves{
@@ -200,6 +202,8 @@
     justify-content: center;
     align-items: center;
     font-weight: 500;
+    margin-bottom: 2.5rem;
+    margin-top: 1.5rem;
   }
   .title span {
     color: var(--clr-primary-5);
@@ -991,12 +995,117 @@
   border-bottom: 2px solid var(--clr-primary-6);
   }
   
+  a{
+    text-decoration: none;
+  }
   
-    
-    
-    
-    
-    
-    
-    
+  .collection {
+    overflow: visible;
   
+    border: none;
+    border-radius: 0;
+    }
+    
+
+.modal{
+  background-color: #00000091;
+  display: block;
+  width: 100%;
+  max-height: 100%;
+}
+.modal-title{
+  color: #c08429;
+}
+.openSelect{
+  display: block;
+      width: 905.333px;
+      left: 0px;
+      top: -154.333px;
+      height: 200px;
+      transform-origin: 0px 100%;
+      opacity: 1;
+      transform: scaleX(1) scaleY(1);
+  }
+ 
+  optgroup {
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 10px;
+  }
+
+.close{
+  background-color: #dc962dee;
+}
+
+.close:hover{
+  background-color: #b07b2b;
+}
+.modal-dialog{
+  background: url(src/assets/images/home_img/newsletter.jpg);
+}
+.modal .modal-content{
+  background: transparent;
+}
+.modal-footer{
+  background: transparent;
+}
+
+.apply-transform {
+  transform: translateY(-10px);
+}
+.c1{
+  width: 100%;
+}
+.thank{
+  display: none !important;
+}
+.breadcumbs{
+margin-left: 6%;
+margin-top: 5%;
+margin-bottom: 8%;
+}
+
+.breadcumbs ul { overflow: hidden;}
+.breadcumbs li {
+  color:#b3b3b3;
+  display: inline-block;
+  float: left;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 38px;
+  position: relative;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.breadcumbs li:first-child { margin-left: 0px;}
+.breadcumbs ul li a {
+  color: #9d9c9c;
+  display: block;
+}
+.breadcumbs ul li:hover a { color: #C87065;}
+.breadcumbs li::after {
+  color: #fff;
+  content: "/";
+  left: -22px;
+  position: absolute;
+  top: 0;
+}
+.breadcumbs li:first-child::after { content: "";}
+.overlay-bg { position: relative;}
+.overlay-bg::before {
+  background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.description {
+  font-size: 1.2rem;
+
+}
+.bigtitle p{
+  font-size: 3rem;
+  font-family: 'Dancing Script' !important;
+}

@@ -3,7 +3,7 @@ import { debounceTime, fromEvent, map } from 'rxjs';
 import { CategoryService } from './../../../services/category.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, NgModule } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-
+import { NgxPaginationModule } from 'ngx-pagination/public-api';
 declare var $:any
 @Component({
   selector: 'app-products',
@@ -16,6 +16,7 @@ export class ProductsComponent implements OnInit{
   @ViewChild('max') maxRange?: ElementRef;
   @ViewChild('searchValue') searchInputRef?: ElementRef;
   collections:any;
+  catgId=0
   produits:any;
  products: Products[]=[]
  numProducts:number;
@@ -27,9 +28,15 @@ export class ProductsComponent implements OnInit{
  priceGrap:number=500
   product:Products
   modalCartQuantity=0;
-  
+  color="null";
+  isActive=13
+  p: number = 1;
+  productsSize=0
+  short=true
+  long=false
 
   constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router,private CaddyService:CaddyService){
+  
     this.numProducts=0;
   this.minPrice=0;
   this.maxPrice = 50000;
@@ -53,43 +60,76 @@ export class ProductsComponent implements OnInit{
     
   }
 
-  loadProducts(min:number,max:number){
+  loadProducts(min:number,max:number,c : string){
         let p1 = this.route.snapshot.params['p1']
     if(p1==1){
+     
       this.CurentCtg = undefined
-      this.getProducts("/selected_P/"+min+"/"+max)
+      this.getProducts("/selected_P/"+min+"/"+max+"/"+c)
+      
      
     }else if (p1==2){
       let p2 = this.route.snapshot.params['p2']
-      this.getProducts("/products_catg/"+p2+"/"+min+"/"+max)
-      console.log("max from loadProducts"+max)
-     
+      this.getProducts("/products_catg/"+p2+"/"+min+"/"+max+"/"+c)
+    
     }
       
   }
   ngOnInit(): void {
     this.getCategories()
-    this.loadProducts(0,50000)
+    this.loadProducts(0,50000,"null")
     this.router.events.subscribe((val)=>{
      
       if(val instanceof NavigationEnd){
         let p1 = this.route.snapshot.params['p1']
-    if(p1==1){
-      this.CurentCtg = undefined
-      this.getProducts("/selected_P/0/50000")
-     
-    }else if (p1==2){
-      let p2 = this.route.snapshot.params['p2']
-      this.getProducts("/products_catg/"+p2+"/0/50000")
-     
-    }
+        if(p1==1){
+          this.CurentCtg = undefined
+          this.getProducts("/selected_P/0/50000/null")
+        }else if (p1==2){
+          
+          let p2 = this.route.snapshot.params['p2']
+          this.getProducts("/products_catg/"+p2+"/0/50000/null")
+        }
       }
     })
     /***** */
      setTimeout(() => {
-      this.IsFavorite()     
+      this.IsFavorite()   
+      this.productsSize=this.produits.length  
     }, 500);
   }
+  onShortClick(){
+    this.short = true
+    this.long=false
+  }
+  onLongClick(){
+    this.long = true
+    this.short = false
+  }
+  
+  onSelectedColor(c:string,val:number){
+    this.color = c;
+    this.isActive = val
+    this.loadProducts(this.minPrice,this.maxPrice,this.color)
+  }
+  fullStarsArray(averageRating:number): number[] {
+    const fullStars = Math.floor(averageRating);
+    return Array(fullStars).fill(0);
+  }
+
+  hasHalfStar(averageRating:number): boolean {
+    return (averageRating - Math.floor(averageRating)) >= 0.5;
+  }
+  hasEmptyStar(averageRating:number):  number[] {
+    const starsNbre=5
+    let rest:number
+    rest = starsNbre - Math.floor(averageRating);
+    if(this.hasHalfStar(averageRating)){
+      rest -=1
+    }
+    return Array(rest).fill(0);
+    }
+
  
   ngAfterViewInit() {
     if(this.searchInputRef){
@@ -155,7 +195,7 @@ export class ProductsComponent implements OnInit{
   }
   curentCatg(c:any){
     this. CurentCtg = c
-    
+    this.catgId = c.id
   }
   OnheaderClick(collection:any){
       this.currentCollect  = collection
@@ -169,7 +209,7 @@ export class ProductsComponent implements OnInit{
       rangeElement.value = String(this.maxPrice-this.priceGrap)
       this.minPrice=Number( rangeElement.value)
      }else{
-      this.loadProducts(this.minPrice,this.maxPrice)
+      this.loadProducts(this.minPrice,this.maxPrice,this.color)
     this.renderer.setStyle(this.progresstElement?.nativeElement,'left',leftrate+"%")
      }
   }
@@ -183,7 +223,7 @@ export class ProductsComponent implements OnInit{
       rangeElement2.value = String(this.minPrice+this.priceGrap)
       this.maxPrice = Number( rangeElement2.value)
      }else{
-      this.loadProducts(this.minPrice,this.maxPrice)
+      this.loadProducts(this.minPrice,this.maxPrice,this.color)
     this.renderer.setStyle(this.progresstElement?.nativeElement,'right',100-rightrate+"%")
   }
 }
@@ -194,7 +234,7 @@ onInputMinChange(event :Event){
   
   if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 50000){
     this.renderer.setProperty(this.minRange?.nativeElement,'value',String(this.minPrice))
-    this.loadProducts(this.minPrice,this.maxPrice)
+    this.loadProducts(this.minPrice,this.maxPrice,this.color)
     let leftrate = (this.minPrice/50000)*100;
     this.renderer.setStyle(this.progresstElement?.nativeElement,'left',leftrate+"%")
   }
@@ -205,7 +245,7 @@ onInputMaxChange(event :Event){
   let inputElement = event.target as HTMLInputElement
   this.maxPrice = Number( inputElement.value)
   if((this.maxPrice-this.minPrice>=this.priceGrap)&& this.maxPrice<= 50000){
-    this.loadProducts(this.minPrice,this.maxPrice)
+    this.loadProducts(this.minPrice,this.maxPrice,this.color)
     this.renderer.setProperty(this.maxRange?.nativeElement,'value',String(this.maxPrice))
     let rightrate = (this.maxPrice/50000)*100;
     this.renderer.setStyle(this.progresstElement?.nativeElement,'right',100-rightrate+"%")
@@ -219,7 +259,7 @@ openModelopen(prd :any){
 }
 openModelclose(){
   console.log("lolo")
-  $('#poupupImg').modal('hide')
+  $('#productModal').modal('hide')
 }
 
 onAddToCart(idProduct:number,quantity:number){

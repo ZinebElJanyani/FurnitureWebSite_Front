@@ -1,1 +1,192 @@
-<p>order-detail works!</p>
+<app-admin-products></app-admin-products>
+<div id="main">
+    <div class="row" style="margin-top: 4%;">
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen-->
+            <div class="container">
+              <div class="row">
+                <div class="col s12 m6 l6">
+                  <h5 class="breadcrumbs-title mt-0 mb-0"><span>Orders Managment</span></h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                  <ol class="breadcrumbs mb-0">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item"><a routerLink="/admin/orders/list">Orders</a>
+                    </li>
+                    <li class="breadcrumb-item active">Order Detail
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="content-wrapper-before blue-grey lighten-5"></div>
+        <div class="col s12">
+            <div class="container">
+            <!-- app invoice View Page -->
+            <section class="invoice-view-wrapper section">
+            <div class="row">
+                <!-- invoice view page -->
+                <div class="col xl9 m8 s12">
+                <div class="card">
+                    <div class="card-content invoice-print-area">
+                    <!-- header section -->
+                    <div class="row invoice-date-number">
+                        <div class="col xl4 s12">
+                        <span class="invoice-number mr-1">Date Issue:</span>
+                        <span>{{order.date  | date:'dd MMM, yyyy \'at\' h:mma'}}</span>
+                        </div>
+                        <div class="col xl8 s12">
+                        <div class="invoice-date display-flex align-items-center flex-wrap">
+                            
+                            <div>
+                            <small>Date Due:</small>
+                            <span>{{order.deliveryDate  | date:'dd MMM, yyyy \'at\' h:mma'}}</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- logo and title -->
+                    <div class="row mt-3 invoice-logo-title">
+                        <div class="col m6 s12 display-flex invoice-logo mt-1 push-m6">
+                        <img src="assets/images/admin/command_logo.jpg" alt="logo" height="70%" width="164">
+                        </div>
+                        <div class="col m6 s12 pull-m6">
+                        <h4 class="indigo-text">Order</h4>
+                        <span>Number #{{order.ref}}</span>
+                        </div>
+                    </div>
+                    <div class="divider mb-3 mt-3"></div>
+                    <!-- invoice address and contact -->
+                    <div class="row invoice-info">
+                        <div class="col m6 s12">
+                        <h6 class="invoice-from"><i class="bi bi-flower3"></i>Decor</h6>
+                        <div class="invoice-address">
+                            <span>Clevision PVT. LTD.</span>
+                        </div>
+                        <div class="invoice-address">
+                            <span>12 Rue des Roses, Casablanca, Morocco.</span>
+                        </div>
+                        <div class="invoice-address">
+                            <span>admin.clService@gmail.com</span>
+                        </div>
+                        <div class="invoice-address">
+                            <span>601-678-8022</span>
+                        </div>
+                        </div>
+                        <div class="col m6 s12">
+                        <div class="divider show-on-small hide-on-med-and-up mb-3"></div>
+                        <h6 class="invoice-to">Bill To</h6>
+                        <div class="invoice-address">
+                            <span>{{order.name}}</span>
+                        </div>
+                        <div class="invoice-address">
+                            <span>{{order.deliveryAdress.addess}}, {{order.deliveryAdress.city.nom}}, Morocco. </span>
+                        </div>
+                        <div class="invoice-address">
+                            <span>{{order.email}}</span>
+                        </div>
+                        <div class="invoice-address">
+                            <span>{{order.phone}}</span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="divider mb-3 mt-3"></div>
+                    <h6 class="invoice-to" style="color:black">Products</h6>
+                    <!-- product details table-->
+                    <div class="invoice-product-details">
+                        <table class="striped responsive-table">
+                        <thead>
+                            <tr>
+                            <th>Item</th>
+                
+                            <th>In stock</th>
+                            <th>Unit Price</th>
+
+                            <th>Qte</th>
+                            <th class="right-align">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of order.commandItems">
+                            <td>{{item.product.nom}}</td>
+                    
+                            <td *ngIf='item.product.qteStock>0'><span class="badge green lighten-5 green-text text-accent-4">In Stock</span></td>
+                            <td *ngIf='item.product.qteStock==0'><span class="badge pink lighten-5 pink-text text-accent-2">Out Of Stock</span></td>
+
+                            <td>{{item.product.price-item.product.promotion}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td class="indigo-text right-align">{{item.price*item.quantity}} DH</td>
+                            </tr>
+                            
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- invoice subtotal -->
+                    <div class="divider mt-3 mb-3"></div>
+                    <div class="invoice-subtotal">
+                        <div class="row">
+                        <div class="col m5 s12">
+                            <ul>
+                                <li class="display-flex justify-content-between">
+                                    <span class="invoice-subtotal-title">Payment Method</span>
+                                    <h6 class="invoice-subtotal-value">{{order.paymentMethod}} payment</h6>
+                                </li>
+                                <li class="display-flex justify-content-between">
+                                    <span class="invoice-subtotal-title">Order State</span>
+                                    <h6 class="invoice-subtotal-value">{{order.commandState}}</h6>
+                                </li>
+                            </ul>
+                        </div>
+                               
+                        
+                        <div class="col xl4 m7 s12 offset-xl3">
+                            <ul>
+                            <li class="display-flex justify-content-between">
+                                <span class="invoice-subtotal-title">Subtotal</span>
+                                <h6 class="invoice-subtotal-value">{{order.totalPrice-order.deliveryPrice+order.couponDiscount-order.assemblyPrice}} DH</h6>
+                            </li>
+                            <li class="display-flex justify-content-between">
+                                <span class="invoice-subtotal-title">Discount</span>
+                                <h6 class="invoice-subtotal-value">- {{order.couponDiscount}} DH</h6>
+                          
+                          
+                            </li>
+                            <li class="display-flex justify-content-between">
+                                <span class="invoice-subtotal-title">Delivery Price</span>
+                                <h6 class="invoice-subtotal-value" *ngIf="order.deliveryPrice>0">+  DH</h6>
+                                    
+                                <h6 class="invoice-subtotal-value" *ngIf="order.deliveryPrice==0" style="color: rgb(22, 142, 40);"><i class="bi bi-truck"></i> Free Delivery</h6>
+                               
+                            </li>
+                            <li class="display-flex justify-content-between">
+                                <span class="invoice-subtotal-title">Assembly Price</span>
+                                <h6 class="invoice-subtotal-value" *ngIf="order.assemblyPrice>0">+  DH</h6>
+                                    
+                                <h6 class="invoice-subtotal-value" *ngIf="order.assemblyPrice==0" > 00.00 DH</h6>
+                               
+                            </li>
+                            <li class="divider mt-2 mb-2"></li>
+                            <li class="display-flex justify-content-between">
+                                <span class="invoice-subtotal-title">Invoice Total</span>
+                                <h6 class="invoice-subtotal-value">{{order.totalPrice}} DH</h6>
+                            </li>
+                           
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+            </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

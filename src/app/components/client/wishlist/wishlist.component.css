@@ -1397,3 +1397,7 @@ input.cart-plus-minus-box {
     color: #C8A165;
   
   }
+
+  td{
+    text-align: center;
+  }

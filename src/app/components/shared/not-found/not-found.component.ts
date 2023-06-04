@@ -12,9 +12,11 @@ declare var $:any
 })
 export class NotFoundComponent {
 
+  }
+
     
 
-}
+
   
 
 

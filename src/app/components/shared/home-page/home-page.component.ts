@@ -1,6 +1,12 @@
 import { state,animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component,Inject, OnInit, HostListener, Query, QueryList, Renderer2, ElementRef, ViewChild,ViewChildren } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
 import { } from "module";
+import { AuthService } from 'src/app/services/auth.service';
+import { CaddyService } from 'src/app/services/caddy.service';
+import { CategoryService } from 'src/app/services/category.service';
+import { ViewportScroller } from '@angular/common';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -71,11 +77,17 @@ export class HomePageComponent implements OnInit {
   activateCount:boolean=false;
   //video
   isPlay=false;
-  constructor(private renderer: Renderer2) { 
+  collections: any;
+  showModalDialog=false;
+  couponForm: any;
+  applyTransform=false
+  istopen=true
+  constructor(private viewportScroller: ViewportScroller,private router: Router, public authService: AuthService,private cadyService:CaddyService,private renderer: Renderer2,public categoryService:CategoryService) { 
       
   }
 
   ngOnInit(): void {
+    this.getCategories()
     setTimeout(() => {
       this.input_logoParts?.forEach((span,index) => {
         setTimeout(() => {
@@ -200,8 +212,55 @@ showVideo(){
 stopVideo(){
   this.isPlay=false;
 }
+getCategories() {
+   
+  this.categoryService.getRessource("/collections")
+  .subscribe(data => 
+    {this.collections = data;
+      console.log(data)
+    
+    },err=>{
+      console.log(err);
+    })
 }
 
+onAddToCart(idProduct:number,quantity:number){
+  this.cadyService.addItemToCart(idProduct,quantity);
+}
+
+openModal() {
+  
+  this.showModalDialog = true;
+this.initilizeForm() 
+}
+
+closeModal() {
+  this.showModalDialog = false;
+}
+initilizeForm() {
+  this.couponForm=new FormGroup({
+    name:new FormControl(this.authService.userAutenticated.name,Validators.required),
+    email:new FormControl(this.authService.userAutenticated.email,Validators.required)})
+
+  }
+get name(){
+  return this.couponForm.get('name');
+}
+get email(){
+  return this.couponForm.get('email');
+}
+onSubmit(){
+this.istopen = false
+this.closeModal()
+setTimeout(() => {
+  this.istopen=true
+}, 5000);
+}
+scrollToElement(elementId: string): void {
+  this.viewportScroller.scrollToAnchor(elementId);
+}
+
+}
 
 
 

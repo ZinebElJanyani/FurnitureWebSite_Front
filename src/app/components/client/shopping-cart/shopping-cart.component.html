@@ -11,7 +11,7 @@
                         </div>
                         <div class="breadcumbs pb-15">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a routerLink="/">Home</a></li>
                                 <li>Shopping Cart</li>
                             </ul>
                         </div>
@@ -56,9 +56,9 @@
                                                                     <a [routerLink]="['/product-detail',item.product.id]"><img src="{{this.categoryService.host+'/productFirst_P/'+item.product.id}}" alt="" /></a>
                                                                 </div>
                                                                 <div class="product-info">
-                                                                    <h4 class="post-title"><a class="text-light-black" href="#">{{item.product.nom}}</a></h4>
+                                                                    <h4 class="post-title"><a class="text-light-black" href="#">{{item.product.nom | Summary:15}}</a></h4>
                                                                     <p class="mb-0">Color :  {{item.product.color}}</p>
-                                                                    <p class="mb-0">Size :     SL</p>
+                                                            
                                                                 </div>
                                                             </div>
                                                             <!-- Single-product end -->												

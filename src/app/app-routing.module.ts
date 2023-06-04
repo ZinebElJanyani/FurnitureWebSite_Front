@@ -24,14 +24,16 @@ import { OredersListComponent } from './components/admin/oreders-list/oreders-li
 import { RoleGuard } from './role.guard';
 import { AdminProfileComponent } from './components/admin/admin-profile/admin-profile.component';
 import { OutStockComponent } from './components/admin/out-stock/out-stock.component';
+import { OrderDetailComponent } from './components/admin/order-detail/order-detail.component';
+import { AboutComponent } from './components/client/about/about.component';
 
 const routes: Routes = [
   
     {path : '' , component: HomePageComponent},
     /*{path : 'courses/:id' , component: CourseComponent},
     {path : 'courses' , component: CoursesComponent},*/
-    
     {path : 'products/:p1/:p2' , component: ProductsComponent},
+    {path : 'products/:p1/:p2/:p3' , component: ProductsComponent},
     {path : '' , redirectTo:'products/1/0',pathMatch:'full'},
     {path : 'product-detail/:p' , component: ProductDetailComponent},
     {path : 'login' , component: LoginComponent},
@@ -39,6 +41,7 @@ const routes: Routes = [
     {path : 'check-out' , component: CheckOutComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
     {path : 'order-success' , component: OrderSuccessComponent},
     {path : 'wishlist' , component: WishlistComponent},
+    {path : 'about' , component: AboutComponent},
 
     {path : 'orders' , component: OrdersComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
     {path : 'profile' , component: ProfileComponent, canActivate: [RoleGuard], data: { expectedRole: 'customer' }},
@@ -48,7 +51,8 @@ const routes: Routes = [
     {path : 'admin/orders/list' , component: OredersListComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'admin/outStock' , component: OutStockComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'admin/products/:id' , component: ProductManagmentComponent,canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
-   
+    {path : 'admin/orderDetail/:id' , component: OrderDetailComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
+
     {path : 'admin/profile' , component: AdminProfileComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'charts' , component: ChartsComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},
     {path : 'admin/categories' , component: CategoryManagmentComponent, canActivate: [RoleGuard], data: { expectedRole: 'admin' }},

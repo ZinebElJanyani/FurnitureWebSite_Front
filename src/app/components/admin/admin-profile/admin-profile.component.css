@@ -97,3 +97,7 @@ img.responsive-img{
     height: 0;
 }
 
+a{
+    text-decoration: none;
+  }
+  

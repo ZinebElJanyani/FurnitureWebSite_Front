@@ -1,0 +1,16 @@
+#breadcrumbs-wrapper{
+    background: url(~src/assets/images/admin/breadcrumb-bg.jpg)  no-repeat scroll center center / cover;
+    
+}
+h5{
+    color: #f4f5f7;
+}
+
+ol li a{
+    color:rgba(255,255,255,.8);
+    font-size: large;
+}
+#breadcrumbs-wrapper .breadcrumbs .active{
+    color:rgba(255,255,255,.9);
+    font-size: large;
+}

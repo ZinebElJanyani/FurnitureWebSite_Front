@@ -218,6 +218,7 @@ input[type="text"], input[type="password"] {
   transition: all 0.5s ease 0s;
   width: 100%;
   outline: none;
+  box-sizing: border-box;
 }
 @media (max-width: 767px){
 .customer-login {
@@ -1446,4 +1447,7 @@ input.cart-plus-minus-box {
   visibility: visible;
   bottom:140px;
   opacity: 1;
+}
+.shop-cart-table tr td{
+  text-align: center;
 }

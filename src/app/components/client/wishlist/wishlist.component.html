@@ -12,7 +12,7 @@
                         <div class="breadcumbs pb-15">
                             <ul>
                                 
-                                <li><a href="index.html">Home</a></li>
+                                <li><a routerLink="/">Home</a></li>
                                 <li>Wishlist</li>
                             </ul>
                         </div>
@@ -57,10 +57,9 @@
                                                                     <a href="single-product.html"><img style="height: 100px;" src="{{this.categoryService.host+'/productFirst_P/'+product.id}}" alt="" /></a>
                                                                 </div>
                                                                 <div class="product-info">
-                                                                    <h4 class="post-title"><a class="text-light-black" href="#">{{product.nom}}</a></h4>
+                                                                    <h4 class="post-title"><a class="text-light-black" href="#">{{product.nom | Summary:15  }}</a></h4>
                                                                     <p class="mb-0">Color :  {{product.color}}</p>
                                                                  
-                                                                    <p class="mb-0">Size :     SL</p>
                                                                 </div>
                                                             </div>
                                                             <!-- Single-product end -->				

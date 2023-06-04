@@ -1,3 +1,4 @@
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ZippyComponent } from './../components/shared/zippy/zippy.component';
 import { HttpClient } from '@angular/common/http';
 import { CarouselComponent } from './../components/shared/carousel/carousel.component';
@@ -35,7 +36,10 @@ import { SummaryPipe } from '../pipes/summary.pipe';
 import { AdminProfileComponent } from '../components/admin/admin-profile/admin-profile.component';
 import { DurationPipe } from '../components/admin/admin-products/duration.pipe';
 import { OutStockComponent } from '../components/admin/out-stock/out-stock.component';
-
+import { OrderDetailComponent } from '../components/admin/order-detail/order-detail.component';
+import { AboutComponent } from '../components/client/about/about.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { RouterModule, Routes } from '@angular/router';
 const components=[
   NavbarComponent,
   HomePageComponent,
@@ -65,9 +69,14 @@ const components=[
     SummaryPipe,
     AdminProfileComponent,
     DurationPipe,
-    OutStockComponent
+    OutStockComponent,
+    OrderDetailComponent,
+    AboutComponent,
+   
 ]
-
+const routes: Routes = [
+  // Define your routes here
+];
 @NgModule({
   declarations: [components],
   imports: [
@@ -79,6 +88,10 @@ const components=[
     HttpClientModule,
     FormsModule,
     DataTablesModule,
+    NgxPaginationModule,
+    ScrollingModule,
+    RouterModule.forRoot( routes,{ scrollPositionRestoration: 'enabled' })
+
   ],
 
   exports:[

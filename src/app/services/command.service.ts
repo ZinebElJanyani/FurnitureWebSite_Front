@@ -105,6 +105,7 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
       });
         return this.http.get("http://localhost:8084/api/command/getInvoice/"+commandId,{headers,responseType: 'blob'})
     }
+    
     public getRessource(url : String){
       const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
       const headers = new HttpHeaders({

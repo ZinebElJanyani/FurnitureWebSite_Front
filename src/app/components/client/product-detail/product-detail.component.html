@@ -18,7 +18,8 @@
                         </div>
                         <div class="breadcumbs pb-15">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a routerLink="/">Home</a></li>
+                                <li><a [routerLink]="['/products', 1, 0]">products</a></li>
                                 <li>Single Product</li>
                             </ul>
                         </div>
@@ -46,14 +47,26 @@
                             <div class="fix">
                                 <h4 class="post-title floatleft">{{product.nom}}</h4>
                                 <span class="pro-rating floatright">
-                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                    <span>( 27 Rating )</span>
+                                  <ng-container *ngIf="product.stars; else noRating">
+                                    <ng-container *ngFor="let star of fullStarsArray(product.stars)">
+                                      <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                    </ng-container>
+                                    
+                                    <ng-container *ngIf="hasHalfStar(product.stars)">
+                                      <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                    </ng-container>
+                                    <ng-container *ngFor="let star of hasEmptyStar(product.stars)">
+                                        <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                    </ng-container>
+
+                                  
+                                  </ng-container>
+                                  <ng-template #noRating >
+                                    <p style="color: #c87065;">No rating yet</p>
+                                  </ng-template>
                                 </span>
                             </div>
+                            
                             <div class="fix mb-20">
                                 <span class="pro-price">{{product.price - product.promotion|number:'0.00'}} DH</span>
                                 <span *ngIf="product.promotion" class="old-price">{{product.price}} DH</span>
@@ -72,7 +85,7 @@
                             </div>
                             <!-- color end -->
                             <!-- Size start -->
-                            <div class="size-filter single-pro-size mb-35 clearfix">
+                           <!-- <div class="size-filter single-pro-size mb-35 clearfix">
                                 <ul>
                                     <li><span class="color-title text-capitalize">size</span></li>
                                     <li><a href="#">M</a></li>
@@ -81,7 +94,7 @@
                                     <li><a href="#">SL</a></li>
                                     <li><a href="#">XL</a></li>
                                 </ul>
-                            </div>
+                            </div>-->
                             <!-- Size end -->
                             <div class="clearfix">
                                 <div class="cart-plus-minus">
@@ -128,7 +141,7 @@
                         <div class="tab-content">
                             <div class="tab-pane" id="description" [class.active]="isDescActive">
                                 <div class="pro-tab-info pro-description">
-                                    <h3 class="tab-title title-border mb-30">dummy Product name</h3>
+                                    <h3 class="tab-title title-border mb-30">{{product.nom}}</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at est bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>

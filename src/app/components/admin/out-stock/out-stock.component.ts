@@ -17,6 +17,7 @@ export class OutStockComponent implements OnInit {
   
   ngOnInit(): void {
     this.getProducts()
+    this.displayProducts()
   }
 
   initilizeForm() {

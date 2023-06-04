@@ -37,6 +37,7 @@
     </div>
     
 </section>
+
 <div class="Block Block--ThreeColumnCopyIconRow">
 <div data-react="ThreeColumnCopyIconRow" data-react-props-namespace="vm">
     <div class="ThreeColumnCopyIconRow  ThreeColumnCopyIconRow--Light">
@@ -46,17 +47,17 @@
 <div class="ThreeColumnCopyIconRow__Row container">
         
             <div class="ThreeColumnCopyIconRow__Col  ThreeColumnCopyIconRow__Col--Light">
-                <a class="ThreeColumnCopyIconRow__Link u-reset-a" href="https://www.raymourflanigan.com/locations" title="Visit a Showroom">
+                <a class="ThreeColumnCopyIconRow__Link u-reset-a" [routerLink]="['/products', 1, 0]" title="Visit a Showroom">
                     <span class="ThreeColumnCopyIconRow__Text"><i class="bi bi-truck fa-4x"></i> Free delivery over 3000 DH <i class="bi bi-chevron-compact-right"></i></span>
                 </a>
             </div>
             <div class="ThreeColumnCopyIconRow__Col  ThreeColumnCopyIconRow__Col--Light">
-                <a class="ThreeColumnCopyIconRow__Link u-reset-a" href="/mattresses?utm_content=RTB_block" title="Free Mattress Delivery†">
+                <a class="ThreeColumnCopyIconRow__Link u-reset-a" [routerLink]="['/products', 1, 0]" title="Free Mattress Delivery†">
                     <span class="ThreeColumnCopyIconRow__Text"><i class="bi bi-wrench-adjustable-circle"></i> Free Bed Assembly <i class="bi bi-chevron-compact-right"></i></span>
                 </a>
             </div>
             <div class="ThreeColumnCopyIconRow__Col  ThreeColumnCopyIconRow__Col--Light">
-                <a class="ThreeColumnCopyIconRow__Link u-reset-a" href="/about-us/pay-your-way?utm_content=RTB_block" title="Extended Financing Available ">
+                <a class="ThreeColumnCopyIconRow__Link u-reset-a" [routerLink]="['/products', 1, 0]" title="Extended Financing Available ">
 
                 <span class="ThreeColumnCopyIconRow__Text"><i class="bi bi-credit-card-fill"></i> Extended Financing Available <i class="bi bi-chevron-compact-right"></i> </span>
             </a>
@@ -69,9 +70,30 @@
     </div>
 </div>
 </div>
+<div class="breadcumbs pb-15">
+  <ul>
+    <li><a  (click)="scrollToElement('bigSale')">Big Sale</a></li>
+    <li>-</li>
+    <li><a  (click)="scrollToElement('shopByCat')">Shop By Category</a></li>
+    <li>-</li>
+    <li><a  (click)="scrollToElement('shopByCollection')">Shop By Collection</a></li>
+    <li>-</li>
+    <li><a  (click)="scrollToElement('whyChooseUs')">Why Choose Us</a></li>
+    <li>-</li>
+    <li><a  (click)="scrollToElement('ourStyle')">Our Style</a></li>
+    <li>-</li>
+    <li><a  (click)="scrollToElement('decorGiftCard')">Decor Gift Card</a></li>
+  </ul>
+</div>
+<div class="container bigtitle">
+  <p>Welcome to Decor, your ultimate destination for exquisite furniture and captivating home decor. </p>
+  </div>
 <section class="section featured">
     <div class="title">
-      <h2><span>/</span> Big Sale!</h2>
+      <h2 id="bigSale"><span>/</span> Big Sale!</h2>
+    </div>
+    <div class="container description">
+      <p>Discover incredible offers on furniture pieces, accessories, and more, carefully selected to bring style and sophistication to every room. From limited-time discounts to special bundle packages, our promotions cater to various tastes and design preferences. Whether you're looking to revamp your living room, upgrade your bedroom, or add a touch of elegance to your dining area, Decor has the perfect deal waiting for you.</p>
     </div>
     <div class="featured-center section-center">
         <app-carousel [images]="Images" ></app-carousel>
@@ -172,113 +194,33 @@
     </div>
 </section>-->
 
-    <section class="container_card">
+    <section class="container_card" >
     <div class="title">
-      <h2><span>/</span> Shop by category</h2>
+      <h2 id="shopByCat"><span>/</span> Shop by category</h2>
     </div>
+    <div class="container description">
+      <p>Explore our wide range of categories, each carefully curated to cater to different design preferences and functional needs. </p>
+    </div>
+    
     <div class="centered flex-box">
-        <figure class="snip1401 card">
-            <h2 class="category_title">Bedroom</h2>
-            <img src="https://www.livingspaces.com/globalassets/images/inspiration/rooms/bedroom/220811-magnolia-homes-shoot3829-1_bedroom.jpg?w=580&h=440&mode=pad" alt="sample67" />
+        <figure class="snip1401 card" *ngFor="let c of collections">
+            <h2 class="category_title">{{c.title}}</h2>
+            <img [src]="c.imageC" alt="sample67" />
             <figcaption>
            
             <ul>
-                <li> <a [routerLink]="['/lkh']" class="item">Beds</a></li>
-                <li> <a [routerLink]="['/lkh']" class="item">Mattresses</a></li>
-                <li> <a [routerLink]="['/lkh']" class="item">Dressers</a></li>
-                <li> <a [routerLink]="['/lkh']" class="item">Vanities</a></li>
-                <li> <a [routerLink]="['/lkh']" class="item">Bedding</a></li>
-                <li> <a [routerLink]="['/lkh']" class="item">Armoires+Wadrobes</a></li>
-               
+                <li *ngFor="let catg of c.categories"> <a [routerLink]="['/products', 2, catg.id]" class="item">{{catg.title}}</a></li>
             </ul>
             
             </figcaption><i class="ion-ios-home-outline"></i>
-            <a href="#"></a>
+            <a routerLink="/"></a>
         </figure>
         
-            <figure class="snip1401 card">
-                <h2 class="category_title">Office</h2>  
-            <img src="https://www.livingspaces.com/globalassets/images/inspiration/rooms/office/210225-home-office1214-1_1a.jpg?w=580&h=440&mode=pad" alt="sample87" />
-            <figcaption>
-                <ul>
-                    <li> <a [routerLink]="['/lkh']" class="item">Office Chairs</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Office Desks</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Office Sets</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Desk lamps</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Gaming Chairs</a></li>
-                 </ul>
-            </figcaption><i class="ion-ios-home-outline"></i>
-            <a href="#"></a>
-            </figure>
-       
-    
-            <figure class="snip1401 card">
-                <h2 class="category_title">Dining Room</h2>
-                <img src="https://themewagon.github.io/treviso/images/demo/portfolio-1.jpg" alt="sample87" />
-                <figcaption>
-                    <ul>
-                        <li> <a [routerLink]="['/lkh']" class="item">Dining Tables</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Dining Chairs</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Sideboards+buffets</a></li>
-                     
-                     </ul>
-                </figcaption><i class="ion-ios-home-outline"></i>
-                <a href="#"></a>
-            </figure>
-            <figure class="snip1401 card">
-                <h2 class="category_title">Kids Room</h2>
-                <img src="https://www.livingspaces.com/globalassets/images/inspiration/rooms/kids/210701-lifestyle2429-1.jpg?w=580&h=440&mode=pad" alt="sample67" />
-                <figcaption>
-                    <ul>
-                        <li> <a [routerLink]="['/lkh']" class="item">Chests</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Kids bed</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Kids Dressers+chests</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Kids Dicor</a></li>
-                        
-                        
-                     </ul>
-                </figcaption><i class="ion-ios-home-outline"></i>
-                <a href="#"></a>
-            </figure>
-        
-            <figure class="snip1401 card">
-                <h2 class="category_title">Patio & Backyard</h2>
-            <img src="https://themewagon.github.io/treviso/images/demo/portfolio-5.jpg" alt="sample67" />
-            <figcaption>
-                <ul>
-                    <li> <a [routerLink]="['/lkh']" class="item">Sets</a></li>
-                    <li> <a [routerLink]="['/lkh']" class="item">Sofas</a></li>
-                    <li> <a [routerLink]="['/lkh']" class="item">outdoor tables</a></li>
-                    <li> <a [routerLink]="['/lkh']" class="item">Outdoor Decor</a></li>
-                    
-                 </ul>
-            </figcaption><i class="ion-ios-home-outline"></i>
-            <a href="#"></a>
-            </figure>
-            
-            <figure class="snip1401 card">
-                <h2 class="category_title">Living Room</h2>
-                <img src="https://www.livingspaces.com/globalassets/images/inspiration/rooms/family/221206-sectional-catalog-2.07276_familyroom.jpg?w=580&h=440&mode=pad" alt="sample87" />
-                <figcaption>
-                    <ul>
-                        <li> <a [routerLink]="['/lkh']" class="item">Sofas</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Rugs</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Daybeds</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Tables</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">TV Stands</a></li>
-                        <li> <a [routerLink]="['/lkh']" class="item">Bookcases</a></li>
-                        
-                        
-                        
-                     </ul>
-                </figcaption><i class="ion-ios-home-outline"></i>
-                <a href="#"></a>
-            </figure>
     </div>
 
     <section>
         <div class="title">
-          <h2><span>/</span> Shop by collection</h2>
+          <h2 id="shopByCollection"><span>/</span> Shop by collection</h2>
         </div>
         
         <div class="image-cover">
@@ -304,7 +246,10 @@
                                 <p>
                                     take our furniture with perfect quality and price.
                                 </p>
-                                <div class="quick-look__actions"><button type="button" id="284080-guicklook-add-to-cart" data-dismiss="modal" class="btn secondary-button add-to-cart-btn" tabindex="0">Add to Cart</button> <a class="btn detail" data-uw-rm-kbnav="anohref" href="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080" data-uw-rm-brl="false" aria-label="Add to Cart More Details" uw-rm-vague-link-id="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080$more details" data-uw-rm-vglnk="" tabindex="0">More Details</a></div>
+                                <div class="quick-look__actions">
+                                    <button type="button" (click)="onAddToCart(103,1)" id="284080-guicklook-add-to-cart" data-dismiss="modal" class="btn secondary-button add-to-cart-btn" tabindex="0">Add to Cart</button>
+                                     <a class="btn detail" data-uw-rm-kbnav="anohref" [routerLink]="['/product-detail',103]"  data-uw-rm-brl="false" aria-label="Add to Cart More Details" uw-rm-vague-link-id="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080$more details" data-uw-rm-vglnk="" tabindex="0">More Details</a>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -322,7 +267,9 @@
                                   <p>
                                       take our furniture with perfect quality and price.
                                   </p>
-                                  <div class="quick-look__actions"><button type="button" id="284080-guicklook-add-to-cart" data-dismiss="modal" class="btn secondary-button add-to-cart-btn" tabindex="0">Add to Cart</button> <a class="btn detail" data-uw-rm-kbnav="anohref" href="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080" data-uw-rm-brl="false" aria-label="Add to Cart More Details" uw-rm-vague-link-id="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080$more details" data-uw-rm-vglnk="" tabindex="0">More Details</a></div>
+                                  <div class="quick-look__actions">
+                                    <button type="button" (click)="onAddToCart(102,1)" id="284080-guicklook-add-to-cart" data-dismiss="modal" class="btn secondary-button add-to-cart-btn" tabindex="0">Add to Cart</button>
+                                     <a class="btn detail" data-uw-rm-kbnav="anohref" [routerLink]="['/product-detail',102]" data-uw-rm-brl="false" aria-label="Add to Cart More Details" uw-rm-vague-link-id="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080$more details" data-uw-rm-vglnk="" tabindex="0">More Details</a></div>
                               </div>
                           </div>
                       </div>
@@ -341,7 +288,9 @@
                                   <p>
                                       take our furniture with perfect quality and price.
                                   </p>
-                                  <div class="quick-look__actions"><button type="button" id="284080-guicklook-add-to-cart" data-dismiss="modal" class="btn secondary-button add-to-cart-btn" tabindex="0">Add to Cart</button> <a class="btn detail" data-uw-rm-kbnav="anohref" href="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080" data-uw-rm-brl="false" aria-label="Add to Cart More Details" uw-rm-vague-link-id="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080$more details" data-uw-rm-vglnk="" tabindex="0">More Details</a></div>
+                                  <div class="quick-look__actions">
+                                    <button type="button" (click)="onAddToCart(101,1)" id="284080-guicklook-add-to-cart" data-dismiss="modal" class="btn secondary-button add-to-cart-btn" tabindex="0">Add to Cart</button> 
+                                    <a class="btn detail" data-uw-rm-kbnav="anohref" [routerLink]="['/product-detail',101]" data-uw-rm-brl="false" aria-label="Add to Cart More Details" uw-rm-vague-link-id="https://www.livingspaces.com/pdp-emery-chiffon-84-inch-sofa-with-reversible-chaise-284080$more details" data-uw-rm-vglnk="" tabindex="0">More Details</a></div>
                               </div>
                           </div>
                       </div>
@@ -359,7 +308,10 @@
 
     <section class="ftco-section ftco-counter ftco-no-pt ftco-no-pb img" id="section-counter">
         <div class="title">
-            <h2><span>/</span> Why choose us</h2>
+            <h2 id="whyChooseUs"><span>/</span> Why choose us</h2>
+          </div>
+          <div class="container description">
+            <p>At Decor, we believe that choosing us as your go-to furniture and home decor store comes with numerous achievement </p>
           </div>
         <div class="container">
           <div class="row d-md-flex align-items-center justify-content-end">
@@ -416,8 +368,14 @@
           </div>
         </div>
         </section>
-        
+        <div class="title">
+          <h2 id="ourStyle"><span>/</span> Our Style</h2>
+        </div>
+        <div class="container description">
+          <p>In Decor, We believe that your living space should reflect your unique style and personality. With an extensive range of high-quality products, we offer an array of design options to transform your home into a haven of comfort and elegance.</p>
+        </div>
         <div class="bg-show">
+          
             <div class="container" *ngIf="isPlay">
                 <div (click)="stopVideo()"><img id="stop" src="assets/images/home_img/x.png" alt="" class="cancel"></div>
                 <iframe class="video"  src="assets/video.mp4" frameborder="0" allowfullscreen></iframe>
@@ -429,11 +387,14 @@
         
         </div>
         <section class="container_last">
+          <div class="title">
+            <h2 id="decorGiftCard"><span>/</span> Decor Gift Card</h2>
+          </div>
             <div class="aspect-ratio-box aspect-ratio-1140x400">
                 <div class="ls-hero-slide">
                     <div class="flex-component">
                         <div class="flex-component__box">
-                            <a href="/inspiration/lifestyle/small-space-living" data-uw-rm-brl="false">
+                            <a [routerLink]="['/products', 1, 0]" data-uw-rm-brl="false">
                                 <img src="https://www.livingspaces.com/globalassets/images/home/2020/08/0807_small_spaces_text.png" alt="small space = happy place" class="img-responsive" loading="lazy" width="480" height="400" data-uw-rm-ima-original="small space = happy place">
                             </a>
                             <p class="sr-only">Limited square feet does not have to limit the possibilites when it comes to
@@ -441,7 +402,7 @@
                                 Learn more.</p>
                         </div>
                         <div class="flex-component__box">
-                            <a href="/inspiration/lifestyle/small-space-living" data-uw-rm-brl="false">
+                            <a [routerLink]="['/products', 1, 0]" data-uw-rm-brl="false">
                                 <img src="https://www.livingspaces.com/globalassets/images/home/2020/08/0810_smallspaces_video.gif" alt="Small work zone, lounge zone, dining zone and sleep zone." class="img-responsive" loading="lazy" width="660" height="400" data-uw-rm-ima-original="small work zone, lounge zone, dining zone and sleep zone.">
                             </a>
                         </div>
@@ -452,156 +413,103 @@
         <div class="contest-component text-center">
         <div class="container">
             <div class="title" data-uw-rm-sr="">Subscribe to our emails for a chance to <span data-uw-rm-sr="">WIN a 5000DH</span> Discount.</div>
-            <a href="#" onclick="return false;" data-toggle="modal" data-target="#subscriptionContestModal" data-uw-rm-brl="false" data-uw-rm-kbnav="click" aria-label="www.livingspaces.com" data-uw-rm-empty-ctrl=""><input type="button" class="btn primary-button" value="Sign Up"></a>
+            <a   data-toggle="modal"  data-uw-rm-brl="false" data-uw-rm-kbnav="click" >
+                <button class="btn primary-button" (click)="openModal()">Sign Up</button> </a>
         </div>
-          
 
+         <!-- <div class="modal fade contest-modal in" id="subscriptionContestModal" tabindex="-1" role="dialog" aria-labelledby="subscriptionContestModal" style="display: block;" data-uw-cer-popup-wrapper="" wz_dt_ref="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content contest-modal__content" style="background-image: url('/globalassets/images/email/footer/20200224_contest_bg.jpg')">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div class="modal-body text-center">
+                <div id="email-subscribe-container" class="contest-modal__signup">
+                    <div class="contest-modal__header">
+                        <h2>Sign up for a chance to</h2> 
+                        <h3>Win a $500<br> Living Spaces Gift Card</h3> 
+                        <p>Receive updates on the latest deals, designs and trends</p>
+                    </div> 
+                    <div class="contest-modal__form">
+                        <form id="email-subscribe-form" novalidate="novalidate">
+                            <div class="form-group">
+                                <div class="">
+                                    <input name="FirstName" data-val="true" data-val-required="The First Name is required" id="FirstName" type="text" value="" class="form-control material-input input-lg text-box single-line"> 
+                                    <label for="FirstName"><span>First Name</span></label> <span data-valmsg-for="FirstName" data-valmsg-replace="true" class="field-validation-valid error"></span></div></div> <div class="form-group"><div class=""><input name="LastName" data-val="true" data-val-required="The Last Name is required" id="LastName" type="text" value="" class="form-control material-input input-lg text-box single-line"> <label for="LastName"><span>Last Name</span></label> <span data-valmsg-for="LastName" data-valmsg-replace="true" class="field-validation-valid error"></span></div></div> <div class="form-group form-group--full"><div class=""><input name="Email" data-val="true" data-val-regex="Email is not valid" data-val-regex-pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" data-val-required="The email address is required" id="Email" type="email" value="" class="form-control material-input input-lg text-box single-line"> <label for="Email"><span>Email</span></label> <span data-valmsg-for="Email" data-valmsg-replace="true" class="field-validation-valid error"></span></div></div> <div class="form-group form-group--big"><div class=""><input name="ZipCode" data-val="true" data-val-maxlength="The zipcode must max 5 characters" data-val-maxlength-max="5" data-val-required="The zipcode address is required" id="ZipCode" type="tel" value="" class="form-control material-input input-lg text-box single-line"> <label for="ZipCode"><span>Zip Code</span></label> <span data-valmsg-for="ZipCode" data-valmsg-replace="true" class="field-validation-valid error"></span></div></div> <div class="form-group form-group--small"><button id="btnEmailSignUp" type="submit" class="btn primary-button"><span>Sign Up</span><i aria-hidden="true" class="fa fa-spinner fa-spin"></i></button></div></form></div></div>
+            </div>
+            <div class="unsubscribe-message__modal">*Unsubscribe anytime. Winners drawn monthly.</div>
+            <div class="modal-footer contest-modal__footer">
+                <p>See our&nbsp;<a href="/company/privacy-policy" target="_blank">Privacy Policy&nbsp;</a>&nbsp;and <a href="/company/email-sign-up/monthly-giveaway-official-rules" title="Official Rules" target="_blank">Official Rules</a>&nbsp;for full details</p>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="modal" tabindex="-1" role="dialog" *ngIf="showModalDialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Sign up for a chance to</h5> 
+     
+
+          <button type="button" class="close btn" data-dismiss="modal" aria-label="Close" (click)="closeModal() ">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h6>Win a $500<br> Decor Gift Card</h6> 
+            <p>Receive updates on the latest deals, designs and trends</p>
+            <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
+                <div class="input-field col m6 s12">
+                    <label for="name" [ngClass]="{'apply-transform': applyTransform||name}">Name</label>
+                    <input  (click)="applyTransform = true" formControlName="name" class="validate" required="" id="name" type="text" >
+             
+                </div>
+                <div class="input-field col m6 s12">
+                    <label for="email" [ngClass]="{'apply-transform': applyTransform|| email}" >Email</label>
+                    <input formControlName="email" class="validate" required="" id="email" type="text" (click)="applyTransform = true">
+             
+                </div>
+                
+                <div class="modal-footer">
+                  <button [disabled]="couponForm.invalid" type="submit" class="btn btn-warning" >OK</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+                </div>
+                </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal vh-10 d-flex justify-content-center align-items-center " [class.thank]="istopen">
+    <div class="col-md-4">
+        <div class="card c1 bg-white shadow p-5">
+            <div class="mb-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="75" height="75"
+                    fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                </svg>
+            </div>
+            <div class="text-center">
+                <h1>Thank You !</h1>
+                <p>Congratulations on subscribing to our emails! By signing up, you have entered yourself for a chance to WIN a fantastic 5000DH discount.</p>
+                <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
 <app-footer></app-footer>
 
 
-<!--
-<section class="home_slide_section">
-
-    <div class="slideshow slider__reveal">
-        <div class="slide one">
-            <div class="slide__img-wrap">
-                <div class="slide__img"  id="img1"></div>
-                <div class="slide__img-reveal"></div>
-            </div>
-            <div class="slide__title slider__text">
-                <div class="slider_text_left">
-                   <p>snksnlqskn</p>
-                    <h2>osita app</h2>
-                    <p>Sed do eiusmod tempor <br> incididunt ut labore et dolore <br> magna aliqua.
-                    </p>
-                    <a href="single-portfolio.html">see <br> project</a>
-                </div>
-                <div class="slider_text_right">
-                    <span class="slider_rotate_text">branding design</span>
-                </div>
-            </div>
-            <span class="slide__number">01 <span class="number_one one">05</span></span>
-            <div class="slider_shap_img shape shape-1 scene">
-                <span data-depth="0.5"><img src="../../../assets/img/slider/shap-dots.png" alt="" ></span>
-            </div>
-            <div class="slider_shap_img2 shape shape-1 scene">
-                <span data-depth="1.7"><img src="assets/img/slider/slider-shap.png" alt=""></span>
-            </div>
-        </div>
-        <div class="slide two">
-            <div class="slide__img-wrap">
-                <div class="slide__img" id ="img2"></div>
-                <div class="slide__img-reveal"></div>
-
-            </div>
-            <div class="slide__title slider__text slider__text2">
-                <div class="slider_text_left">
-                    <h2>curology</h2>
-                    <p>Sed do eiusmod tempor <br> incididunt ut labore et dolore <br> magna aliqua.
-                    </p>
-                    <a href="single-portfolio.html">see <br> project</a>
-                </div>
-                <div class="slider_text_right two">
-                    <span class="slider_rotate_text">branding design</span>
-                </div>
-            </div>
-            <span class="slide__number">02 <span class="number_one two">05</span></span>
-            <div class="slider_shap_img shape shape-1 scene">
-                <span data-depth="0.5"><img src="assets/img/slider/shap-dots2.png" alt=""></span>
-            </div>
-            <div class="slider_shap_img2 shape shape-1 scene">
-                <span data-depth="1.7"><img src="assets/img/slider/slider-shap2.png" alt=""></span>
-            </div>
-
-        </div>
-        <div class="slide three slide_style_left">
-            <div class="slide__img-wrap">
-                <div class="slide__img" id="img3"></div>
-                <div class="slide__img-reveal"></div>
-
-            </div>
-            <div class="slide__title slider__text slider__text3">
-                <div class="slider_text_right three">
-                    <span class="slider_rotate_text">branding design</span>
-                </div>
-                <div class="slider_text_left text-left">
-                    <h2>greo store</h2>
-                    <p>Sed do eiusmod tempor <br> incididunt ut labore et dolore <br> magna aliqua.
-                    </p>
-                    <a href="single-portfolio.html">see <br> project</a>
-                </div>
-            </div>
-            <span class="slide__number">03 <span class="number_one three">05</span></span>
-            <div class="slider_shap_img shape shape-1 scene">
-                <span data-depth="0.5"><img [src]="//assets/img/slider/shap-dots3.png" alt=""></span>
-            </div>
-            <div class="slider_shap_img2 shape shape-1 scene">
-                <span data-depth="1.7"><img src="http://localhost:4200/assets/img/slider/shap-dots3.png" alt=""></span>
-            </div>
-        </div>
-        <div class="slide four slide_style_left">
-            <div class="slide__img-wrap">
-                <div class="slide__img" id="img4"></div>
-                <div class="slide__img-reveal"></div>
-
-            </div>
-            <div class="slide__title slider__text slider__text3">
-                <div class="slider_text_right three">
-                    <span class="slider_rotate_text">branding design</span>
-                </div>
-                <div class="slider_text_left text-left">
-                    <h2>club toucan</h2>
-                    <p>Sed do eiusmod tempor <br> incididunt ut labore et dolore <br> magna aliqua.
-                    </p>
-                    <a href="single-portfolio.html">see <br> project</a>
-                </div>
-
-            </div>
-            <span class="slide__number">04 <span class="number_one four">05</span></span>
-            <div class="slider_shap_img shape shape-1 scene">
-                <span data-depth="0.5"><img src="assets/img/slider/shap-dots4.png" alt=""></span>
-            </div>
-            <div class="slider_shap_img2 shape shape-1 scene">
-                <span data-depth="1.7"><img src="assets/img/slider/slider-shap4.png" alt=""></span>
-            </div>
-        </div>
-        <div class="slide five slide_style_left">
-            <div class="slide__img-wrap">
-                <div class="slide__img" style="background-image: url(assets/img/slider/slide5.png);"></div>
-                <div class="slide__img-reveal"></div>
-
-            </div>
-            <div class="slide__title slider__text slider__text3">
-                <div class="slider_text_right three">
-                    <span class="slider_rotate_text">branding design</span>
-                </div>
-                <div class="slider_text_left text-left">
-                    <h2>QH coffee</h2>
-                    <p>Sed do eiusmod tempor <br> incididunt ut labore et dolore <br> magna aliqua.
-                    </p>
-                    <a href="single-portfolio.html">see <br> project</a>
-                </div>
-
-            </div>
-            <span class="slide__number">05 <span class="number_one five">05</span></span>
-            <div class="slider_shap_img shape shape-1 scene">
-                <span data-depth="0.5"><img src="assets/img/slider/shap-dots5.png" alt=""></span>
-            </div>
-            <div class="slider_shap_img2 shape shape-1 scene">
-                <span data-depth="1.7"><img src="assets/img/slider/slider-shap5.png" alt=""></span>
-            </div>
-        </div>
-        <nav class="slidenav">
-            <button class="slidenav__item prev"><i class="ion-ios-arrow-left"></i></button>
-            <button class="slidenav__item next"><i class="ion-ios-arrow-right"></i></button>
-            <button class="slidenav__preview">
-                <i class="ion-chevron-down"></i>
-            </button>
-        </nav>
-    </div>
-</section>-->
-
-
-           
 
 

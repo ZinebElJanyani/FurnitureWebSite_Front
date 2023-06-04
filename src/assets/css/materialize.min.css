@@ -28,3 +28,7 @@ input[type=search]:not(.browser-default){
     height: unset;
     margin: unset;
 }
+a{
+    text-decoration: none !important;
+  }
+  

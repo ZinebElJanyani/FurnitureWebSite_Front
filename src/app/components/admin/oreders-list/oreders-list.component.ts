@@ -1,6 +1,7 @@
 import { state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommandService } from 'src/app/services/command.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class OredersListComponent implements OnInit{
   orderForm:any
   orderId=0;
 
-  constructor(private commandService:CommandService){
+  constructor(private commandService:CommandService,private router:Router){
    
   }
   
@@ -79,6 +80,10 @@ get state(){
   
   closeConfirmationDialog() {
     this.showConfirmationDialog = false;
+  }
+
+  onOrderDetail(orderID:number){
+    this.router.navigate(['/admin/orderDetail',orderID])
   }
 
 }

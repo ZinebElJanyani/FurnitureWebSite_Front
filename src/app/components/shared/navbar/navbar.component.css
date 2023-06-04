@@ -55,8 +55,8 @@ a:not([href]):not([tabindex]){
 }
 .cart-item-count {
   position: absolute;
-  top: -0.85rem;
-  right: -0.85rem;
+  top: -0.9rem;
+  right: 5rem;
   background: var(--clr-primary-5);
   width: 1.75rem;
   height: 1.75rem;
@@ -204,3 +204,15 @@ Sidebar
 nav [class*=mdi-], nav [class^=mdi-], nav i {
   all: unset;
 }
+
+@media only screen and (min-width: 601px)
+{nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+    line-height: normal;
+    
+}}
+
+nav{
+  line-height: normal;
+  box-shadow: unset;
+}
+

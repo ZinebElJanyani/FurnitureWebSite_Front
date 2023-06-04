@@ -19,6 +19,7 @@ export class ProductManagmentComponent implements OnInit{
   productForm:any
   categories:any
   isShow=false
+  nvigateTO=false
   colors= [ "Ivory",
     "Orange",
     "White",
@@ -128,14 +129,16 @@ export class ProductManagmentComponent implements OnInit{
           this.categoryService.uploadProductImg(this.deleted_images,this.productImgs,idProduct).subscribe(data=>{
             })
             this.isShow=false
-            this.router.navigate(['/admin/products',0])
             this.productForm.reset()
+            if(!this.nvigateTO){
+            this.router.navigate(['/admin/products',0])
            
-           /* const elements = this.el.nativeElement.querySelectorAll('li.list');
+           
+            const elements = this.el.nativeElement.querySelectorAll('li.list');
               for (let i = 0; i < elements.length; i++) {
                 this.renderer.removeChild(elements[i].parentNode, elements[i]);
-              }*/
-        }, 3000);
+              }}
+        }, 5000);
         
       },err =>{
         console.log(err)
@@ -260,6 +263,7 @@ export class ProductManagmentComponent implements OnInit{
 
   
   onShowList(){
+    this.nvigateTO=true
     this.router.navigate(['/admin/products/list'])
   }
 }

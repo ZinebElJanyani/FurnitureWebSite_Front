@@ -217,9 +217,11 @@ input[type="text"], input[type="password"] {
   transition: all 0.5s ease 0s;
   width: 100%;
   outline: none;
+  box-sizing: border-box;
 }
 input[type="checkbox"]{
   opacity: 1;
+  position: relative;
 }
 input::-webkit-input-placeholder {
   color: #999;
@@ -1668,4 +1670,10 @@ color:var(--bs-success) ;
   text-align: center;
   color: #666666;
   letter-spacing: 1px;
+}
+.clearfix, .row:after {
+  clear: none;
+}
+label{
+  font-size: 1rem;
 }

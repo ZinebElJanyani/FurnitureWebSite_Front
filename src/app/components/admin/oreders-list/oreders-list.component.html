@@ -1,21 +1,20 @@
 
 <app-admin-products></app-admin-products>
 <div id="main">
-  <div class="row" style="margin-top: 2%;">
+  <div class="row" style="margin-top: 3%;">
     <div id="breadcrumbs-wrapper">
       <!-- Search for small screen-->
       <div class="container">
         <div class="row">
           <div class="col s12 m6 l6">
-            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Product Managment</span></h5>
+            <h5 class="breadcrumbs-title mt-0 mb-0"><span>Orders Managment</span></h5>
           </div>
           <div class="col s12 m6 l6 right-align-md">
             <ol class="breadcrumbs mb-0">
-              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              <li class="breadcrumb-item"><a routerLink="/">Home</a>
               </li>
-              <li class="breadcrumb-item"><a href="#">Product Managment</a>
-              </li>
-              <li class="breadcrumb-item active">Product Categories
+             
+              <li class="breadcrumb-item active">Orders Managment
               </li>
             </ol>
           </div>
@@ -27,7 +26,7 @@
         <div class="section section-data-tables">
           <div class="card">
           <div class="card-content">
-          <p class="caption">Add New Category or show categories that are available.</p>
+          <p class="caption">show commands and change their state</p>
 
           </div>
           </div>
@@ -112,7 +111,9 @@
                             <td *ngIf="!o.withAssembly" style="color: rgb(188, 30, 30);"><i class="material-icons">clear</i></td>
 
                             <td>{{o.couponDiscount}} DH</td>
-                            <td><button class="btn btn-warning" (click)="openConfirmationDialog(o.id,i)"> <i class="material-icons Small">edit_square</i></button><button class="btn btn-info" (click)="openConfirmationDialog(o.id,i)"> <i class="material-icons Small">visibility</i></button></td>
+                            <td>
+                              <button class="btn btn-warning" (click)="openConfirmationDialog(o.id,i)"> <i class="material-icons Small">edit_square</i></button>
+                              <button class="btn btn-info" (click)="onOrderDetail(o.id)"> <i class="material-icons Small">visibility</i></button></td>
 
                           </tr>
                           

@@ -84,7 +84,23 @@ export class ProductDetailComponent implements OnInit{
   get recommandProduct(){
     return this.reviewForm.get('recommandProduct');
   }
+  fullStarsArray(averageRating:number): number[] {
+    const fullStars = Math.floor(averageRating);
+    return Array(fullStars).fill(0);
+  }
 
+  hasHalfStar(averageRating:number): boolean {
+    return (averageRating - Math.floor(averageRating)) >= 0.5;
+  }
+  hasEmptyStar(averageRating:number):  number[] {
+    const starsNbre=5
+    let rest:number
+    rest = starsNbre - Math.floor(averageRating);
+    if(this.hasHalfStar(averageRating)){
+      rest -=1
+    }
+    return Array(rest).fill(0);
+    }
 
   Freview(){
    

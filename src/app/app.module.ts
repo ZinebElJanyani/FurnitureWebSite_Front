@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { DurationPipe } from './components/admin/admin-products/duration.pipe';
 import { OutStockComponent } from './components/admin/out-stock/out-stock.component';
 import { OrderDetailComponent } from './components/admin/order-detail/order-detail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AboutComponent } from './components/client/about/about.component';
 
 
 /*import { ProfileComponent } from './components/shared/profile/profile.component';*/
@@ -21,7 +23,8 @@ import { OrderDetailComponent } from './components/admin/order-detail/order-deta
 @NgModule({
   declarations: [
     AppComponent,
-    OrderDetailComponent,
+
+   
   
     
   
@@ -32,6 +35,7 @@ import { OrderDetailComponent } from './components/admin/order-detail/order-deta
     ComponentModule,
     MaterialModule,
     BrowserAnimationsModule,
+  
  
   ],
   providers: [AuthService,CategoryService,CaddyService],

@@ -219,6 +219,7 @@ input[type="text"], input[type="password"] {
   transition: all 0.5s ease 0s;
   width: 100%;
   outline: none;
+  box-sizing: border-box;
 }
 input::-webkit-input-placeholder {
   color: #999;
@@ -638,7 +639,18 @@ button {
 }
 .tooltip .tooltip-arrow { border-top-color:#C8A165 !important; }
 /* Quickview */
-.modal { z-index: 13000;}
+.modal {
+   z-index: 13000;
+    overflow-y: unset !important; 
+    width: unset !important;  
+     max-height: unset !important; 
+     margin: unset !important; 
+     padding: unset !important; 
+     border-radius: unset !important;  
+    background-color: unset !important; 
+    will-change: unset !important; 
+
+}
 #productModal .modal-dialog {
     margin: 5% auto;
     max-width: 96%;
@@ -1862,6 +1874,8 @@ body {
   position: inherit;
   visibility: visible;
   width: calc(100% - 0px);
+  display: flex;
+  justify-content: space-evenly;
 }
 .pro-price-2 {
   color: #c87065;
@@ -3004,19 +3018,20 @@ input[type="number"]::-webkit-outer-spin-button{
   justify-content: center;
 }
 
-.slider{
+.slider1{
   height: 5px;
   border-radius: 5px;
   background: #ddd;
   position: relative;
 }
-.slider .progress{
+.slider1 .progress1{
   height: 5px;
   left:0%;
   right: 0%;
   position:absolute;
   border-radius: 5px;
   background: #C8A165;
+  z-index: 1;
 
 }
 
@@ -3031,6 +3046,7 @@ input[type="number"]::-webkit-outer-spin-button{
   background: none;
   pointer-events: none;
   -webkit-appearance: none;
+  z-index: 0;
 }
 
 input[type="range"]::-webkit-slider-thumb{
@@ -3047,5 +3063,19 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 
+input[type=range] {
+ 
+  margin: unset !important;
+ border: unset !important;
+  background-color: unset !important;
+}
 
-
+.my-pagination ::ng-deep .ngx-pagination{
+  background-color: #575757;
+}
+.my-pagination ::ng-deep .ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: #cdc2b7;
+  color: #fefefe;
+  cursor: default;
+}
