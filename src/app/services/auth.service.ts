@@ -70,9 +70,12 @@ export class AuthService {
       
       alert("login Success");
       this.getUserInfo_JWT();
-      if(this.userAutenticated.role == "customer"){
-      this.createCaddyForCostomer(this.token.acces_token);
-      }
+      setTimeout(() => {
+        if(this.userAutenticated.role == "customer"){
+          this.createCaddyForCostomer(this.token.acces_token);
+          }
+      }, 1000);
+      
       
       
     },

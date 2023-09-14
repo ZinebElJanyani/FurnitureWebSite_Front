@@ -10,7 +10,7 @@
 .expendedDropdown{
     display: block;
     width: 400px;
-    left: 930px;
+    left: 923px;
     top: 64px;
     height: 232px;
     transform-origin: 100% 0px;
@@ -27,7 +27,7 @@
 .profileExpended{
     display: block;
     width: 160px;
-    left: 1220px;
+    left: 1229px;
     top: 64px;
     height: 200px;
     transform-origin: 100% 0px;
@@ -39,4 +39,41 @@
 .forme{
     margin-top: 10px;
     padding: 0 40px;
+}
+
+
+#mlogo{
+    width:90px;
+    height:50px;
+    margin-left: 30%;
+}
+@media only screen and (max-width: 992px)
+{.brand-sidebar .brand-logo {
+   padding: 50% 0;
+}
+}
+
+.navExpended{
+    transform: translateX(0%);
+}
+
+.overlayNotExpended{
+    display: none;
+    opacity: 0;
+}
+
+.overlayExpended{
+    display: block;
+    opacity: 1;
+}
+.afterClick{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    content: '';
+    -webkit-transition: .2s opacity ease-out,.2s color ease-out;
+    transition: .2s opacity ease-out,.2s color ease-out;
+    opacity: 0;
+
 }

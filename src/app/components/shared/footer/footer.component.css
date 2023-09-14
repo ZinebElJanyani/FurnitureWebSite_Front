@@ -703,7 +703,7 @@
   .btn {
     display: inline-block;
     font-weight: 400;
-    color: #777777;
+    color: #c3b9ae;
     text-align: center;
     vertical-align: middle;
     user-select: none;
@@ -747,13 +747,13 @@
   
   .btn-primary {
     color: #212529;
-    background-color: var(--clr-primary-8);
+    background-color: #C8A165;
     
   }
   
   .btn-primary:hover {
     color: #212529;
-    background-color: var(--clr-primary-6);
+    background-color: #cdc2b7;
     border-color: #d69c39;
   }
   
@@ -3176,7 +3176,7 @@
   }
   
   .text-primary {
-    color: var(--clr-primary-8) !important;
+    color: #cdc2b7 !important;
     margin-left: 1px;
   }
   
@@ -3213,7 +3213,7 @@
   }
   
   a.text-warning:hover, a.text-warning:focus {
-    color: #ba8b00 !important;
+    color: #cdc2b7 !important;
   }
   
   .text-danger {

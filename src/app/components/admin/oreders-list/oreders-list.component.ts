@@ -63,9 +63,10 @@ get state(){
       console.log(data)
       );
       setTimeout(() => {
-        this.getCommands()
         this.showConfirmationDialog = false
-      }, 2000);
+        this.getCommands()
+       
+      }, 1000);
    
   }
   openConfirmationDialog(orderId:number,commandIndex:number) {

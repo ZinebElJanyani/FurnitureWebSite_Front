@@ -5,6 +5,7 @@ import { CaddyService } from './../../../services/caddy.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Console } from 'console';
 import { data } from 'jquery';
+import { ViewportScroller } from '@angular/common';
 declare var $:any
 @Component({
   selector: 'app-shopping-cart',
@@ -18,20 +19,22 @@ export class ShoppingCartComponent implements OnInit {
   quantity=0
   items:any
   cartSubTotal=0
-  deliverySubtotal=250
+  deliverySubtotal=500
   couponDicount =0
-  couponCode :String
+
   orderTotal=0
   customer:any
   recommendations:any
   productsOutStock:string[] =[]
-  constructor(private  router: Router,private authService : AuthService ,private renderer: Renderer2,public caddyService :CaddyService,public categoryService:CategoryService){
-    this.couponCode="124GN%SI&13DDF"
+  isHide=false
+  isFavorite:boolean[]=[];
+  constructor(private viewportScroller:ViewportScroller,private  router: Router,private authService : AuthService ,private renderer: Renderer2,public caddyService :CaddyService,public categoryService:CategoryService){
+   
   }
   ngOnInit(): void {
     this.showItems();
-    if(localStorage.getItem('coupon')){
-      this.couponDicount=150
+    if(localStorage.getItem('couponAmount')){
+      this.couponDicount=Number(localStorage.getItem('couponAmount'))
     }
     this.getCRecommendations();
   }
@@ -78,6 +81,9 @@ calculTotal(){
 
       this.showItems();
     }
+    scrollToElement(elementId: string): void {
+      this.viewportScroller.scrollToAnchor(elementId);
+    }
 
     onCartSubTotal(){
       let Total = 0
@@ -95,7 +101,36 @@ calculTotal(){
     }
 
     onCouponCode(){
-      if(!localStorage.getItem('coupon')){
+      const value = this.inputCoupon?.nativeElement.value;
+      this.caddyService.verifyCoupon(value).subscribe(
+        data=>{
+          console.log(data)
+  
+          if(data!=0){
+           if( localStorage.getItem('coupon')==value){
+            alert("Sorry, this coupon has already been used. Please enter a different coupon code to avail the discount.")
+
+           }else{
+            this.couponDicount+= Number(data)
+            localStorage.setItem('coupon',value);
+            localStorage.setItem('couponAmount',String(this.couponDicount));
+            alert("Congratulations! Your coupon code has been applied successfully. You will now receive the discounted price on your order. Thank you for choosing our website, and we hope you enjoy your purchase!")
+            this.calculTotal()
+            this.onUpdateCaddy()
+            this.renderer.setProperty(this.inputCoupon?.nativeElement,'value',"")
+          }
+        }else{
+            alert("We're sorry, the coupon code you entered is not valid. Please check the code and try again. If you continue to have trouble, please contact our customer support for assistance.")
+            this.renderer.setProperty(this.inputCoupon?.nativeElement,'value',"Enter your code here.")
+            }
+          
+        },err=>{
+          console.log(err)
+        }
+        
+      )
+      
+      /*if(!localStorage.getItem('coupon')){
         
       const value = this.inputCoupon?.nativeElement.value;
       if(value==this.couponCode){
@@ -111,7 +146,7 @@ calculTotal(){
         }
       }else{
         alert("Sorry, this coupon has already been used. Please enter a different coupon code to avail the discount.")
-      }
+      }*/
 
     }
 
@@ -150,8 +185,13 @@ calculTotal(){
       $('#productModal').modal('show')
      
   }
+  closeModal(){
+  
+    $('#productModal').modal('hide')
+   
+}
   onProceed(){
-
+    this.closeModal()
     this.items.forEach((item:any) => {
       if(item.product.qteStock<item.quantity){
        if(item.product.qteStock==0){
@@ -176,5 +216,9 @@ calculTotal(){
     setTimeout(() => {
     this.router.navigate(["/check-out"]);
   }, 2000);
+  }
+  favorite(i:number,id_product:number){
+    this.isFavorite[i] = !this.isFavorite[i];
+    this.categoryService.favoriteProduct(id_product,this.isFavorite[i])
   }
 }

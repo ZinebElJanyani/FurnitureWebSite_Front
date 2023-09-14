@@ -160,7 +160,7 @@ export class HomePageComponent implements OnInit {
  @HostListener('window:scroll', ['$event'])
   onScroll(e : Event){
     
-    if( window.scrollY <3113 && window.scrollY>2400){
+    if( window.scrollY <4000 && window.scrollY>3000){
       this.activateCount=true;
     }else{
       this.activateCount=false;
@@ -225,7 +225,13 @@ getCategories() {
 }
 
 onAddToCart(idProduct:number,quantity:number){
-  this.cadyService.addItemToCart(idProduct,quantity);
+  this.authService.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
+    if (isAuthenticated === true) {
+  this.cadyService.addItemToCart(idProduct,quantity);}
+  else{
+    this.router.navigate(['/login'])
+  }
+});
 }
 
 openModal() {

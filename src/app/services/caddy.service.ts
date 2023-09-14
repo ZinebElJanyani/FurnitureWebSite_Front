@@ -95,4 +95,17 @@ updateCaddy(totalPrice?:number,deliveryPrice?:number,coupon?:number){
   };
   return this.http.get("http://localhost:8084/api/caddy/showCartInfo",{headers, params: options.params})
  }
+
+ verifyCoupon(coded:string){
+  const authToken = 'Bearer ' + this.authService.userAutenticated.token.acces_token; 
+  const headers = new HttpHeaders({
+    'Authorization': authToken
+  });
+  const options = {
+    params: {
+      code: coded
+    }
+  };
+  return this.http.get("http://localhost:8084/api/caddy/verifyCoupon",{headers, params: options.params})
+ }
 }

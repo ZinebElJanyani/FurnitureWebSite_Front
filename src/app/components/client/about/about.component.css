@@ -884,7 +884,7 @@ body {
 	11. Shop-page
 ----------------------------------- */
 .heading-banner-area {
-    background: rgba(0, 0, 0, 0.052) url(~src/assets/images/admin/blog2.jpg) no-repeat scroll center center / cover ;
+    background: rgba(0, 0, 0, 0.052) url(~src/assets/images/admin/blog3.jpg) no-repeat scroll center center / cover ;
   }
   .heading-banner-title h2 {
     color: #fff;
@@ -989,3 +989,65 @@ img{
   max-width: 100%;
   height: auto;
 }
+ /* Scroll Up */
+ #scrollUp {
+  background: #C8A165 none repeat scroll 0 0;
+  bottom: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  color: #fff;
+  font-size: 20px;
+  height: 45px;
+  line-height: 45px;
+  overflow: hidden;
+  padding-top: 0px;
+  position: fixed;
+  right: 15px;
+  text-align: center;
+  transition: all 0.3s ease 0s;
+  width: 45px;
+  z-index: 200;
+  cursor: pointer;
+}
+#scrollUp:hover {
+    background: #c8a165 none repeat scroll 0 0;
+}
+@keyframes scroll-ani-to-top {
+	0% {
+		bottom: 0;
+		opacity: 0;
+	}
+	50% {
+		bottom: 50%;
+		opacity: 1;
+	}
+	100% {
+		bottom: 10%;
+		opacity: 0;
+	}
+}
+@-webkit-keyframes scroll-ani-to-top {
+	0% {
+		bottom: 0;
+		opacity: 0;
+	}
+	50% {
+		bottom: 50%;
+		opacity: 1;
+	}
+	100% {
+		bottom: 75%;
+		opacity: 0;
+	}
+}
+#scrollUp:hover i {
+    animation: 800ms linear 0s normal none infinite running scroll-ani-to-top;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    margin-bottom: -25px;
+    position: absolute;
+    width: 100%;
+}
+
+
+

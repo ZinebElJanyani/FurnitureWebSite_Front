@@ -19,20 +19,25 @@ outOfStock=0
 newOrders=0
 duration=0
 isProExpended=false
-
+isnavEXP=false
+displaySearch=false
 constructor(public authService:AuthService,private router: Router){}
  
 ngOnInit(): void {
   this.getNotifications()
-  const interval$ = interval(1200000);
+  const interval$ = interval(12000);
 
   interval$.subscribe(() => this.getNotifications());
   }
 
-
+  onNavExp(){
+    this.isnavEXP =!this.isnavEXP
+    console.log("koko"+this.isnavEXP)
+  }
   getNotifications(){
     this.authService.getRessource("notifications/"+this.authService.userAutenticated.id).subscribe(
       (data)=>{
+        console.log(data)
        this.notification=data
        this.outOfStock = this.notification[0]
        this.newOrders = this.notification[1]

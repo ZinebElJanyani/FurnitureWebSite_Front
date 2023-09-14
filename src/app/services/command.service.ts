@@ -47,12 +47,11 @@ createDeliveryAddress(idCity:number, address:string,isSaved:boolean){
       'Authorization': authToken,
       'Content-Type': 'application/json'
     });
-    let commandState=0
-    if(paymentMethod=="CreditCards"){
-       commandState=2
-    }else{
-      commandState=1
-    }
+    let commandState=1
+    if(paymentMethod=="Cash"){
+       commandState=0
+      }
+    
     let body = {
       'ref': null,
       'date':new Date(),

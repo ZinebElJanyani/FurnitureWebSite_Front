@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="wrapper bg-dark-white">
+<div class="wrapper bg-dark-white" id="top">
 	<!-- HEADING-BANNER START -->
 	<div class="heading-banner-area overlay-bg">
 		<div class="container">
@@ -395,3 +395,5 @@
 	
 	
 </div>
+<a id="scrollUp" (click)="scrollToElement('top')"  style="position: fixed; z-index: 2147483647; display: block;"><i class="zmdi zmdi-triangle-up"></i></a>
+<app-footer></app-footer>

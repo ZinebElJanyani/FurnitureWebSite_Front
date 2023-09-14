@@ -5,6 +5,9 @@ import { stat } from 'fs';
 import { CaddyService } from 'src/app/services/caddy.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CheckOutValidators } from './checkOutValidators';
+import { ViewportScroller } from '@angular/common';
+import { Router } from '@angular/router';
+import { data } from 'jquery';
 //import{render} from 'cresditcardpayments/cresditcardpayments';
 
 @Component({
@@ -55,8 +58,8 @@ export class CheckOutComponent implements OnInit{
   orderTotal=0
   assemblySubtotal=0
   commandForm!:FormGroup // ! =>tells TypeScript that commandForm will be initialized in ngOnInit.
-
-
+  addresses:any
+  selectedAdress:any
   idAddress=0
   idCommand=3;
   ngOnInit(): void {
@@ -67,8 +70,9 @@ export class CheckOutComponent implements OnInit{
     this.getCartIfo()
     this.initilizeForm()
     this.paypal()
+    this.getCustoerSavedAdresses()
   }
-  constructor(private commandService:CommandService,private caddyService : CaddyService){
+  constructor(private  router: Router,private viewportScroller:ViewportScroller,private commandService:CommandService,private caddyService : CaddyService){
    
   }
 
@@ -127,7 +131,25 @@ export class CheckOutComponent implements OnInit{
   get cvc(){
     return this.commandForm.get('cvc');
   }
+  scrollToElement(elementId: string): void {
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
+  onSelect(event:Event){
+    const id = (event.target as HTMLInputElement).value
+   
+    this.selectedAdress = this.addresses.find((item:any) =>item.id==Number(id));
+    console.log(this.selectedAdress)
+    this.commandService.showCities(this.selectedAdress.city.region.id).subscribe(data => 
+      {this.cities = data;})
+    this.commandForm.patchValue({
+      region: this.selectedAdress.city.region.id,
+  
+      city: this.selectedAdress.city.id,
 
+      address: this.selectedAdress.addess
+    });
+
+  }
  
   getItems() {
     this.caddyService.showCart().subscribe(data => 
@@ -173,7 +195,7 @@ export class CheckOutComponent implements OnInit{
     let idR=Number(inputElement.value);
     this.commandService.showCities(idR).subscribe(data => 
       {this.cities = data;
-       
+       console.log("cities"+data)
       },err=>{
         console.log(err);
       })
@@ -184,8 +206,10 @@ export class CheckOutComponent implements OnInit{
         { let result = data
 
           this.orderTotal = result.totalPrice;
+          
           this.couponDicount = result.coupon
          this.deliverySubtotal = result.deliveryPrice
+         console.log(data)
         },err=>{
           console.log(err);
         })
@@ -259,16 +283,21 @@ export class CheckOutComponent implements OnInit{
       
       if(this.isCreditCart){
       setTimeout(() => {
-        console.log('of3')
+        
         this.setCreditCard(this.commandForm.value.cardName,this.commandForm.value.cardNumber,this.commandForm.value.cvc)
 
         }, 3000);
         }
         alert("Thank you for your purchase at Comfy! Your order has been successfully registered and a confirmation email with the details of your order will be sent to you.\nYou can check the status of your order by logging in to your account and accessing the 'My Orders' section.")
+       
+        
+        this.router.navigate(["/orders"]);
+        localStorage.setItem('coupon',"")
+        localStorage.setItem('couponAmount',"0")
       }else{
         alert("In order to complete your command process, you should choose a payment method")
       }
-    }
+  }
 
     setCommand(phone:string,email:string,name:string,deliveryDate:Date,withAssembly:boolean){
       let a=""
@@ -314,7 +343,7 @@ export class CheckOutComponent implements OnInit{
               purchase_units:[
                 {
                   amount:{
-                    value:12,
+                    value: this.orderTotal*0.1,
                     currency_code:'USD'
                   }
                 }
@@ -337,6 +366,18 @@ export class CheckOutComponent implements OnInit{
           }
     
         }).render(this.paypalRef?.nativeElement);
+      }
+
+      getCustoerSavedAdresses(){
+      
+        this.commandService.getRessource("getAdresses/"+this.user.id).subscribe(
+          data =>{
+            console.log(data)
+            this.addresses = data
+          },err=>{
+            console.log(err)
+          }
+        )
       }
 }
 

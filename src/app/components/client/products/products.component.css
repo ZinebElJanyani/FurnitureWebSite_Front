@@ -3075,7 +3075,11 @@ input[type=range] {
 }
 .my-pagination ::ng-deep .ngx-pagination .current {
   padding: 0.1875rem 0.625rem;
-  background: #cdc2b7;
-  color: #fefefe;
+  background: #cdc2b7 !important;
+  color: #fefefe !important;
   cursor: default;
+}
+
+.ngx-pagination a, .ngx-pagination button {
+  color: #fefefe !important;
 }

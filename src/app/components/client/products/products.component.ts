@@ -1,9 +1,11 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { CaddyService } from './../../../services/caddy.service';
 import { debounceTime, fromEvent, map } from 'rxjs';
 import { CategoryService } from './../../../services/category.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, NgModule } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination/public-api';
+import { ViewportScroller } from '@angular/common';
 declare var $:any
 @Component({
   selector: 'app-products',
@@ -35,7 +37,7 @@ export class ProductsComponent implements OnInit{
   short=true
   long=false
 
-  constructor(private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router,private CaddyService:CaddyService){
+  constructor(private authService:AuthService,private viewportScroller:ViewportScroller,private renderer: Renderer2,public categoryService:CategoryService,private route:ActivatedRoute,private router:Router,private CaddyService:CaddyService){
   
     this.numProducts=0;
   this.minPrice=0;
@@ -94,9 +96,9 @@ export class ProductsComponent implements OnInit{
     })
     /***** */
      setTimeout(() => {
-      this.IsFavorite()   
+      this.IsFavorite(this.produits)   
       this.productsSize=this.produits.length  
-    }, 500);
+    }, 1000);
   }
   onShortClick(){
     this.short = true
@@ -141,8 +143,13 @@ export class ProductsComponent implements OnInit{
         this.categoryService.getRessource("/Find-product/"+this.searchInputRef?.nativeElement.value)
         .subscribe(data => 
           {this.produits = data;
+            console.log("koko")
             
-          
+            setTimeout(() => {
+              this.IsFavorite(this.produits)   
+              this.productsSize=this.produits.length  
+              console.log("lolo")
+            }, 500);
           },err=>{
             console.log(err);
           })
@@ -153,18 +160,21 @@ export class ProductsComponent implements OnInit{
     this.isFavorite[i] = !this.isFavorite[i];
     this.categoryService.favoriteProduct(id_product,this.isFavorite[i])
   }
-  IsFavorite(){
+  IsFavorite(prods:any){
     let data =  localStorage.getItem('wishlist')
     let wishlist:number[]=[]
-    console.log(this.produits)
+    this.isFavorite = new Array(this.products.length).fill(false);
     if(data){
       wishlist=JSON.parse(data)
       let i =0;
-      this.produits.forEach((product:any )=> {
+      console.log(prods)
+      console.log(wishlist)
+      prods.forEach((product:any )=> {
        
         const index = wishlist.indexOf(product.id);
         if(index !==-1){
           this.isFavorite[i] = true
+          console.log(index)
         }
         i++;
       })
@@ -186,8 +196,12 @@ export class ProductsComponent implements OnInit{
     this.categoryService.getRessource(url)
     .subscribe(data => 
       {this.produits = data;
-        console.log("hello")
-        console.log(data)
+        console.log("hiyani")
+        setTimeout(() => {
+          this.IsFavorite(this.produits)   
+          console.log("wami2")
+          this.productsSize=this.produits.length  
+        }, 500);
       
       },err=>{
         console.log(err);
@@ -253,22 +267,32 @@ onInputMaxChange(event :Event){
 }
 
 openModelopen(prd :any){
-  console.log("koko")
+  
   $('#productModal').modal('show')
   this.product = prd
 }
 openModelclose(){
-  console.log("lolo")
+  
   $('#productModal').modal('hide')
 }
 
 onAddToCart(idProduct:number,quantity:number){
-this.CaddyService.addItemToCart(idProduct,quantity);
+  
+    if (localStorage.getItem('isAuthenticated')=='true') {
+      console.log(Boolean(localStorage.getItem('isAuthenticated')))
+    this.CaddyService.addItemToCart(idProduct,quantity);}
+    else{
+      this.router.navigate(['/login'])
+    }
+
 }
 
 onInputChange(event:Event){
 this.modalCartQuantity=Number( (event.target as HTMLInputElement).value)
-console.log(this.modalCartQuantity);
+
+}
+scrollToElement(elementId: string): void {
+  this.viewportScroller.scrollToAnchor(elementId);
 }
 
 /*OnSearchValueChange(vl:String){
@@ -322,6 +346,7 @@ console.log(this.modalCartQuantity);
   }*/
   
 }
+
 
 interface Products{
   id: number;

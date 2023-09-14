@@ -1,6 +1,7 @@
 import { CategoryService } from 'src/app/services/category.service';
 import { CommandService } from './../../../services/command.service';
 import { Component, OnInit } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -13,17 +14,22 @@ export class OrdersComponent implements OnInit {
   isPaymentDisplay=false
   isDeliveryDisplay=false
 
-  constructor(private commandService:CommandService,public categoryService:CategoryService){
+  constructor( private viewportScroller:ViewportScroller,private commandService:CommandService,public categoryService:CategoryService){
   }
 
   ngOnInit(): void {
     this.getOrders();
   }
-
+  scrollToElement(elementId: string): void {
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
 
  getOrders() {
   this.commandService.getCommand().subscribe(data => {
     this.orders = data;
+  // Sort the orders by date in descending order
+    this.orders.sort((a:any, b:any) => b.date.localeCompare(a.date));
+
    // console.log(data);
 
   })

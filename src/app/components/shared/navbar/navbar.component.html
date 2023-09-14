@@ -14,16 +14,20 @@
                 <!--<li><a routerLink="/login" class="nav-link">login</a></li>-->
                 
                 <li *ngIf="!isAuthenticated"><a routerLink="/login" class="nav-link">Login</a></li>
-                <li  ngbDropdown class="nav-item dropdown" *ngIf="isAuthenticated">
+                <li  ngbDropdown class="nav-item dropdown" *ngIf="isAuthenticated ">
                     <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{this.authservice.userAutenticated.name}}
                     </a>
-                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="this.authservice.userAutenticated.role==='customer'">
                       <a class="dropdown-item" routerLink="/profile">My Profile</a>
                       <a class="dropdown-item" routerLink="/orders">My Orders</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" (click)="onLogout()" routerLink="/">Log Out</a>
                     </div>
+                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="this.authservice.userAutenticated.role==='admin'">
+    
+                        <a class="dropdown-item"  routerLink="/charts">Dashboard</a>
+                      </div>
                   </li>
             </ul>
         </div>

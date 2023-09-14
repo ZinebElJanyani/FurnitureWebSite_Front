@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="heading-banner-area overlay-bg">
+<div class="heading-banner-area overlay-bg" id="top">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -71,12 +71,12 @@
                                 </tr>
                                 <tr>
                                     <td>Delivery Subtotal</td>
-                                    <td class="text-right" *ngIf="order.deliveryPrice>0">+  DH</td>
+                                    <td class="text-right" *ngIf="order.deliveryPrice>0">+{{order.deliveryPrice}}  DH</td>
                                     <td class="text-right" *ngIf="order.deliveryPrice==0" style="color: rgb(22, 142, 40);"><i class="bi bi-truck"></i> Free Delivery</td>
                                 </tr>
                                 <tr>
                                     <td>Assembly Subtotal</td>
-                                    <td class="text-right" *ngIf="order.assemblyPrice>0">+  DH</td>
+                                    <td class="text-right" *ngIf="order.assemblyPrice>0">+{{order.assemblyPrice}}  DH</td>
                                     <td class="text-right" *ngIf="order.assemblyPrice==0">00.00 DH</td>
                                 </tr>
                                 <tr id="lastC">
@@ -145,3 +145,6 @@
     </article>
   
 </div>
+<a id="scrollUp" (click)="scrollToElement('top')"  style="position: fixed; z-index: 2147483647; display: block;"><i class="zmdi zmdi-triangle-up"></i></a>
+
+<app-footer></app-footer>

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { HttpEventType,HttpRequest } from '@angular/common/http';
+import { ViewportScroller } from '@angular/common';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class ProductDetailComponent implements OnInit{
   
 
 
-  constructor( public caddyService:CaddyService, public authService: AuthService,public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
+  constructor(private router:Router, private viewportScroller:ViewportScroller,public caddyService:CaddyService, public authService: AuthService,public categoryService:CategoryService,private sanitizer: DomSanitizer, private route:ActivatedRoute){
     
   }
   ngOnInit(): void {
@@ -84,6 +85,9 @@ export class ProductDetailComponent implements OnInit{
   get recommandProduct(){
     return this.reviewForm.get('recommandProduct');
   }
+  scrollToElement(elementId: string): void {
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
   fullStarsArray(averageRating:number): number[] {
     const fullStars = Math.floor(averageRating);
     return Array(fullStars).fill(0);
@@ -103,32 +107,37 @@ export class ProductDetailComponent implements OnInit{
     }
 
   Freview(){
-   
-      
-   this.categoryService.addReview(this.product.id,this.nbrStars,this.reviewForm.value.title,this.reviewForm.value.text,"",this.reviewForm.value.recommandProduct,this.reviewForm.value.name)
-   .subscribe((data:any) => 
-      {
+    if (localStorage.getItem('isAuthenticated')) {
+        this.categoryService.addReview(this.product.id,this.nbrStars,this.reviewForm.value.title,this.reviewForm.value.text,"",this.reviewForm.value.recommandProduct,this.reviewForm.value.name)
+        .subscribe((data:any) => 
+           {
+          
+            if(this.selectedFile){
+             setTimeout(() => {
+               this.onUploadImage(data);
+               console.log("koko")
+             }, 2000);  
+            }
+           },err=>{
+             console.log(err);
+           })
      
-       if(this.selectedFile){
-        setTimeout(() => {
-          this.onUploadImage(data);
-          console.log("koko")
-        }, 2000);  
-       }
-      },err=>{
-        console.log(err);
-      })
-
-      this.reviewForm.reset()
-      this.oneStar=false
-      this.threeStar=false
-      this.fourStar=false
-      this.twoStar=false
-      this.fiveStar=false
-      setTimeout(() => {
-        this.getReviews()
-       
-      }, 1000);
+           this.reviewForm.reset()
+           this.oneStar=false
+           this.threeStar=false
+           this.fourStar=false
+           this.twoStar=false
+           this.fiveStar=false
+           setTimeout(() => {
+             this.getReviews()
+            
+           }, 1000);
+    }
+      else{
+        this.router.navigate(['/login'])
+      }
+  
+   
   }
   onSelectedFile(event:Event){
     const input = event.target as HTMLInputElement;
@@ -285,7 +294,12 @@ export class ProductDetailComponent implements OnInit{
     }
 
     onAddToCart(idProduct:number,quantity:number){
-      this.caddyService.addItemToCart(idProduct,quantity);
+      if (localStorage.getItem('isAuthenticated')) {
+        this.caddyService.addItemToCart(idProduct,quantity);}
+        else{
+          this.router.navigate(['/login'])
+        }
+   
       }
 
 

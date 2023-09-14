@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="wrapper bg-dark-white">
+<div class="wrapper bg-dark-white" id="top">
     <!-- HEADING-BANNER START -->
     <div class="heading-banner-area overlay-bg">
         <div class="container">
@@ -136,25 +136,27 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="section-title text-center">
-								<h2 class="title-border">Featured Products</h2>
+								<h2 class="title-border">Recommendations for you</h2>
 							</div>
 						</div>
 					</div>
 			
 					<div class="row">
 					
-                        <div class="single-product col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let p of recommendations">
+                        <div class="single-product col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let p of recommendations; let i = index;">
                             <div class="product-img">
         
-                                <span *ngIf="p.promotion>0" class="pro-label sale-label">-{{p.promotion}} %</span>
+                                <span *ngIf="p.promotion>0" class="pro-label new-label">-{{p.promotion}} %</span>
                                 <span *ngIf="p.qteStock==0" class="pro-label stock-label">Out Of Stock</span>
-                                <div class="product-action clearfix">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi zmdi-favorite-outline"></i></a>
-                                    <a href="#" data-toggle="modal"  data-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                </div>
                                 <a [routerLink]="['/product-detail', p.id]"><img src="{{this.categoryService.host+'/productFirst_P/'+p.id}}" alt="" /></a>
+
+                                <div class="product-action clearfix">
+                                    <a  (click)="favorite(i,p.id)" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi" [class.zmdi-favorite]="this.isFavorite[i]" [class.zmdi-favorite-outline]="!this.isFavorite[i]  "></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#productModal" title="" data-original-title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                    <a (click)="onAddToCart(p.id,1)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                               
+                                </div>
                                
                             </div>
                             <div class="product-info clearfix">
@@ -198,13 +200,13 @@
             </div>
         </div>
     </div>
-    <div id="quickview-wrapper">
+    <div id="quickview-wrapper"  >
         <!-- Modal -->
-        <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="productModal" tabindex="-1" role="dialog" >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" data-target="productModal" class="close" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
                         <div class="modal-product container">
@@ -227,7 +229,7 @@
                             </div>
                             <div style="display: flex; justify-content: space-between;">
                             <button class="single_add_to_cart_button" type="submit" (click)="onProceed()" data-dismiss="modal" >Proceed</button>
-                            <button class="single_add_to_cart_button" type="submit" data-dismiss="modal"   >Concel</button>
+                            <button class="single_add_to_cart_button" type="submit" data-dismiss="modal" (click)="closeModal()" >Concel</button>
                             </div>
                         </div>
                     </div>  
@@ -241,4 +243,6 @@
     </div>
     <!-- SHOPPING-CART-AREA END --> 
 </div>
-		
+<a id="scrollUp" (click)="scrollToElement('top')"  style="position: fixed; z-index: 2147483647; display: block;"><i class="zmdi zmdi-triangle-up"></i></a>
+
+<app-footer></app-footer>

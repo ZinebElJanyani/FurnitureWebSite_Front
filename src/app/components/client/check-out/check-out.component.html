@@ -1,4 +1,5 @@
-<div class="heading-banner-area overlay-bg">
+<app-navbar></app-navbar>
+<div class="heading-banner-area overlay-bg" id="top">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -72,7 +73,7 @@
                                                     <h4 class="title-1 title-border text-uppercase mb-30">ship to different address</h4>
                                                    
                                                     <label for="region">Region</label>
-                                                    <select class="custom-select mb-15" id="city" (change)="getCitiesIn($event)" formControlName="region" >
+                                                    <select class=" form-control" id="city" (change)="getCitiesIn($event)" formControlName="region" >
                                                         <option *ngFor="let region of regions" value="{{region.id}}" >{{region.nom}}</option>
                                                     </select>
                                                     <div *ngIf="region?.touched && region?.invalid" class="alert alert-danger error" >
@@ -81,7 +82,7 @@
                                                         
 
                                                     <label for="city">City</label>
-                                                    <select class="custom-select mb-15" id="town" formControlName="city">
+                                                    <select class="form-control" id="town" formControlName="city">
                                                         <option *ngFor="let city of cities" value="{{city.id}}" >{{city.nom}}</option>
                                                        
                                                     </select>
@@ -105,7 +106,21 @@
                                                         <input type="checkbox" name="example" (change)="onAssemblyChoose()" formControlName="withAssembly" >
                                                         Would you like to add the assembly service with the delivery?
                                                     </label>
+                                                    <label for="adress">Or choose one of your previews adresses</label>
+                                                    <div class="input-field" data-select2-id="130">
+                                                     
+                                                        <select (change)="onSelect($event)" class="select2 browser-default select2-hidden-accessible"  tabindex="-1" aria-hidden="true" style="width: auto; min-width: 449px; position: relative;">
+                                                            <option value="" data-select2-id="6" style="color: rgb(20, 181, 225);font-weight: 600;" > </option>
+    
+                                                            <option value="{{adrs.id}}" data-select2-id="6" style="color: rgb(20, 181, 225);font-weight: 600;" *ngFor="let adrs of addresses" > {{adrs.addess}}</option>
+                                                            
+                                                            
+                                                        </select>
+                                                    
+                                                    </div>
                                                 </div>
+                                                
+                                               
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <div class="our-order payment-details mt-60 pr-20">
@@ -247,3 +262,6 @@
     </div>
     <!-- CHECKOUT-AREA END -->
 </div>	
+<a id="scrollUp" (click)="scrollToElement('top')"  style="position: fixed; z-index: 2147483647; display: block;"><i class="zmdi zmdi-triangle-up"></i></a>
+
+<app-footer></app-footer>
