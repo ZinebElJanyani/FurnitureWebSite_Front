@@ -496,10 +496,13 @@
         width: 100%;
     }
   #table_plus{
-    margin-left: -150px;
+    margin-left: -183px;
   }
   #chest_plus{
-    margin-left: -250px;
+    margin-left: -265px;
+  }
+  #armoire_plus{
+    margin-left: -35px;
   }
   }
   

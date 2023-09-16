@@ -119,14 +119,18 @@ a:not([href]):not([tabindex]){
     display: flex;
     font-size: 1.5rem;
     text-transform: capitalize;
+    
   }
   .nav-link {
     color: var(--clr-white);
     margin-right: 3rem;
     letter-spacing: var(--spacing);
     transition: var(--transition);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     position: relative;
+    
+    
+    
   }
   
 
@@ -169,6 +173,8 @@ Sidebar
     align-items: center;
     margin-left: -100%;
     transition: all 0.5s ease;
+   
+    text-shadow: 2px 2px 4px black;
     
   }
   .mobile-menu{
@@ -177,7 +183,8 @@ Sidebar
   .nav-links .nav-link {
     color: var(--clr-white);
     margin: 10px 0;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
   }
   
 }
