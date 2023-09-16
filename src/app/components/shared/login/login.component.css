@@ -251,3 +251,12 @@ h1{
 .ng-touched.ng-invalid{
     border: 2px solid rgb(193, 61, 61);
 }
+
+@media screen and (max-width: 768px){
+    form{
+		padding: 0 10px;
+	}
+	h1{
+		font-size: 2rem;
+	}
+  }

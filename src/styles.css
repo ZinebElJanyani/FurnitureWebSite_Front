@@ -49,7 +49,7 @@ Variables
     --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     --max-width: 1170px;
-    --fixed-width: 620px;
+    /*--fixed-width: 620px;*/
   }
 
   /*
@@ -74,7 +74,7 @@ body {
   font-size: 0.875rem;
   background-color: #fcfcfc;
   
-  max-width:100%;
+
   overflow-x: hidden;
 }
 ul {
@@ -181,4 +181,12 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 768px){
+  body {
+      overflow-x: none;
+      margin: 0;
+      padding: 0;
+  }
 }

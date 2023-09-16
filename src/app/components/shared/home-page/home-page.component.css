@@ -16,6 +16,82 @@
       url(~src/assets/images/home_img/hero2-image.jpg) center/cover ; 
       
   }
+  .header {
+    
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(~src/assets/images/home_img/hero2-image.jpg) center/cover ; 
+    color: white;
+  }
+ 
+  .inner-header {
+    height: 65vh;
+    width: 100%;
+   padding: 20% 7%;
+  }
+  .flex {
+    /*Flexbox for containers*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+  }
+  .content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: white;
+  }
+  /* Animation */
+  .parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+  }
+  .parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+  .parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+  .parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  .parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
+  @keyframes move-forever {
+    0% {
+      transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+      transform: translate3d(85px, 0, 0);
+    }
+  }
+  /*Shrinking for mobile*/
+  @media (max-width: 768px) {
+    .waves {
+      height: 40px;
+      min-height: 40px;
+    }
+    .content {
+      height: 30vh;
+    }
+    h1 {
+      font-size: 24px;
+    }
+  }
+/**finished added**/  
   .intro-say{
   font-size: 2rem;
   text-transform: none;
@@ -55,16 +131,14 @@
   }
   
   
-  .hero {
+ /* .hero {
     min-height: 100vh;
-    /* margin-top: -6rem;   */
-     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url(~src/assets/images/home_img/hero2-image.jpg) center/cover; 
+    
     display: grid;
     place-items: center;
     color: var(--clr-white);
     overflow-x: none;
-  }
+  }*/
   
   .hero-container {
   
@@ -108,17 +182,9 @@
       font-size: 1.5rem;
       margin: 1rem 0;
     }
-    .waves{
-  
-  margin-bottom: -110px;
-    }
+    
   }
-  @media screen and (max-width: 800px) {
-  .waves{
   
-    margin-bottom: -120px
-      }
-  }
   @media screen and (min-width: 992px) {
   .hero h1 {
     font-size: 1.5rem;
@@ -128,72 +194,26 @@
     font-size: 1rem;
     margin: 1.5rem 0;
   }
-  .waves{
   
-  margin-bottom: -50px;
-    }
   } 
-  .wave1{
-  background-image: url(~src/assets/images/home_img/1.png);
-  -webkit-background-size: 50% 80px;
-  background-size: 50% 80px;
-  animation : animate 12s linear infinite;
-  overflow-x: hidden;
-  }
-  .wave2{
-  background-image: url(~src/assets/images/home_img/2.png);
-  -webkit-background-size: 50% 100px;
-  background-size: 50% 100px;
-  animation : animate 12s linear infinite;
-  overflow-x: hidden;
-  }
-  .wave3{
-  background-image: url(~src/assets/images/home_img/3.png);
-  -webkit-background-size: 50% 80px;
-  background-size: 50% 80px;
-  animation : animate 18s linear infinite;
-  
-  }
-  
-  .line-1{
-  
-  z-index: 15;
-  opacity: 0.5;
-  }
-  .line-2{
-  z-index: 10;
-  opacity: 0.7;
-  }
-  .line-3{
-  z-index: 5;
-  
-  }
+  @media screen and (min-width: 400px) {
+    .hero h1 {
+      font-size: 0.5rem;
+      letter-spacing: 3px;
+    }
+    .hero h3 {
+      font-size: 0.5rem;
+      margin: 0.5rem 0;
+    }
+   
+    } 
+
+ 
   
   
-  .wave{
-  position:absolute;
-  left:0;
-  overflow-x: hidden;
-  width:160%;
-  height: 32%;
-  background-repeat: repeat no-repeat;
-  background-position: 0 bottom;
-  transform-origin: center bottom;
-  
-  }
   
   
-  @keyframes animate{
-  0%{
-    transform: translateX(0) translateZ(0) scaleY(1);
-  }
-  50%{
-    transform: translateX(-25%) translateZ(0) scaleY(0.5);
-  }
-  100%{
-    transform: translateX(0) translateZ(0) scaleY(1);
-  }
-  }
+ 
   
   /*  promotions
   */
@@ -471,7 +491,17 @@
       max-width: 768px;
   }}
   
-  
+  @media screen and (max-width: 768px){
+    #colc {
+        width: 100%;
+    }
+  #table_plus{
+    margin-left: -150px;
+  }
+  #chest_plus{
+    margin-left: -250px;
+  }
+  }
   
   .ThreeColumnCopyIconRow__Link {
     align-items: center;
@@ -517,6 +547,7 @@
     text-transform: capitalize;
     letter-spacing:2px;
     font-weight: 600;
+    z-index: -1;
   }
   .pro-view-all-3 a:hover{
     color:  var(--clr-primary-7);
@@ -861,7 +892,7 @@
   
   @media(max-width: 768px){
     .bg-show  .video{
-        width: 450px;
+        width:300px;
     }
     .bg-show .link img{
         width: 2rem;

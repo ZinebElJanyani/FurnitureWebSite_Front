@@ -949,6 +949,19 @@ body {
   min-height: 350px;
   padding: 40px 30px 30px 40px;
 }
+@media (max-width: 767px){
+.about-brief {
+    margin-left: 0;
+    padding: 30px 15px;
+  }
+}
+@media (max-width: 767px){
+.heading-banner-title h2 {
+    font-size: 24px;
+    line-height: 32px;
+    
+}
+}
 .single-member {
   padding: 30px 15px;
   transition: all 0.3s ease 0s;
